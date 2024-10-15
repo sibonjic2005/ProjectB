@@ -21,6 +21,9 @@ class Restaurant
 
     public void MenuAdmin()
     {
-
+        Console.WriteLine("1. Make a reservation");
+        Console.WriteLine("2. Cancel a reservation");
+        Console.WriteLine("3. View reservations");
+        Console.WriteLine("4. Log out");
     }
 }
