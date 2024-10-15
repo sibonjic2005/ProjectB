@@ -4,6 +4,8 @@ class Restaurant
 {
     public void Menu()
     {
+        Console.WriteLine("Welcome to the secure login system!");
+
         Console.WriteLine("1. Login");
         Console.WriteLine("2. Sign Up");
         Console.WriteLine("3. Enter as Guest");
