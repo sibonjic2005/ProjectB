@@ -13,6 +13,9 @@ class Program
     // Dictionary to store username and hashed passwords
     static Dictionary<string, string> users = new Dictionary<string, string>();
 
+    // Flag to track whether changes were made
+    static bool changesMade = false;
+
     static void Main()
     {
         // Load existing users from the JSON file if it exists
@@ -35,7 +38,11 @@ class Program
                     Register();
                     break;
                 case "3":
-                    SaveUsersToFile();
+                    // Only save if changes were made or the file doesn't exist (first-time run)
+                    if (changesMade)
+                    {
+                        SaveUsersToFile();
+                    }
                     return;
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
@@ -80,10 +87,11 @@ class Program
 
         // Hash the password and store the user
         users[username] = HashPassword(password);
+        changesMade = true; // Mark that changes were made
 
         Console.WriteLine("User registered successfully!");
 
-        // Save the new user to the JSON file
+        // Save to JSON immediately after registering a new user
         SaveUsersToFile();
     }
 
@@ -154,6 +162,11 @@ class Program
                 users = new Dictionary<string, string>(); // Start fresh if there's an error
             }
         }
+        else
+        {
+            // If the file doesn't exist, consider it a first-time run
+            changesMade = true; // Mark that changes are required (file needs to be created)
+        }
     }
 
     // Method to save users to a JSON file
@@ -163,7 +176,9 @@ class Program
         {
             string json = JsonConvert.SerializeObject(users, Formatting.Indented);
             File.WriteAllText(filePath, json);
-            Console.WriteLine("Users saved successfully.");
+            Console.WriteLine($"JSON: {json}");
+            Console.WriteLine("Users saved successfully to " + filePath);
+            changesMade = false; // Reset the changes flag after saving
         }
         catch (Exception ex)
         {
