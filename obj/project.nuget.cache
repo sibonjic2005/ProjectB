@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4t1gEJFhVeA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cgeri\\OneDrive\\Documenten\\GitHub\\ProjectB\\ProjectB.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cgeri\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
