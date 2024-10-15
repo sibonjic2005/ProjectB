@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
+using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Text;
 
 class Log_in
 {
-    static string filePath = "users.json";
-    static Dictionary<string, string> users = new Dictionary<string, string>();
+    static string filePath = "credentials.json";
+    static List<User> users = new List<User>();
+    static Dictionary<string, string> credentials = new Dictionary<string, string>();
     static bool changesMade = false;
+    static bool isLoggedIn = false;
     Restaurant restaurant = new Restaurant();
-    bool isLoggedIn = false;
-
     public void Menupage()
     {
         LoadUsersFromFile();
@@ -46,16 +44,16 @@ class Log_in
 
     public void Login()
     {
-        Console.Write("Enter your username: ");
-        string username = Console.ReadLine();
+        Console.Write("Enter your email: ");
+        string email = Console.ReadLine();
 
         Console.Write("Enter your password: ");
         string password = ReadPassword();
 
-        if (ValidateLogin(username, password))
+        if (ValidateLogin(email, password))
         {
             isLoggedIn = true;
-            Console.WriteLine("Login successful! Welcome, " + username + ".");
+            Console.WriteLine("Login successful! Welcome, " + email + ".");
             restaurant.MenuLogin();
         }
         else
@@ -66,28 +64,48 @@ class Log_in
 
     static void Register()
     {
-        Console.Write("Enter a new username: ");
-        string username = Console.ReadLine();
+        Console.Write("Enter your name: ");
+        string name = Console.ReadLine();
 
-        if (users.ContainsKey(username))
+        Console.Write("Enter your email: ");
+        string email = Console.ReadLine();
+
+        if (credentials.ContainsKey(email))
         {
-            Console.WriteLine("Username already exists. Please choose a different username.");
+            Console.WriteLine("Email already taken. Please choose a different email.");
             return;
         }
 
+        Console.Write("Enter your phone number: ");
+        string phoneNumber = Console.ReadLine();
+
         Console.Write("Enter a password: ");
         string password = ReadPassword();
+        string hashedPassword = HashPassword(password);
 
-        users[username] = HashPassword(password);
+        credentials[email] = hashedPassword;
         changesMade = true;
+
+        Console.Write("Enter your date of birth (DD-MM-YYYY) (optional): ");
+        string dateOfBirth = Console.ReadLine();
+
+        Console.Write("Enter your address (optional): ");
+        string address = Console.ReadLine();
+
+        Console.Write("Enter your food preferences (e.g., diet, allergies, halal): ");
+        string preferences = Console.ReadLine();
+
+        User user = new User(name, email, phoneNumber, hashedPassword, dateOfBirth, address, preferences);
+
+        users.Add(user);
 
         Console.WriteLine("User registered successfully!");
         SaveUsersToFile();
     }
 
-    static bool ValidateLogin(string username, string password)
+    static bool ValidateLogin(string email, string password)
     {
-        if (users.ContainsKey(username) && users[username] == HashPassword(password))
+        if (credentials.ContainsKey(email) && credentials[email] == HashPassword(password))
         {
             return true;
         }
@@ -140,12 +158,12 @@ class Log_in
             try
             {
                 string json = File.ReadAllText(filePath);
-                users = JsonConvert.DeserializeObject<Dictionary<string, string>>(json) ?? new Dictionary<string, string>();
+                credentials = JsonConvert.DeserializeObject<Dictionary<string, string>>(json) ?? new Dictionary<string, string>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error loading users: " + ex.Message);
-                users = new Dictionary<string, string>();
+                credentials = new Dictionary<string, string>();
             }
         }
         else
@@ -158,7 +176,7 @@ class Log_in
     {
         try
         {
-            string json = JsonConvert.SerializeObject(users, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(credentials, Formatting.Indented);
             File.WriteAllText(filePath, json);
             changesMade = false;
         }
