@@ -1,48 +1,47 @@
-using System.Net.Quic;
-
-static class StartingMenu
+using Spectre.Console;
+public static class StartingMenu
 {
-    static public void Menu()
+    public static void Menu()
     {
-        Console.WriteLine("Welcome to the secure login system!");
+        
+        var choices = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Welcome to the starting menu?")
+                .PageSize(7)
+                .MoreChoicesText("[grey](Move up and down to reveal more choices)")
+                .AddChoices(new[] {
+                        "Login", "Create an account", "Login as guest", 
+                        "Exit", "User menu(for testing)", "Admin menu(for testing)",
+                        "Information"            
+                }));
 
-        Console.WriteLine("1. Login");
-        Console.WriteLine("2. Create an account");
-        Console.WriteLine("3. Enter as Guest");
-        Console.WriteLine("4. Exit");
-        Console.WriteLine("5. User menu (for testing)"); // for testing ONLY
-        Console.WriteLine("6. Admin menu (for testing)"); // for testing ONLY
-
-        string input = Console.ReadLine();
-        if (input == "1")
+        switch (choices)
         {
-            UserLogin.Start();
-        }
-        else if (input == "2")
-        {
-            Console.WriteLine("This feature is not yet implemented");
-        }
-        else if (input == "3")
-        {
-            Console.WriteLine("This feature is not yet implemented");
-        }
-        else if (input == "4")
-        { 
-            Console.WriteLine("Thank for visiting our website!");
-            return;
-        }
-        else if (input == "5")
-        {
-            UserMenu.UserMenuStart();
-        }
-        else if (input == "6")
-        {
-            AdminMenu.AdminMenuStart();
-        }
-        else
-        {
-            Console.WriteLine("Invalid input");
-            Menu();
+            case "Login":
+                UserLogin.Login();
+                break;
+            case "Create an account":
+                Console.WriteLine("This feature is not yet implemented");
+                break;
+            case "Login as guest":
+                GuestLogin.LoginGuest();
+                break;
+            case "Exit":
+                Console.WriteLine("Thank for visiting our website!");
+                break;
+            case "User menu(for testing)":
+                UserMenu.UserMenuStart();
+                break;
+            case "Admin menu(for testing)":
+                AdminMenu.AdminMenuStart();
+                break;
+            case "Information":
+                RestaurantInformation.PrintRestaurantInformation();
+                break;
+            default:
+                Console.WriteLine("Invalid option selected. Please try again.");
+                Menu();
+                break;
         }
     }
 }

@@ -1,20 +1,16 @@
 using Spectre.Console;
-static class UserLogin
+class GuestLogin
 {
-    public static void Login()
+    public static void LoginGuest()
     {
+        var email = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter your email address: "));
+
         var name = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your name: "));
 
         var phonenumber = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your phonenumber: "));
-
-        var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your email address: "));
-
-        var password = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your password: ")
-                .Secret());
 
         var allergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
@@ -31,8 +27,13 @@ static class UserLogin
                     "Wheats", "Dairy"
         }));
 
+    // Write the selected fruits to the terminal
+    foreach (string allergy in allergies)
+{
+    AnsiConsole.WriteLine(allergy);
+}
 
-        Console.WriteLine($"{name}{phonenumber}{email}{password}");
+        Console.WriteLine($"{email}{name}{phonenumber}");
 
         //call logic method and see if user exists
         //if exsist go to user menu
