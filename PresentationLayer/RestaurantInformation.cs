@@ -9,6 +9,7 @@ public static class RestaurantInformation
         Console.WriteLine("Phone Number: +31 10 223 4598");
         Console.WriteLine("Cuisine Type: Blind experience or A la Carte");
         Console.WriteLine("Cancellation Policy: You can always cancel your reservation in the application or cancel by calling.");
+        Console.WriteLine("House Rules: Pets are allowed, but need to behave. \nNo takeaway");
 
          var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()

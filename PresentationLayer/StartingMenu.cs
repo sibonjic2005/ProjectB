@@ -21,7 +21,7 @@ public static class StartingMenu
                 UserLogin.Login();
                 break;
             case "Create an account":
-                Console.WriteLine("This feature is not yet implemented");
+                CreateAccount.CreateAcc();
                 break;
             case "Login as guest":
                 GuestLogin.LoginGuest();

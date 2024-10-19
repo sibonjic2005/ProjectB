@@ -9,30 +9,47 @@ using Spectre.Console;
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Welcome to the starting menu?")
-                .PageSize(5)
+                .PageSize(15)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        "Make a reservation", "Cancel a reservation", "View reservations", 
-                        "Log out", "Edit restaurant information"           
+                        "Make a reservation", "Change a reservation", "View reservations", 
+                        "Change Client info", "View Client info", 
+                        "Edit Foodmenu", "Edit restaurant information",
+                        "Create employee account", "Promote/Demote accounts", "Log out"        
                 }));
 
         switch (choices)
         {
-            case "Make a reservation":
+            case "Make a reservation": // for people that called
                 Console.WriteLine("This feature is not yet implemented");
                 break;
-            case "Cancel a reservation":
+            case "Change a reservation": // Cancel it, change time, change table
                 Console.WriteLine("This feature is not yet implemented");
                 break;
             case "View reservations":
                 Console.WriteLine("This feature is not yet implemented");
                 break;
-            case "Log out":
-                Console.WriteLine("You sucessfully logged out.");
-                StartingMenu.Menu();
+            case "Change Client info":
+                Console.WriteLine("This feature is not yet implemented");
+                break;
+            case "View Client info":
+                Console.WriteLine("This feature is not yet implemented");
+                break;
+            case "Edit Foodmenu": // Edit foods and prices
+                Console.WriteLine("This feature is not yet implemented");
                 break;
             case "Edit restaurant information":
                 Console.WriteLine("This feature is not yet implemented");
+                break;
+            case "Create employee account":
+                Console.WriteLine("This feature is not yet implemented");
+                break;
+            case "Promote/Demote accounts":
+                Console.WriteLine("This feature is not yet implemented");
+                break;
+            case "Log out":
+                Console.WriteLine("You sucessfully logged out.");
+                StartingMenu.Menu();
                 break;
             default: //Not neccessary needed
                 Console.WriteLine("Invalid option selected. Please try again.");
