@@ -6,14 +6,17 @@ static class CreateAccount
         var name = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your name: "));
 
+        var birthday = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter birthday (DD-MM-YYYY): "));
+        
+        var address = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter your address: "));
+
         var phonenumber = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your phonenumber: "));
 
         var email = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your email address: "));
-
-        var birthday = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter birthday (DD-MM-YYYY): "));
 
         var password = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your password: ")
@@ -34,7 +37,7 @@ static class CreateAccount
                     "Wheats", "Dairy"
         }));
 
-        Console.WriteLine($"\nName: {name}, Phonenumber: {phonenumber}, Email: {email} \nBirthday: {birthday}, Password: {password}");
+        Console.WriteLine($"\nName: {name}, Birthday: {birthday}, Address: {address} \nPhonenumber: {phonenumber}, Email: {email}, Password: {password}");
         foreach (string allergy in allergies)
         {
             AnsiConsole.WriteLine(allergy);

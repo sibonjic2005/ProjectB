@@ -9,11 +9,11 @@ using Spectre.Console;
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Welcome to the starting menu?")
-                .PageSize(5)
+                .PageSize(10)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        "Make a reservation", "Cancel a reservation", "View a reservation", 
-                        "Log out"           
+                        "Make a reservation", "Cancel a reservation", "View a reservation",
+                        "See Foodmenu", "Information", "Log out"           
                 }));
 
         switch (choices)
@@ -26,6 +26,12 @@ using Spectre.Console;
                 break;
             case "View your reservation":
                 Console.WriteLine("This feature is not yet implemented");
+                break;
+            case "See Foodmenu":
+                Console.WriteLine("This feature is not yet implemented");
+                break;
+            case "Information":
+                RestaurantInformation.PrintRestaurantInformation();
                 break;
             case "Log out":
                 Console.WriteLine("You sucessfully logged out.");
