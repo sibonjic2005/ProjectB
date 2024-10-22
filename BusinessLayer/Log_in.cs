@@ -12,19 +12,19 @@ public class Log_in
 
             if (password.Length < 8)
             {
-                Console.WriteLine("Password must be at least 8 characters long.");
+                return "Password must be at least 8 characters long.";
             }
             else if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                Console.WriteLine("Password must contain at least one uppercase letter.");
+                return "Password must contain at least one uppercase letter.";
             }
             else if (!Regex.IsMatch(password, "[0-9]"))
             {
-                Console.WriteLine("Password must contain at least one digit.");
+                return "Password must contain at least one digit.";
             }
             else if (!Regex.IsMatch(password, "[^a-zA-Z0-9]"))
             {
-                Console.WriteLine("Password must contain at least one special character.");
+                return "Password must contain at least one special character.";
             }
             else
             {
@@ -45,7 +45,7 @@ public class Log_in
 
             if (!Regex.IsMatch(email, emailPattern))
             {
-                Console.WriteLine("Email address is invalid.");
+                return "Email address is invalid.";
             }
             else
             {
@@ -65,7 +65,7 @@ public class Log_in
 
             if (!Regex.IsMatch(phoneNumber, phonePattern))
             {
-                Console.WriteLine("Phone number is invalid. It must contain 10 to 15 digits.");
+                return "Phone number is invalid. It must contain 10 to 15 digits.";
             }
             else
             {
