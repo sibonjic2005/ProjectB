@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-public class Log_in
+public class Log_in_Checker
 {
     public string PasswordRules(Func<string> getPassword)
     {

@@ -7,7 +7,12 @@
       "dateOfBirth": "1990-01-01",
       "address": "123 Main St",
       "preferences": [],
-      "isAdmin": false
+      "isAdmin": false,
+      "reservation": {
+        "date": "",
+        "time": "",
+        "amount": ""
+      }
     },
     {
       "name": "Admin Jane",
@@ -17,6 +22,7 @@
       "dateOfBirth": "1985-01-01",
       "address": "456 Admin Rd",
       "preferences": [],
-      "isAdmin": true
+      "isAdmin": true,
+      "reservation": null
     }
   ]
