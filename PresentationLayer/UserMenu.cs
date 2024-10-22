@@ -12,7 +12,7 @@ using Spectre.Console;
                 .PageSize(10)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        "Make a reservation", "Cancel a reservation", "View a reservation",
+                        "Make a reservation", "Cancel a reservation", "View your reservation",
                         "See Foodmenu", "Information", "Log out"           
                 }));
 

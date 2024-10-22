@@ -10,7 +10,7 @@ static class AdminReservation
             new TextPrompt<string>("Enter a phone number: "));
 
         var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a email: "));
+            new TextPrompt<string>("Enter an email: "));
 
         var date = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a date: "));
@@ -51,7 +51,21 @@ static class AdminReservation
 
     public static void ViewReservation()
     {
-        //Call every reservation from json file
+        AccountsLogic accountsLogic = new AccountsLogic();
+        var allUsers = accountsLogic.LoadAllUsers();
+
+        foreach (var user in allUsers)
+        {
+            if (user.Reservations.Count > 0)
+            {
+                Console.WriteLine($"Reservations for {user.Name}:");
+                foreach (var reservation in user.Reservations)
+                {
+                    Console.WriteLine($"Date: {reservation["date"]}, Time: {reservation["time"]}, People: {reservation["amount"]}");
+                }
+            }
+        }
+        AdminMenu.AdminMenuStart();
     }
 
     public static void ChangeReservation()

@@ -5,7 +5,7 @@ class Program
 
     static void Main()
     {
-        UserReservation.Calendar();
-        //StartingMenu.Menu();
+        // UserReservation.Calendar();
+        StartingMenu.Menu();
     }
 }

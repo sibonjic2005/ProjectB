@@ -26,5 +26,16 @@
     "preferences": [],
     "isAdmin": true,
     "reservations": []
+  },
+  {
+    "name": "mo",
+    "emailAddress": "modeadmin@yooo.com",
+    "phoneNumber": "0672382912",
+    "password": "KanusManus!102",
+    "dateOfBirth": "01-01-2000",
+    "address": "Gaatjenixaanlaan 10",
+    "preferences": [],
+    "isAdmin": true,
+    "reservations": []
   }
 ]

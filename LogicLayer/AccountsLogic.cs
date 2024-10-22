@@ -8,11 +8,16 @@ class AccountsLogic
 {
     private List<UserModel> _accounts;
 
-    public static UserModel? CurrentAccount { get; private set; }
+    public static UserModel? CurrentAccount { get; set; }
 
     public AccountsLogic()
     {
         _accounts = AccountsAccess.LoadAll();
+    }
+
+    public List<UserModel> LoadAllUsers()
+    {
+        return _accounts;
     }
 
     public void UpdateList(UserModel account)
@@ -60,5 +65,20 @@ class AccountsLogic
     {
         var admin = UserModel.CreateAdmin(name, email, phone, password, dateOfBirth, address, preferences);
         UpdateList(admin);
+    }
+
+    public void AddReservation(string email, Dictionary<string, string> reservation)
+    {
+        var user = GetByEmail(email);
+        if (user != null)
+        {
+            user.Reservations.Add(reservation);
+            UpdateList(user);
+
+            if (CurrentAccount != null && CurrentAccount.EmailAddress == email)
+            {
+                CurrentAccount.Reservations.Add(reservation);
+            }
+        }
     }
 }

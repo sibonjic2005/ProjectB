@@ -3,6 +3,14 @@ static class UserReservation
 {
     public static void MakeReservation()
     {
+        string email = AccountsLogic.CurrentAccount?.EmailAddress;
+
+        if (email == null)
+        {
+            Console.WriteLine("No account is currently logged in.");
+            return;
+        }
+
         var date = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a date: "));
 
@@ -10,10 +18,22 @@ static class UserReservation
             new TextPrompt<string>("Enter a time: "));
         
         var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an amount of people: "));
+            new TextPrompt<string>("Enter the amount of people: "));
 
 
         Console.WriteLine($"\nDate: {date}, Time: {time}, Amount of persons: {person}");
+
+        Dictionary<string, string> reservation = new Dictionary<string, string>
+        {
+            { "date", date },
+            { "time", time },
+            { "amount", person }
+        };
+
+        AccountsLogic accountsLogic = new AccountsLogic();
+        accountsLogic.AddReservation(email, reservation);
+
+
         Console.WriteLine($"\nReservation complete!");
         UserMenu.UserMenuStart();
     }
@@ -36,7 +56,27 @@ static class UserReservation
 
     public static void ViewReservation()
     {
-        Console.WriteLine("beep boop");
+        var currentUser = AccountsLogic.CurrentAccount;
+        if (currentUser == null)
+        {
+            Console.WriteLine("No account is currently logged in.");
+        }
+        else if (currentUser.Reservations == null || currentUser.Reservations.Count == 0)
+        {
+            Console.WriteLine("No reservations found.");
+        }
+        else
+        {
+            if (currentUser.Reservations.Count == 1)
+                Console.WriteLine("Your reservation:");
+            else
+                Console.WriteLine("Your reservations:");
+            foreach (var reservation in currentUser.Reservations)
+            {
+                Console.WriteLine($"Date: {reservation["date"]}, Time: {reservation["time"]}, People: {reservation["amount"]}");
+            }
+        }
+        UserMenu.UserMenuStart();
     }
 
     public static void Calendar()
