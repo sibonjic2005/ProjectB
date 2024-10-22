@@ -12,7 +12,7 @@ using Spectre.Console;
                 .PageSize(15)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        "Make a reservation", "Change a reservation", "View reservations", 
+                        "Make a reservation", "Change a reservation","Cancel reservation", "View reservations", 
                         "Change Client info", "View Client info", 
                         "Edit Foodmenu", "Edit restaurant information",
                         "Create employee account", "Promote/Demote accounts", "Log out"        
@@ -21,13 +21,16 @@ using Spectre.Console;
         switch (choices)
         {
             case "Make a reservation": // for people that called
-                Console.WriteLine("This feature is not yet implemented");
+                AdminReservation.MakeReservation();
                 break;
             case "Change a reservation": // Cancel it, change time, change table
-                Console.WriteLine("This feature is not yet implemented");
+                AdminReservation.ChangeReservation();
+                break;
+            case "Cancel a reservation": // Cancel it, change time, change table
+                AdminReservation.CancelReservation();
                 break;
             case "View reservations":
-                Console.WriteLine("This feature is not yet implemented");
+                AdminReservation.ViewReservation();
                 break;
             case "Change Client info":
                 Console.WriteLine("This feature is not yet implemented");
@@ -39,15 +42,15 @@ using Spectre.Console;
                 Console.WriteLine("This feature is not yet implemented");
                 break;
             case "Edit restaurant information":
-                Console.WriteLine("This feature is not yet implemented");
-                break;
+              Console.WriteLine("This feature is not yet implemented");
+               break;
             case "Create employee account":
                 Console.WriteLine("This feature is not yet implemented");
                 break;
             case "Promote/Demote accounts":
                 Console.WriteLine("This feature is not yet implemented");
                 break;
-            case "Log out":
+             case "Log out":
                 Console.WriteLine("You sucessfully logged out.");
                 StartingMenu.Menu();
                 break;
