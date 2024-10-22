@@ -1,8 +1,17 @@
 using Spectre.Console;
-static class Reservation
+static class AdminReservation
 {
     public static void MakeReservation()
     {
+        var name = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a Name: "));
+
+        var phonenumber = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a phone number: "));
+
+        var email = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a phone number: "));
+
         var date = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a date: "));
 
@@ -13,13 +22,20 @@ static class Reservation
             new TextPrompt<string>("Enter an amount of people: "));
 
 
-        Console.WriteLine($"\nDate: {date}, Time: {time}, Amount of persons: {person}");
+        Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
-        
+        AdminMenu.AdminMenuStart();
     }
 
     public static void CancelReservation()
     {
+        Console.WriteLine("What is the name on the reservation");
+        string name = Console.ReadLine();
+        Console.WriteLine("What is the phonenumber of the reservation");
+        string phonenumber = Console.ReadLine();
+        Console.WriteLine("What is the email of the reservation");
+        string email = Console.ReadLine();
+        // ViewReservation() aan roepen
         // hierzo code om te laten zien over welke reservering het gaat
         // date: \n time: \ person:
         // use the json file i guess
@@ -31,10 +47,11 @@ static class Reservation
             .WithConverter(choice => choice ? "y" : "n"));
 
         Console.WriteLine(confirmation ? "Confirmed, reservation cancelled." : "Declined, reservation is still there.");
+        AdminMenu.AdminMenuStart();
     }
 
     public static void ViewReservation()
     {
-
+        //Call every reservation from json file
     }
 }
