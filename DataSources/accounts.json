@@ -1,0 +1,22 @@
+[
+    {
+      "name": "John Doe",
+      "emailAddress": "john@example.com",
+      "phoneNumber": "123456789",
+      "password": "password123",
+      "dateOfBirth": "1990-01-01",
+      "address": "123 Main St",
+      "preferences": [],
+      "isAdmin": false
+    },
+    {
+      "name": "Admin Jane",
+      "emailAddress": "admin@example.com",
+      "phoneNumber": "987654321",
+      "password": "adminpass",
+      "dateOfBirth": "1985-01-01",
+      "address": "456 Admin Rd",
+      "preferences": [],
+      "isAdmin": true
+    }
+  ]
