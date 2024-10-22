@@ -22,7 +22,7 @@ using Spectre.Console;
                 Console.WriteLine("This feature is not yet implemented");
                 break;
             case "Cancel a reservation":
-                Console.WriteLine("This feature is not yet implemented");
+                Reservation.CancelReservation();
                 break;
             case "View your reservation":
                 Console.WriteLine("This feature is not yet implemented");
