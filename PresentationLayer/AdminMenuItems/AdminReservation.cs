@@ -10,7 +10,7 @@ static class AdminReservation
             new TextPrompt<string>("Enter a phone number: "));
 
         var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a phone number: "));
+            new TextPrompt<string>("Enter a email: "));
 
         var date = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a date: "));
@@ -43,7 +43,6 @@ static class AdminReservation
         new TextPrompt<bool>("Do you want to cancel your reservation?")
             .AddChoice(true)
             .AddChoice(false)
-            .DefaultValue(false)
             .WithConverter(choice => choice ? "y" : "n"));
 
         Console.WriteLine(confirmation ? "Confirmed, reservation cancelled." : "Declined, reservation is still there.");
@@ -53,5 +52,36 @@ static class AdminReservation
     public static void ViewReservation()
     {
         //Call every reservation from json file
+    }
+
+    public static void ChangeReservation()
+    {
+        //View old information
+
+        //New information
+        //if left empty(null) keep old information
+        
+        var name = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a new Name: "));
+
+        var phonenumber = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a new phone number: "));
+
+        var email = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a new email: "));
+
+        var date = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a new date: "));
+
+        var time = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a new time: "));
+        
+        var person = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter an amount of people: "));
+
+
+        Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
+        Console.WriteLine($"\nReservation complete!");
+        AdminMenu.AdminMenuStart();
     }
 }

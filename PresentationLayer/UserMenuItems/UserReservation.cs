@@ -1,5 +1,5 @@
 using Spectre.Console;
-static class Reservation
+static class UserReservation
 {
     public static void MakeReservation()
     {
@@ -28,7 +28,6 @@ static class Reservation
         new TextPrompt<bool>("Do you want to cancel your reservation?")
             .AddChoice(true)
             .AddChoice(false)
-            .DefaultValue(false)
             .WithConverter(choice => choice ? "y" : "n"));
 
         Console.WriteLine(confirmation ? "Confirmed, reservation cancelled." : "Declined, reservation is still there.");
@@ -37,6 +36,12 @@ static class Reservation
 
     public static void ViewReservation()
     {
-        //Check which user it is then check the reservation
+        Console.WriteLine("beep boop");
+    }
+
+    public static void Calendar()
+    {
+        var calendar = new Calendar(2024,10);
+        AnsiConsole.Write(calendar);
     }
 }
