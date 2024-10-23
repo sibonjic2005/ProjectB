@@ -1,7 +1,8 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-public class Log_in_Checker
+public class SignUpChecker
 {
     public string PasswordRules(Func<string> getPassword)
     {
@@ -12,19 +13,23 @@ public class Log_in_Checker
 
             if (password.Length < 8)
             {
-                return "Password must be at least 8 characters long.";
+                Console.WriteLine("Password must be at least 8 characters long.");
+                continue;
             }
             else if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                return "Password must contain at least one uppercase letter.";
+                Console.WriteLine("Password must contain at least one uppercase letter.");
+                continue;
             }
             else if (!Regex.IsMatch(password, "[0-9]"))
             {
-                return "Password must contain at least one digit.";
+                Console.WriteLine("Password must contain at least one digit.");
+                continue;
             }
             else if (!Regex.IsMatch(password, "[^a-zA-Z0-9]"))
             {
-                return "Password must contain at least one special character.";
+                Console.WriteLine("Password must contain at least one special character.");
+                continue;
             }
             else
             {
@@ -45,7 +50,8 @@ public class Log_in_Checker
 
             if (!Regex.IsMatch(email, emailPattern))
             {
-                return "Email address is invalid.";
+                Console.WriteLine("Email address is invalid.");
+                continue;
             }
             else
             {
@@ -65,7 +71,8 @@ public class Log_in_Checker
 
             if (!Regex.IsMatch(phoneNumber, phonePattern))
             {
-                return "Phone number is invalid. It must contain 10 to 15 digits.";
+                Console.WriteLine("Phone number is invalid. It must contain 10 to 15 digits.");
+                continue;
             }
             else
             {

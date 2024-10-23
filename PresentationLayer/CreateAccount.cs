@@ -1,9 +1,10 @@
+using System.Security.Cryptography.X509Certificates;
 using Spectre.Console;
 static class CreateAccount
 {
     public static void CreateAcc()
     {
-        Log_in_Checker log_in_checker = new Log_in_Checker();
+        SignUpChecker sign_up_checker = new SignUpChecker();
         AccountsLogic accounts_logic = new AccountsLogic();
 
         var name = AnsiConsole.Prompt(
@@ -18,11 +19,11 @@ static class CreateAccount
         var phonenumber = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your phonenumber: "));
 
-        var email = log_in_checker.ValidateEmail(() => 
+        var email = sign_up_checker.ValidateEmail(() => 
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your email address:"))
         );
 
-        var password = log_in_checker.PasswordRules(() => 
+        var password = sign_up_checker.PasswordRules(() => 
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your password: ").Secret())
         );
 
@@ -55,7 +56,7 @@ static class CreateAccount
 
     public static void CreateAdmin()
     {
-        Log_in_Checker log_in_checker = new Log_in_Checker();
+        SignUpChecker sign_up_checker = new SignUpChecker();
         AccountsLogic accounts_logic = new AccountsLogic();
 
         var name = AnsiConsole.Prompt(
@@ -70,11 +71,11 @@ static class CreateAccount
         var phonenumber = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your phonenumber: "));
 
-        var email = log_in_checker.ValidateEmail(() => 
+        var email = sign_up_checker.ValidateEmail(() => 
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your email address:"))
         );
 
-        var password = log_in_checker.PasswordRules(() => 
+        var password = sign_up_checker.PasswordRules(() => 
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your password: ").Secret())
         );
 
