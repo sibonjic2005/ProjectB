@@ -67,6 +67,26 @@ class AccountsLogic
         UpdateList(admin);
     }
 
+    public void AddNewReservation(string name, string email, string phone, List<string> preferences, Dictionary<string, string> reservation)
+    {
+        var user = GetByEmail(email);
+        if (user != null)
+        {
+            user.Reservations.Add(reservation);
+            UpdateList(user);
+        }
+        else
+        {
+            CreateUser(name, email, phone, "NAjnjdnjn1241RFW@R$#%#$%#GERegnrejgnjr", "", "", preferences);
+            var newUser = GetByEmail(email);
+            if (newUser != null)
+            {
+                newUser.Reservations.Add(reservation);
+                UpdateList(newUser);
+            }
+        }
+    }
+
     public void AddReservation(string email, Dictionary<string, string> reservation)
     {
         var user = GetByEmail(email);

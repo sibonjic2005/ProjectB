@@ -54,6 +54,45 @@ static class CreateAccount
         UserLogin.NewUserLogin(email, password);
     }
 
+    public static void CreateGuestAcc()
+    {
+        SignUpChecker signUpChecker = new SignUpChecker();
+        AccountsLogic accountsLogic = new AccountsLogic();
+
+        var email = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter your email address: "));
+
+        var name = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter your name: "));
+
+        var phonenumber = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter your phonenumber: "));
+
+        var allergies = AnsiConsole.Prompt(
+            new MultiSelectionPrompt<string>()
+                .Title("Do have any allergies?")
+                .NotRequired()
+                .PageSize(10)
+                .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
+                .InstructionsText(
+                    "[grey](Press [blue]<space>[/] to choose your allergy, " + 
+                    "[green]<enter>[/] to accept)[/]")
+                .AddChoices(new[] {
+                    "Tree Nuts", "Soy", "Fish",
+                    "Peanuts", "Shellfish", "Eggs",
+                    "Wheats", "Dairy"
+        }));
+
+    // Write the selected fruits to the terminal
+        foreach (string allergy in allergies)
+        {
+            AnsiConsole.WriteLine(allergy);
+        }
+
+        Console.WriteLine($"Email: {email}\nName:{name}\nPhone number:{phonenumber}");
+    
+    }
+
     public static void CreateAdmin()
     {
         SignUpChecker sign_up_checker = new SignUpChecker();

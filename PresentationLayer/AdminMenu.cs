@@ -26,11 +26,12 @@ using Spectre.Console;
             case "Change a reservation": // Cancel it, change time, change table
                 AdminReservation.ChangeReservation();
                 break;
-            case "Cancel a reservation": // Cancel it, change time, change table
+            case "Cancel reservation": // Cancel it, change time, change table
                 AdminReservation.CancelReservation();
                 break;
             case "View reservations":
                 AdminReservation.ViewReservation();
+                AdminMenuStart();
                 break;
             case "Change Client info":
                 Console.WriteLine("This feature is not yet implemented");
