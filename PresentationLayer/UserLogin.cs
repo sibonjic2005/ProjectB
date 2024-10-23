@@ -17,7 +17,15 @@ static class UserLogin
         {
             Console.WriteLine($"Welcome back, {user.Name}!");
             AccountsLogic.CurrentAccount = user;
-            UserMenu.UserMenuStart();
+
+            if (user.IsAdmin)
+            {
+                AdminMenu.AdminMenuStart();
+            }
+            else
+            {
+                UserMenu.UserMenuStart();
+            }
         }
         else
         {

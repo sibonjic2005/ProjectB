@@ -81,4 +81,19 @@ class AccountsLogic
             }
         }
     }
+
+    public void RemoveReservations(string email)
+    {
+        var user = GetByEmail(email);
+        if (user != null)
+        {
+            user.Reservations.Clear();
+            UpdateList(user);
+
+            if (CurrentAccount != null & CurrentAccount.EmailAddress == email)
+            {
+                CurrentAccount.Reservations.Clear();
+            }
+        }
+    }
 }

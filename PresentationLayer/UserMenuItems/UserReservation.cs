@@ -44,11 +44,27 @@ static class UserReservation
         // hierzo code om te laten zien over welke reservering het gaat
         // date: \n time: \ person:
         // use the json file i guess
+
+        string email = AccountsLogic.CurrentAccount?.EmailAddress;
+        if (email == null)
+        {
+            Console.WriteLine("No account is currently logged in.");
+            return;
+        }
+
+        ViewReservation();
+
         var confirmation = AnsiConsole.Prompt(
-        new TextPrompt<bool>("Do you want to cancel your reservation?")
+        new TextPrompt<bool>("\nDo you want to cancel your reservation?")
             .AddChoice(true)
             .AddChoice(false)
             .WithConverter(choice => choice ? "y" : "n"));
+
+        if (confirmation)
+        {
+            AccountsLogic accountsLogic = new AccountsLogic();
+            accountsLogic.RemoveReservations(email);
+        }
 
         Console.WriteLine(confirmation ? "Confirmed, reservation cancelled." : "Declined, reservation is still there.");
         UserMenu.UserMenuStart();
@@ -76,7 +92,7 @@ static class UserReservation
                 Console.WriteLine($"Date: {reservation["date"]}, Time: {reservation["time"]}, People: {reservation["amount"]}");
             }
         }
-        UserMenu.UserMenuStart();
+        // UserMenu.UserMenuStart();
     }
 
     public static void Calendar()
