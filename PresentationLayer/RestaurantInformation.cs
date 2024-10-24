@@ -22,7 +22,7 @@ public static class RestaurantInformation
                 
         if (choices == "Go back")
         {
-            StartingMenu.Menu();
+            UserMenu.UserMenuStart();
         }
     }
 }

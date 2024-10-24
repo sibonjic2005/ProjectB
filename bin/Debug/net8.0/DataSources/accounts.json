@@ -37,5 +37,22 @@
     "preferences": [],
     "isAdmin": true,
     "reservations": []
+  },
+  {
+    "name": "amma",
+    "emailAddress": "a@hotmail.com",
+    "phoneNumber": "11111111111111",
+    "password": "aaaaaaA1!",
+    "dateOfBirth": "12-10-1200",
+    "address": "Amma",
+    "preferences": [
+      "Tree Nuts",
+      "Soy",
+      "Fish",
+      "Peanuts",
+      "Shellfish"
+    ],
+    "isAdmin": false,
+    "reservations": []
   }
 ]
