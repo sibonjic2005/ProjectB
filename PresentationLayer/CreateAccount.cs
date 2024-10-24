@@ -10,14 +10,16 @@ static class CreateAccount
         var name = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your name: "));
 
-        var dateofbirth = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter date of birth (DD-MM-YYYY): "));
+        var dateofbirth = sign_up_checker.ValidateDate(() =>
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter date of birth (DD-MM-YYYY): "))
+        );
         
         var address = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your address: "));
 
-        var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your phonenumber: "));
+        var phonenumber = sign_up_checker.PhoneNumberRules(() =>
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your phonenumber: "))
+        );
 
         var email = sign_up_checker.ValidateEmail(() => 
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your email address:"))

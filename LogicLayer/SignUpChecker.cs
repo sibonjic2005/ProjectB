@@ -80,4 +80,34 @@ public class SignUpChecker
             }
         }
     }
+
+    // Methode voor datumvalidatie met het formaat DD-MM-YYYY
+    public string ValidateDate(Func<string> getDate)
+    {
+        string date;
+        string datePattern = @"^\d{2}-\d{2}-\d{4}$"; // DD-MM-YYYY formaat
+
+        while (true)
+        {
+            date = getDate();
+
+            // Eerst controleren op het formaat
+            if (!Regex.IsMatch(date, datePattern))
+            {
+                Console.WriteLine("Date is invalid. Please enter a valid date in the format DD-MM-YYYY.");
+                continue;
+            }
+
+            // Vervolgens controleren of het een geldige datum is
+            if (!DateTime.TryParseExact(date, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out _))
+            {
+                Console.WriteLine("Date is invalid. Please enter a valid calendar date.");
+                continue;
+            }
+            else
+            {
+                return date; // Geldige datum
+            }
+        }
+    }
 }
