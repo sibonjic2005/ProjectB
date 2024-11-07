@@ -17,10 +17,15 @@ static class UserReservation
         //     new TextPrompt<string>("Enter a date: "));
 
         DateTime date = Calendar.CalendarDate();
+        List<string> timeOptions = Calendar.GetTimeOptions(date);
 
         var time = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a time: "));
-        
+            new SelectionPrompt<string>()
+                .Title("Select a reservation time:")
+                .PageSize(10)
+                .AddChoices(timeOptions)
+        );
+
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
 

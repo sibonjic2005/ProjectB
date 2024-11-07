@@ -38,6 +38,23 @@ static class Calendar
         }
     }
 
+    public static List<string> GetTimeOptions(DateTime date)
+    {
+        int startHour = 10;
+        if (date.Date == DateTime.Today)
+        {
+            startHour = Math.Max(10, DateTime.Now.Hour + 1);
+        }
+
+        var timeOptions = new List<string> ();
+        for (int hour = startHour; hour <= 23; hour++)
+        {
+            timeOptions.Add($"{hour:00}:00");
+        }
+
+        return timeOptions;
+    }
+
     static void DisplayCalendar(DateTime selectedDate)
     {
         DateTime firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);

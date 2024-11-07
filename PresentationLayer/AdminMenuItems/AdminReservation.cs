@@ -31,9 +31,14 @@ static class AdminReservation
         //     new TextPrompt<string>("Enter a date: "));
 
         DateTime date = Calendar.CalendarDate();
+        List<string> timeOptions = Calendar.GetTimeOptions(date);
 
         var time = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a time: "));
+            new SelectionPrompt<string>()
+                .Title("Select a reservation time:")
+                .PageSize(10)
+                .AddChoices(timeOptions)
+        );
         
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an amount of people: "));
@@ -92,7 +97,7 @@ static class AdminReservation
                 Console.WriteLine($"Name: {user.Name}\nemail: {user.EmailAddress}:");
                 foreach (var reservation in user.Reservations)
                 {
-                    Console.WriteLine($"  -Date: {reservation["date"]}\n  -Time: {reservation["time"]}\n  -People: {reservation["amount"]}\n");
+                    Console.WriteLine($"  - Date: {reservation["date"]}\n  - Time: {reservation["time"]}\n  - People: {reservation["amount"]}\n");
                 }
             }
         }

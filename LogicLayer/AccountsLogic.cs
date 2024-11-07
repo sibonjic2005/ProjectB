@@ -20,6 +20,28 @@ class AccountsLogic
         return _accounts;
     }
 
+    public List<string> LoadAllUsersMail()
+    {
+        List<string> accountMails = new List<string>();
+
+        foreach (UserModel user in _accounts)
+        {
+            accountMails.Add(user.EmailAddress);
+        }
+
+        return accountMails;
+    }
+
+    public string CheckUserRights(UserModel user)
+    {
+        if (user.IsAdmin)
+            return "Admin";
+        else if (user.IsEmployee)
+            return "Employee";
+
+        return null;
+    }
+
     public void UpdateList(UserModel account)
     {
         int index = _accounts.FindIndex(s => s.EmailAddress.Equals(account.EmailAddress, StringComparison.OrdinalIgnoreCase));
