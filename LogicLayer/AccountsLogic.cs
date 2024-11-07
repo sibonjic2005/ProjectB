@@ -114,6 +114,33 @@ class AccountsLogic
         UpdateList(admin);
     }
 
+    public void ChangeRights(UserModel user, string rights)
+    {
+        switch (rights)
+        {
+            case "Admin":
+                user.IsAdmin = true;
+                user.IsEmployee = false;
+                user.IsGuest = false;
+                UpdateList(user);
+                break;
+            case "Employee":
+                user.IsAdmin = false;
+                user.IsEmployee = true;
+                user.IsGuest = false;
+                UpdateList(user);
+                break;
+            case "User":
+                user.IsAdmin = false;
+                user.IsEmployee = false;
+                user.IsGuest = false;
+                UpdateList(user);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void AddNewReservation(string name, string email, string phone, List<string> preferences, Dictionary<string, string> reservation)
     {
         var user = GetByEmail(email);

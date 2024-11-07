@@ -1,5 +1,5 @@
 using Spectre.Console;
-static class AdminRights
+class AdminRights
 {
     public static void PromoteDemoteUser()
     {
@@ -28,8 +28,7 @@ static class AdminRights
                 })
         );
 
-        // Call method to change rights (Logic Layer)
-        // accountsLogic.ChangeRights(newUserRights); for example
+        accountsLogic.ChangeRights(account, newUserRights);
 
     }
 }
