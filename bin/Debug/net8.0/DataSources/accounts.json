@@ -8,6 +8,7 @@
     "address": "123 Main St",
     "preferences": [],
     "isAdmin": false,
+    "isGuest": false,
     "reservations": [
       {
         "date": "01-12-2024",
@@ -25,6 +26,7 @@
     "address": "456 Admin Rd",
     "preferences": [],
     "isAdmin": true,
+    "isGuest": false,
     "reservations": []
   },
   {
@@ -36,6 +38,7 @@
     "address": "Gaatjenixaanlaan 10",
     "preferences": [],
     "isAdmin": true,
+    "isGuest": false,
     "reservations": []
   },
   {
@@ -53,6 +56,37 @@
       "Shellfish"
     ],
     "isAdmin": false,
+    "isGuest": false,
+    "reservations": []
+  },
+  {
+    "name": "ammar",
+    "emailAddress": "ammarsibonjic@gmail.com",
+    "phoneNumber": "0687694016",
+    "password": "Ikbenammar1!",
+    "dateOfBirth": "12-10-2005",
+    "address": "ammarsibonjic@gmail.com",
+    "preferences": [],
+    "isAdmin": false,
+    "isGuest": false,
+    "reservations": [
+      {
+        "date": "1",
+        "time": "1",
+        "amount": "1"
+      }
+    ]
+  },
+  {
+    "name": "a",
+    "emailAddress": "1@d.com",
+    "phoneNumber": "1111111111",
+    "password": "!Ammmmmm!1M",
+    "dateOfBirth": "12-12-1222",
+    "address": "q",
+    "preferences": [],
+    "isAdmin": false,
+    "isGuest": false,
     "reservations": []
   }
 ]

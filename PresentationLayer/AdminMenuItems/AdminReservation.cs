@@ -84,14 +84,15 @@ static class AdminReservation
         AccountsLogic accountsLogic = new AccountsLogic();
         var allUsers = accountsLogic.LoadAllUsers();
 
+        Console.WriteLine($"Reservations: \n");
         foreach (var user in allUsers)
         {
             if (user.Reservations.Count > 0)
             {
-                Console.WriteLine($"Reservations for {user.Name} with email {user.EmailAddress}:");
+                Console.WriteLine($"Name: {user.Name}\nemail: {user.EmailAddress}:");
                 foreach (var reservation in user.Reservations)
                 {
-                    Console.WriteLine($"Date: {reservation["date"]}, Time: {reservation["time"]}, People: {reservation["amount"]}");
+                    Console.WriteLine($"  -Date: {reservation["date"]}\n  -Time: {reservation["time"]}\n  -People: {reservation["amount"]}\n");
                 }
             }
         }
