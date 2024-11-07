@@ -1,16 +1,16 @@
 using System.Text.Json.Serialization;
 
 
-class UserModel
+class UserModel : GuestModel
 {
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
+    // [JsonPropertyName("name")]
+    // public string Name { get; set; }
 
-    [JsonPropertyName("emailAddress")]
-    public string EmailAddress { get; set; }
+    // [JsonPropertyName("emailAddress")]
+    // public string EmailAddress { get; set; }
     
-    [JsonPropertyName("phoneNumber")]
-    public string PhoneNumber { get; set; }
+    // [JsonPropertyName("phoneNumber")]
+    // public string PhoneNumber { get; set; }
     
     [JsonPropertyName("password")]
     public string Password { get; set; }
@@ -21,8 +21,8 @@ class UserModel
     [JsonPropertyName("address")]
     public string Address { get; set; } = "";
     
-    [JsonPropertyName("preferences")]
-    public List<string> Preferences { get; set; } = new List<string>();
+    // [JsonPropertyName("preferences")]
+    // public List<string> Preferences { get; set; } = new List<string>();
 
     [JsonPropertyName("isAdmin")]
     public bool IsAdmin { get; set; }
@@ -33,19 +33,20 @@ class UserModel
     [JsonPropertyName("isEmployee")]
     public bool IsEmployee { get; set; }
 
-    [JsonPropertyName("reservations")]
-    public List<Dictionary<string, string>> Reservations { get; set; } = new List<Dictionary<string, string>>();
+    // [JsonPropertyName("reservations")]
+    // public List<Dictionary<string, string>> Reservations { get; set; } = new List<Dictionary<string, string>>();
 
     public UserModel(string name, string emailAddress, string phoneNumber, string password = "", string dateOfBirth = "", string address = "", List<string> preferences = null)
+        : base(name, emailAddress, phoneNumber, preferences)
     {
-        Name = name;
-        EmailAddress = emailAddress;
-        PhoneNumber = phoneNumber;
+        // Name = name;
+        // EmailAddress = emailAddress;
+        // PhoneNumber = phoneNumber;
         Password = password;
         DateOfBirth = dateOfBirth;
         Address = address;
-        Preferences = preferences ?? new List<string>();
-        Reservations = new List<Dictionary<string, string>>();
+        // Preferences = preferences ?? new List<string>();
+        // Reservations = new List<Dictionary<string, string>>();
         IsAdmin = false;
         IsEmployee = false;
     }
