@@ -56,16 +56,34 @@ class AccountsLogic
 
     }
 
-    public void CreateUser(string name, string email, string phone, string password = "", string dateOfBirth = "", string address = "", List<string> preferences = null)
+    public void CreateUser(string name, string email, string phone, string rights, string password = "", string dateOfBirth = "", string address = "", List<string> preferences = null)
     {
-        var user = new UserModel(name, email, phone, password, dateOfBirth, address, preferences);
-        UpdateList(user);
+        if (rights == "Employee rights")
+        {
+            CreateEmployee(name, email, phone, password, dateOfBirth, address, preferences);
+        }
+        else if (rights == "Admin rights")
+        {
+            CreateAdmin(name, email, phone, password, dateOfBirth, address, preferences);
+        }
+        else
+        {
+            var user = new UserModel(name, email, phone, password, dateOfBirth, address, preferences);
+            UpdateList(user);
+        }
+        
     }
 
     public void CreateGuestUser(string name, string email, string phone)
     {
         var user = new UserModel(name, email, phone) { IsGuest = true };
         UpdateList(user);
+    }
+
+    public void CreateEmployee(string name, string email, string phone, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
+    {
+        var employee = UserModel.CreateEmployee(name, email, phone, password, dateOfBirth, address, preferences);
+        UpdateList(employee);
     }
 
     public void CreateAdmin(string name, string email, string phone, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
@@ -84,7 +102,7 @@ class AccountsLogic
         }
         else
         {
-            CreateUser(name, email, phone, "NAjnjdnjn1241RFW@R$#%#$%#GERegnrejgnjr", "", "", preferences);
+            CreateUser(name, email, phone, "NAjnjdnjn1241RFW@R$#%#$%#GERegnrejgnjr", "User rights", "", "", preferences);
             var newUser = GetByEmail(email);
             if (newUser != null)
             {

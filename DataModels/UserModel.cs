@@ -30,6 +30,9 @@ class UserModel
     [JsonPropertyName("isGuest")]
     public bool IsGuest { get; set;} = false;
 
+    [JsonPropertyName("isEmployee")]
+    public bool IsEmployee { get; set; }
+
     [JsonPropertyName("reservations")]
     public List<Dictionary<string, string>> Reservations { get; set; } = new List<Dictionary<string, string>>();
 
@@ -44,6 +47,7 @@ class UserModel
         Preferences = preferences ?? new List<string>();
         Reservations = new List<Dictionary<string, string>>();
         IsAdmin = false;
+        IsEmployee = false;
     }
 
     public static UserModel CreateAdmin(string name, string emailAddress, string phoneNumber, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
@@ -53,5 +57,14 @@ class UserModel
             IsAdmin = true
         };
         return admin;
+    }
+
+    public static UserModel CreateEmployee(string name, string emailAddress, string phoneNumber, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
+    {
+        var employee = new UserModel(name, emailAddress, phoneNumber, password, dateOfBirth, address, preferences)
+        {
+            IsEmployee = true
+        };
+        return employee;
     }
 }

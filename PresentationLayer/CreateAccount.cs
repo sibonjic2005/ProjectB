@@ -50,7 +50,7 @@ static class CreateAccount
         }
 
         // Create a new user
-        accounts_logic.CreateUser(name, email, phonenumber, password, dateofbirth, address, allergies);
+        accounts_logic.CreateUser(name, email, phonenumber, password, "User rights" ,dateofbirth, address, allergies);
 
         UserLogin.NewUserLogin(email, password);
     }
@@ -100,23 +100,33 @@ static class CreateAccount
         AccountsLogic accounts_logic = new AccountsLogic();
 
         var name = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your name: "));
+            new TextPrompt<string>("Enter a name: "));
 
         var dateofbirth = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter date of birth (DD-MM-YYYY): "));
         
         var address = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your address: "));
+            new TextPrompt<string>("Enter an address: "));
 
         var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your phonenumber: "));
+            new TextPrompt<string>("Enter a phonenumber: "));
 
         var email = sign_up_checker.ValidateEmail(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your email address:"))
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter an email address:"))
         );
 
         var password = sign_up_checker.PasswordRules(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your password: ").Secret())
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter a password: ").Secret())
+        );
+
+        var rights = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .Title("What [green]rights[/] do you want this user to have?")
+            .PageSize(10)
+            .MoreChoicesText("[grey](Move up and down to select rights)[/]")
+            .AddChoices(new[] {
+                "Admin rights", "Employee rights", "User rights"
+            })
         );
 
         var allergies = AnsiConsole.Prompt(
@@ -140,6 +150,7 @@ static class CreateAccount
             AnsiConsole.WriteLine(allergy);
         }
 
-        accounts_logic.CreateAdmin(name, email, phonenumber, password, dateofbirth, address, allergies);
+        accounts_logic.CreateUser(name, email, phonenumber, rights, password, dateofbirth, address, allergies);
+        // accounts_logic.CreateAdmin(name, email, phonenumber, password, dateofbirth, address, allergies);
     }
 }
