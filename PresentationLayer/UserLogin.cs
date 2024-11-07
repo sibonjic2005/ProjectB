@@ -22,6 +22,10 @@ static class UserLogin
             {
                 AdminMenu.AdminMenuStart();
             }
+            else if (user.IsEmployee)
+            {
+                EmployeeMenu.EmployeeMenuStart();
+            }
             else
             {
                 UserMenu.UserMenuStart();

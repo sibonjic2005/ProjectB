@@ -1,9 +1,9 @@
 using Spectre.Console;
 
- static class AdminMenu
+ static class EmployeeMenu
 
  {
-    public static void AdminMenuStart()
+    public static void EmployeeMenuStart()
     {
         
         var choices = AnsiConsole.Prompt(
@@ -14,24 +14,23 @@ using Spectre.Console;
                 .AddChoices(new[] {
                         "Make a reservation", "Change a reservation","Cancel reservation", "View reservations", 
                         "Change Client info", "View Client info", 
-                        "Edit Foodmenu", "Edit restaurant information",
-                        "Create employee account", "Promote/Demote accounts", "Log out"        
+                        "Edit Food menu", "Edit restaurant information", "Log out"        
                 }));
 
         switch (choices)
         {
             case "Make a reservation": // for people that called
-                AdminReservation.MakeReservation();
+                EmployeeReservation.MakeReservation();
                 break;
             case "Change a reservation": // Cancel it, change time, change table
-                AdminReservation.ChangeReservation();
+                EmployeeReservation.ChangeReservation();
                 break;
             case "Cancel reservation": // Cancel it, change time, change table
-                AdminReservation.CancelReservation();
+                EmployeeReservation.CancelReservation();
                 break;
             case "View reservations":
-                AdminReservation.ViewReservation();
-                AdminMenuStart();
+                EmployeeReservation.ViewReservation();
+                EmployeeMenuStart();
                 break;
             case "Change Client info":
                 Console.WriteLine("This feature is not yet implemented");
@@ -39,26 +38,19 @@ using Spectre.Console;
             case "View Client info":
                 Console.WriteLine("This feature is not yet implemented");
                 break;
-            case "Edit Foodmenu": // Edit foods and prices
+            case "Edit Food menu": // Edit foods and prices
                 Console.WriteLine("This feature is not yet implemented");
                 break;
             case "Edit restaurant information":
-              Console.WriteLine("This feature is not yet implemented");
-               break;
-            case "Create employee account":
-                CreateAccount.CreateAdmin();
-                AdminMenuStart();
-                break;
-            case "Promote/Demote accounts":
                 Console.WriteLine("This feature is not yet implemented");
                 break;
              case "Log out":
-                Console.WriteLine("You sucessfully logged out.");
+                Console.WriteLine("You successfully logged out.");
                 StartingMenu.Menu();
                 break;
-            default: //Not neccessary needed
+            default: //Not necessary needed
                 Console.WriteLine("Invalid option selected. Please try again.");
-                AdminMenuStart();
+                EmployeeMenuStart();
                 break;
         }
     }

@@ -35,7 +35,7 @@ using Spectre.Console;
                 Console.WriteLine("You sucessfully logged out.");
                 StartingMenu.Menu();
                 break;
-            default: //Not neccessary needed
+            default: //Not necessary
                 Console.WriteLine("Invalid option selected. Please try again.");
                 UserMenuStart();
                 break;
