@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+using System.Windows.Markup;
 using Spectre.Console;
 static class UserReservation
 {
@@ -11,8 +13,10 @@ static class UserReservation
             return;
         }
 
-        var date = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a date: "));
+        // var date = AnsiConsole.Prompt(
+        //     new TextPrompt<string>("Enter a date: "));
+
+        DateTime date = Calendar.CalendarDate();
 
         var time = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a time: "));
@@ -20,12 +24,11 @@ static class UserReservation
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
 
-
-        Console.WriteLine($"\nDate: {date}, Time: {time}, Amount of persons: {person}");
+        Console.WriteLine($"\nDate: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}");
 
         Dictionary<string, string> reservation = new Dictionary<string, string>
         {
-            { "date", date },
+            { "date", date.ToString("dd-MM-yyyy") },
             { "time", time },
             { "amount", person }
         };
@@ -93,11 +96,5 @@ static class UserReservation
             }
         }
         // UserMenu.UserMenuStart();
-    }
-
-    public static void Calendar()
-    {
-        var calendar = new Calendar(2024,10);
-        AnsiConsole.Write(calendar);
     }
 }

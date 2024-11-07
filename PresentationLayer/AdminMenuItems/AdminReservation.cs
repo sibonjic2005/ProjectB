@@ -27,8 +27,10 @@ static class AdminReservation
                     "Wheats", "Dairy"
         }));
 
-        var date = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a date: "));
+        // var date = AnsiConsole.Prompt(
+        //     new TextPrompt<string>("Enter a date: "));
+
+        DateTime date = Calendar.CalendarDate();
 
         var time = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a time: "));
@@ -38,7 +40,7 @@ static class AdminReservation
 
         Dictionary<string, string> reservation = new Dictionary<string, string>
         {
-            { "date", date },
+            { "date", date.ToString("dd-MM-yyyy") },
             { "time", time },
             { "amount", person }
         };
@@ -46,7 +48,7 @@ static class AdminReservation
         AccountsLogic accountsLogic = new AccountsLogic();
         accountsLogic.AddNewReservation(name, email, phonenumber, allergies, reservation);
 
-        Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
+        Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
         AdminMenu.AdminMenuStart();
     }
