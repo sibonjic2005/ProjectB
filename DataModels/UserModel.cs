@@ -27,10 +27,13 @@ class UserModel
     [JsonPropertyName("isAdmin")]
     public bool IsAdmin { get; set; }
 
+    [JsonPropertyName("isGuest")]
+    public bool IsGuest { get; set;} = false;
+
     [JsonPropertyName("reservations")]
     public List<Dictionary<string, string>> Reservations { get; set; } = new List<Dictionary<string, string>>();
 
-    public UserModel(string name, string emailAddress, string phoneNumber, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
+    public UserModel(string name, string emailAddress, string phoneNumber, string password = "", string dateOfBirth = "", string address = "", List<string> preferences = null)
     {
         Name = name;
         EmailAddress = emailAddress;

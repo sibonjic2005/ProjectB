@@ -42,7 +42,8 @@ class AccountsLogic
 
     public UserModel? CheckLogin(string email, string password)
     {
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        // if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        if (string.IsNullOrEmpty(email))
         {
             return null;
         }
@@ -55,9 +56,15 @@ class AccountsLogic
 
     }
 
-    public void CreateUser(string name, string email, string phone, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
+    public void CreateUser(string name, string email, string phone, string password = "", string dateOfBirth = "", string address = "", List<string> preferences = null)
     {
         var user = new UserModel(name, email, phone, password, dateOfBirth, address, preferences);
+        UpdateList(user);
+    }
+
+    public void CreateGuestUser(string name, string email, string phone)
+    {
+        var user = new UserModel(name, email, phone) { IsGuest = true };
         UpdateList(user);
     }
 

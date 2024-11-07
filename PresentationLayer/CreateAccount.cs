@@ -61,8 +61,9 @@ static class CreateAccount
         SignUpChecker signUpChecker = new SignUpChecker();
         AccountsLogic accountsLogic = new AccountsLogic();
 
-        var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your email address: "));
+        var email = signUpChecker.ValidateEmail(() => 
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your email address:"))
+        );
 
         var name = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your name: "));
@@ -92,7 +93,10 @@ static class CreateAccount
         }
 
         Console.WriteLine($"Email: {email}\nName:{name}\nPhone number:{phonenumber}");
-    
+
+        accountsLogic.CreateGuestUser(name, email, phonenumber);
+
+        UserLogin.NewUserLogin(email, "");
     }
 
     public static void CreateAdmin()
