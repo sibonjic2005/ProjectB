@@ -11,8 +11,7 @@ static class CreateAccount
             new TextPrompt<string>("Enter your name: "));
 
         var dateofbirth = sign_up_checker.ValidateDate(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter date of birth (DD-MM-YYYY): "))
-        );
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter date of birth (DD-MM-YYYY): ")));
         
         var address = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your address: "));
@@ -26,7 +25,7 @@ static class CreateAccount
         );
 
         var password = sign_up_checker.PasswordRules(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your password: ").Secret())
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your password: (Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.)").Secret())
         );
 
         var allergies = AnsiConsole.Prompt(
@@ -61,9 +60,8 @@ static class CreateAccount
         SignUpChecker signUpChecker = new SignUpChecker();
         AccountsLogic accountsLogic = new AccountsLogic();
 
-        var email = signUpChecker.ValidateEmail(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your email address:"))
-        );
+        var email = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter your email address: "));
 
         var name = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter your name: "));
@@ -93,10 +91,7 @@ static class CreateAccount
         }
 
         Console.WriteLine($"Email: {email}\nName:{name}\nPhone number:{phonenumber}");
-
-        accountsLogic.CreateGuestUser(name, email, phonenumber);
-
-        UserLogin.NewUserLogin(email, "");
+    
     }
 
     public static void CreateAdmin()
