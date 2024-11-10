@@ -106,6 +106,11 @@ static class AdminReservation
 
     public static void ChangeReservation()
     {
+        Console.WriteLine("Give the email of the reservation who you want to change?");
+        string getemail = Console.ReadLine();
+        AccountsLogic accountsLogic = new AccountsLogic();
+        accountsLogic.ChangeReservation(getemail);
+        
         //View old information
 
         //New information

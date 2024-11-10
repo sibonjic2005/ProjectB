@@ -190,4 +190,14 @@ class AccountsLogic
             }
         }
     }
+
+    public void ChangeReservation(string email)
+    {
+        var user = GetByEmail(email);
+        if (user != null)
+        {
+            UserReservation.ViewReservation();
+            
+        }
+    }
 }

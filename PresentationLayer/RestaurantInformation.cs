@@ -10,8 +10,7 @@ public static class RestaurantInformation
         Console.WriteLine("Cuisine Type: Blind experience or A la Carte");
         Console.WriteLine("Cancellation Policy: You can always cancel your reservation in the application or cancel by calling.");
         Console.WriteLine("House Rules: Pets are allowed, but need to behave. \nNo takeaway");
-        Console.WriteLine("Opening time: 10:00 - 00-00");
-        Console.WriteLine("24/7 OPEN!\n");
+        Console.WriteLine("Opening time Mon-Sun: 10:00 - 00-00");
 
          var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
