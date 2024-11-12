@@ -196,8 +196,9 @@ class AccountsLogic
         var user = GetByEmail(email);
         if (user != null)
         {
-            UserReservation.ViewReservation();
             
+            //UserReservation.ViewReservation(); this doenst work
+
         }
     }
 }
