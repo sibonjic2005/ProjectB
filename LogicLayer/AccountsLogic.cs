@@ -191,14 +191,12 @@ class AccountsLogic
         }
     }
 
-    public void ChangeReservation(string email)
+    public void UpdateChanges(string email)
     {
         var user = GetByEmail(email);
         if (user != null)
         {
-            
-            //UserReservation.ViewReservation(); this doenst work
-
+            UpdateList(user);
         }
     }
 }
