@@ -29,7 +29,12 @@ using Spectre.Console;
                 UserMenuStart();
                 break;
             case "See Foodmenu":
-                Console.WriteLine("This feature is not yet implemented");
+                FoodMenu.DisplayFoodMenu();
+                GoBack.GoBackUserMenu();
+                break;
+            case "Information":
+                RestaurantInformation.PrintRestaurantInformation();
+                GoBack.GoBackUserMenu();
                 break;
             case "Log out":
                 Console.WriteLine("You sucessfully logged out.");
@@ -41,4 +46,4 @@ using Spectre.Console;
                 break;
         }
     }
-}
+ }

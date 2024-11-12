@@ -42,9 +42,11 @@ public static class StartingMenu
                 break;
             case "FoodMenu":
                 FoodMenu.DisplayFoodMenu();
+                GoBack.GoBackStartingMenu();
                 break;
             case "Information":
                 RestaurantInformation.PrintRestaurantInformation();
+                GoBack.GoBackStartingMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option selected. Please try again.");
