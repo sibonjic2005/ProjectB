@@ -34,8 +34,8 @@ class UserModel : GuestModel
     [JsonPropertyName("isEmployee")]
     public bool IsEmployee { get; set; }
 
-    // [JsonPropertyName("reservations")]
-    // public List<Dictionary<string, string>> Reservations { get; set; } = new List<Dictionary<string, string>>();
+    [JsonPropertyName("reservations")]
+    public List<Reservation> Reservations { get; set; } = new List<Reservation>();
 
     public UserModel(string name, string emailAddress, string phoneNumber, string password = "", string dateOfBirth = "", string address = "", List<string> preferences = null)
         : base(name, emailAddress, phoneNumber, preferences)

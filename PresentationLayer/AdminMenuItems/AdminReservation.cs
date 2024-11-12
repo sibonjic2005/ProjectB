@@ -43,19 +43,19 @@ static class AdminReservation
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an amount of people: "));
 
-        Dictionary<string, string> reservation = new Dictionary<string, string>
-        {
-            { "date", date.ToString("dd-MM-yyyy") },
-            { "time", time },
-            { "amount", person }
-        };
+        var reservation = new Reservation(
+        
+            date,
+            time,
+            person 
+        );
 
         AccountsLogic accountsLogic = new AccountsLogic();
         accountsLogic.AddNewReservation(name, email, phonenumber, allergies, reservation);
 
         Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
-        AdminMenu.AdminMenuStart();
+        // AdminMenu.AdminMenuStart();
     }
 
     public static void CancelReservation()
@@ -81,7 +81,7 @@ static class AdminReservation
         }
 
         Console.WriteLine(confirmation ? "Confirmed, reservation cancelled." : "Declined, reservation is still there.");
-        AdminMenu.AdminMenuStart();
+        // AdminMenu.AdminMenuStart();
     }
 
     public static void ViewReservation()
@@ -95,9 +95,9 @@ static class AdminReservation
             if (user.Reservations.Count > 0)
             {
                 Console.WriteLine($"Name: {user.Name}\nemail: {user.EmailAddress}:");
-                foreach (var reservation in user.Reservations)
+                foreach (Reservation reservation in user.Reservations)
                 {
-                    Console.WriteLine($"  - Date: {reservation["date"]}\n  - Time: {reservation["time"]}\n  - People: {reservation["amount"]}\n");
+                    Console.WriteLine($"  - Date: {reservation.Date}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
                 }
             }
         }
@@ -114,7 +114,7 @@ static class AdminReservation
             if (user == null)
             {
                 Console.WriteLine("No reservation found with the given email.");
-                AdminMenu.AdminMenuStart();
+                // AdminMenu.AdminMenuStart();
                 return;
             }
 
@@ -126,27 +126,29 @@ static class AdminReservation
         //New information
         //if left empty(null) keep old information
         
-        var name = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new Name: "));
-
+        var newName = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a new Name (leave empty to keep current): "));
+            
         var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new phone number: "));
+            new TextPrompt<string>("Enter a new phone number (leave empty to keep current): "));
 
         var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new email: "));
+            new TextPrompt<string>("Enter a new email (leave empty to keep current): "));
 
-        var date = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new date: "));
+        var dateString = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter a new date (leave empty to keep current): "));
+
+        DateTime date = DateTime.Parse(dateString);
 
         var time = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new time: "));
+            new TextPrompt<string>("Enter a new time (leave empty to keep current): "));
         
         var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an amount of people: "));
+            new TextPrompt<string>("Enter an amount of people (leave empty to keep current): "));
 
-        accountsLogic.UpdateChanges(getemail);
-        Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
+        accountsLogic.UpdateChanges(getemail, newName, phonenumber, email, date, time ,person);
+        Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
-        AdminMenu.AdminMenuStart();
+        // AdminMenu.AdminMenuStart();
     }
 }

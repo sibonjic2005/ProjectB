@@ -16,7 +16,7 @@ class GuestModel
     public List<string> Preferences { get; set; } = new List<string>();
 
     [JsonPropertyName("reservations")]
-    public List<Dictionary<string, string>> Reservations { get; set; } = new List<Dictionary<string, string>>();
+    public List<Reservation> Reservations { get; set; } = new List<Reservation>();
 
     public GuestModel(string name, string emailAddress, string phoneNumber, List<string> preferences = null)
     {
@@ -24,6 +24,6 @@ class GuestModel
         EmailAddress = emailAddress;
         PhoneNumber = phoneNumber;
         Preferences = preferences ?? new List<string>();
-        Reservations = new List<Dictionary<string, string>>();
+        Reservations = new List<Reservation>();
     }
 }

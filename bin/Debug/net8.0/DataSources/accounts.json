@@ -6,17 +6,17 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "name": "John Doe",
-    "emailAddress": "john@example.com",
-    "phoneNumber": "123456789",
-    "preferences": [],
     "reservations": [
       {
-        "date": "01-12-2024",
-        "time": "14:00",
-        "amount": "3"
+        "Date": "2024-11-13T00:00:00+01:00",
+        "Time": "13:00",
+        "PersonCount": "8"
       }
-    ]
+    ],
+    "name": "John Poe",
+    "emailAddress": "john@example.com",
+    "phoneNumber": "1234567890",
+    "preferences": []
   },
   {
     "password": "adminpass",
@@ -25,11 +25,11 @@
     "isAdmin": true,
     "isGuest": false,
     "isEmployee": false,
+    "reservations": [],
     "name": "Admin Jane",
     "emailAddress": "admin@example.com",
     "phoneNumber": "987654321",
-    "preferences": [],
-    "reservations": []
+    "preferences": []
   },
   {
     "password": "KanusManus!102",
@@ -38,11 +38,11 @@
     "isAdmin": true,
     "isGuest": false,
     "isEmployee": false,
+    "reservations": [],
     "name": "mo",
     "emailAddress": "modeadmin@yooo.com",
     "phoneNumber": "0672382912",
-    "preferences": [],
-    "reservations": []
+    "preferences": []
   },
   {
     "password": "aaaaaaA1!",
@@ -51,6 +51,7 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
+    "reservations": [],
     "name": "amma",
     "emailAddress": "a@hotmail.com",
     "phoneNumber": "11111111111111",
@@ -60,8 +61,7 @@
       "Fish",
       "Peanuts",
       "Shellfish"
-    ],
-    "reservations": []
+    ]
   },
   {
     "password": "Ikbenammar1!",
@@ -70,17 +70,11 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
+    "reservations": [],
     "name": "ammar",
     "emailAddress": "ammarsibonjic@gmail.com",
     "phoneNumber": "0687694016",
-    "preferences": [],
-    "reservations": [
-      {
-        "date": "1",
-        "time": "1",
-        "amount": "1"
-      }
-    ]
+    "preferences": []
   },
   {
     "password": "!Ammmmmm!1M",
@@ -89,11 +83,11 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
+    "reservations": [],
     "name": "a",
     "emailAddress": "1@d.com",
     "phoneNumber": "1111111111",
-    "preferences": [],
-    "reservations": []
+    "preferences": []
   },
   {
     "password": "Klampetoren12!",
@@ -102,10 +96,25 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": true,
+    "reservations": [],
     "name": "employee1",
     "emailAddress": "woningklemmer@hotmail.com",
     "phoneNumber": "0612345678",
-    "preferences": [],
-    "reservations": []
+    "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [],
+    "name": "Koos",
+    "emailAddress": "frjeunferfe@hotmail.com",
+    "phoneNumber": "063423243",
+    "preferences": [
+      "Soy"
+    ]
   }
 ]

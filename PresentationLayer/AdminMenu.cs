@@ -22,12 +22,15 @@ using Spectre.Console;
         {
             case "Make a reservation": // for people that called
                 AdminReservation.MakeReservation();
+                AdminMenuStart();
                 break;
             case "Change a reservation": // Cancel it, change time, change table
                 AdminReservation.ChangeReservation();
+                AdminMenuStart();
                 break;
             case "Cancel reservation": // Cancel it, change time, change table
                 AdminReservation.CancelReservation();
+                AdminMenuStart();
                 break;
             case "View reservations":
                 AdminReservation.ViewReservation();

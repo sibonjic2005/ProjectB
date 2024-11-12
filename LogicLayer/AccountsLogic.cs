@@ -141,7 +141,7 @@ class AccountsLogic
         }
     }
 
-    public void AddNewReservation(string name, string email, string phone, List<string> preferences, Dictionary<string, string> reservation)
+    public void AddNewReservation(string name, string email, string phone, List<string> preferences, Reservation reservation)
     {
         var user = GetByEmail(email);
         if (user != null)
@@ -161,7 +161,7 @@ class AccountsLogic
         }
     }
 
-    public void AddReservation(string email, Dictionary<string, string> reservation)
+    public void AddReservation(string email, Reservation reservation)
     {
         var user = GetByEmail(email);
         if (user != null)
@@ -191,11 +191,21 @@ class AccountsLogic
         }
     }
 
-    public void UpdateChanges(string email)
+    public void UpdateChanges(string email, string newName, string newPhoneNumber, string newEmail, DateTime newDate, string newTime, string newPerson)
     {
         var user = GetByEmail(email);
         if (user != null)
         {
+            if(!string.IsNullOrEmpty(newName)) user.Name = newName;
+            if(!string.IsNullOrEmpty(newPhoneNumber)) user.PhoneNumber = newPhoneNumber;
+            if(!string.IsNullOrEmpty(newEmail)) user.EmailAddress = newEmail;
+
+            if (user.Reservations != null)
+            {
+                user.Reservations[0].Date = newDate;
+                if(!string.IsNullOrEmpty(newName)) user.Name = newName;
+                if(!string.IsNullOrEmpty(newName)) user.Name = newName;
+            }    
             UpdateList(user);
         }
     }

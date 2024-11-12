@@ -31,12 +31,11 @@ static class UserReservation
 
         Console.WriteLine($"\nDate: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}");
 
-        Dictionary<string, string> reservation = new Dictionary<string, string>
-        {
-            { "date", date.ToString("dd-MM-yyyy") },
-            { "time", time },
-            { "amount", person }
-        };
+        var reservation = new Reservation(
+            date,
+            time,
+            person 
+        );
 
         AccountsLogic accountsLogic = new AccountsLogic();
         accountsLogic.AddReservation(email, reservation);
@@ -95,9 +94,9 @@ static class UserReservation
                 Console.WriteLine("Your reservation:");
             else
                 Console.WriteLine("Your reservations:");
-            foreach (var reservation in currentUser.Reservations)
+            foreach (Reservation reservation in currentUser.Reservations)
             {
-                Console.WriteLine($"Date: {reservation["date"]}, Time: {reservation["time"]}, People: {reservation["amount"]}");
+                Console.WriteLine($"  - Date: {reservation.Date}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
             }
         }
         // UserMenu.UserMenuStart();
