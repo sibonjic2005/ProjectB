@@ -15,6 +15,7 @@ static class GoBack
                 
         if (choices == "Go back")
         {
+            Console.Clear();
             UserMenu.UserMenuStart();
         }
     }
@@ -31,6 +32,7 @@ static class GoBack
                 
         if (choices == "Go back")
         {
+            Console.Clear();
             StartingMenu.Menu();
         }
     }
