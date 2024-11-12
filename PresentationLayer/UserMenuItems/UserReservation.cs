@@ -15,7 +15,6 @@ static class UserReservation
 
         // var date = AnsiConsole.Prompt(
         //     new TextPrompt<string>("Enter a date: "));
-
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
@@ -29,6 +28,7 @@ static class UserReservation
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
 
+        Console.Clear();
         Console.WriteLine($"\nDate: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}");
 
         var reservation = new Reservation(
@@ -73,6 +73,7 @@ static class UserReservation
             accountsLogic.RemoveReservations(email);
         }
 
+        Console.Clear();
         Console.WriteLine(confirmation ? "Confirmed, reservation cancelled." : "Declined, reservation is still there.");
         UserMenu.UserMenuStart();
     }

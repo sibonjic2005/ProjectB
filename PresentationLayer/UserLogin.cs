@@ -15,6 +15,7 @@ static class UserLogin
 
         if (user != null)
         {
+            Console.Clear();
             Console.WriteLine($"Welcome back, {user.Name}!");
             AccountsLogic.CurrentAccount = user;
 
@@ -33,6 +34,7 @@ static class UserLogin
         }
         else
         {
+            Console.Clear();
             Console.WriteLine("Invalid login credentials");
             StartingMenu.Menu();
         }
