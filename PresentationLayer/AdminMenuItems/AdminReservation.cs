@@ -110,12 +110,17 @@ static class AdminReservation
         string getemail = Console.ReadLine();
 
         AccountsLogic accountsLogic = new AccountsLogic();
-        User user = accountsLogic.GetByEmail(getemail);
-        
+        var user = accountsLogic.GetByEmail(getemail);
+            if (user == null)
+            {
+                Console.WriteLine("No reservation found with the given email.");
+                AdminMenu.AdminMenuStart();
+                return;
+            }
+
 
         //accountsLogic.ChangeReservation(getemail);
-
-        
+    
         //View old information
 
         //New information
@@ -139,7 +144,7 @@ static class AdminReservation
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an amount of people: "));
 
-
+        
         Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
         AdminMenu.AdminMenuStart();
