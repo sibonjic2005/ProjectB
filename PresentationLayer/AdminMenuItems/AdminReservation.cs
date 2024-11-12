@@ -94,7 +94,7 @@ static class AdminReservation
         {
             if (user.Reservations.Count > 0)
             {
-                Console.WriteLine($"Name: {user.Name}\nemail: {user.EmailAddress}:");
+                Console.WriteLine($"Name: {user.Name}\nEmail: {user.EmailAddress}:");
                 foreach (var reservation in user.Reservations)
                 {
                     Console.WriteLine($"  - Date: {reservation["date"]}\n  - Time: {reservation["time"]}\n  - People: {reservation["amount"]}\n");
