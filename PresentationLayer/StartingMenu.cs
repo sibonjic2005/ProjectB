@@ -13,10 +13,8 @@ public static class StartingMenu
                     "Login", 
                     "Create an account", 
                     "Login as guest", 
-                    "Exit", 
-                    "User menu (for testing)", 
-                    "Admin menu (for testing)", 
-                    "FoodMenu", 
+                    "Exit",
+                    "FoodMenu",
                     "Information"
                 }));
 
@@ -33,12 +31,6 @@ public static class StartingMenu
                 break;
             case "Exit":
                 Console.WriteLine("Thank you for visiting our website!");
-                break;
-            case "User menu (for testing)":
-                UserMenu.UserMenuStart();
-                break;
-            case "Admin menu (for testing)":
-                AdminMenu.AdminMenuStart();
                 break;
             case "FoodMenu":
                 FoodMenu.DisplayFoodMenu();
