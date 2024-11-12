@@ -43,14 +43,16 @@ static class CreateAccount
                     "Wheats", "Dairy"
         }));
 
-        Console.WriteLine($"\nName: {name}, Birthday: {dateofbirth}, Address: {address} \nPhonenumber: {phonenumber}, Email: {email}, Password: {password}");
+        // Console.WriteLine($"\nName: {name}, Birthday: {dateofbirth}, Address: {address} \nPhonenumber: {phonenumber}, Email: {email}, Password: {password}");
         foreach (string allergy in allergies)
         {
             AnsiConsole.WriteLine(allergy);
         }
 
         // Create a new user
-        accounts_logic.CreateUser(name, email, phonenumber, password, "User rights" ,dateofbirth, address, allergies);
+        accounts_logic.CreateUser(name, email, phonenumber, "User rights" ,password ,dateofbirth, address, allergies);
+
+        Console.Clear();
 
         UserLogin.NewUserLogin(email, password);
     }

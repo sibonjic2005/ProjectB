@@ -97,7 +97,7 @@ static class UserReservation
                 Console.WriteLine("Your reservations:");
             foreach (Reservation reservation in currentUser.Reservations)
             {
-                Console.WriteLine($"  - Date: {reservation.Date}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
+                Console.WriteLine($"  - Date: {reservation.Date.ToString("d")}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
             }
         }
         // UserMenu.UserMenuStart();

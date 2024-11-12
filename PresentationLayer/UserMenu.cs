@@ -5,10 +5,9 @@ using Spectre.Console;
  {
     public static void UserMenuStart()
     {
-        
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Welcome to the LogIn Menu")
+                .Title("Welcome to the Login Menu")
                 .PageSize(10)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
