@@ -51,10 +51,7 @@ class ClientInfo
 
         var email = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an email: "));
-
-        var password = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an password: "));
-
+            
         var dateOfBirth = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an date of birth: "));
         
@@ -77,7 +74,7 @@ class ClientInfo
         }));
 
 
-        accountsLogic.UpdateChangesClientInfo(userMail, newName, phonenumber, email, password, dateOfBirth, address, allergies);
+        accountsLogic.UpdateChangesClientInfo(userMail, newName, phonenumber, email, dateOfBirth, address, allergies);
         Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}");
         Console.WriteLine($"\nReservation complete!");
         
