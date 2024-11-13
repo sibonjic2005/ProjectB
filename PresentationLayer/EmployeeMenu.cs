@@ -12,8 +12,8 @@ using Spectre.Console;
                 .PageSize(15)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)[/]")
                 .AddChoices(new[] {
-                        "Make a reservation", "Change a reservation","Cancel reservation", "View reservations", 
-                        "Change Client info", "View Client info", 
+                        "Make a reservation", "Change a reservation",
+                        "Cancel reservation", "View reservations", 
                         "Edit Food menu", "Edit restaurant information", "Log out"        
                 }));
 
@@ -34,12 +34,6 @@ using Spectre.Console;
             case "View reservations":
                 AdminReservation.ViewReservation();
                 EmployeeMenuStart();
-                break;
-            case "Change Client info":
-                Console.WriteLine("This feature is not yet implemented");
-                break;
-            case "View Client info":
-                Console.WriteLine("This feature is not yet implemented");
                 break;
             case "Edit Food menu": // Edit foods and prices
                 Console.WriteLine("This feature is not yet implemented");

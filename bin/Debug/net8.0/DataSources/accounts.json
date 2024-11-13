@@ -103,18 +103,37 @@
     "preferences": []
   },
   {
-    "password": "User rights",
-    "dateOfBirth": "",
-    "address": "",
+    "password": "Qwerty123!",
+    "dateOfBirth": "01-11-2002",
+    "address": "dfter 123",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": true,
+    "reservations": [
+      {
+        "Date": "2024-11-14T18:00:00+01:00",
+        "Time": "18:00",
+        "PersonCount": "10"
+      }
+    ],
+    "name": "Ryan",
+    "emailAddress": "ryan@gmail.com",
+    "phoneNumber": "1234567890",
+    "preferences": []
+  },
+  {
+    "password": "Qwerty123!",
+    "dateOfBirth": "12-12-7000",
+    "address": "Jailcell 5A",
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
     "reservations": [],
-    "name": "Koos",
-    "emailAddress": "frjeunferfe@hotmail.com",
-    "phoneNumber": "063423243",
+    "name": "P Diddy2",
+    "emailAddress": "OiledUp@gmail.com",
+    "phoneNumber": "7897897899",
     "preferences": [
-      "Soy"
+      "Tree Nuts"
     ]
   },
   {
