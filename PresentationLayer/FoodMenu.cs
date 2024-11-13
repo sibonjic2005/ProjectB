@@ -217,7 +217,7 @@ public class FoodMenu
             "", 
             "Red Wine (Merlot/Cabernet Sauvignon)", 
             "- **Smooth red wine** available in Merlot or Cabernet Sauvignon.\n- A perfect pairing with any of your main courses.", 
-            "$7.49"
+            "$7.49."
         );
 
         // Pas stijl toe en render de tabel
