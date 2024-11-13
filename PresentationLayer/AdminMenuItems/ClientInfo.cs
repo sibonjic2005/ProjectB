@@ -15,7 +15,7 @@ class ClientInfo
 
         UserModel account = accountsLogic.GetByEmail(userMail);
 
-        Console.WriteLine($"\nName: {account.Name}, \nBirthday: {account.DateOfBirth}, \nAddress: {account.Address} \nPhonenumber: {account.PhoneNumber}, \nEmail: {account.EmailAddress}, \nPassword: {account.Password}");
+        Console.WriteLine($"\nName: {account.Name}, \nEmail: {account.EmailAddress}, \nBirthday: {account.DateOfBirth}, \nAddress: {account.Address} \nPhonenumber: {account.PhoneNumber}");
         foreach (string allergy in account.Preferences)
         {
             AnsiConsole.WriteLine($"Allergic to: {allergy}");
@@ -75,8 +75,12 @@ class ClientInfo
 
 
         accountsLogic.UpdateChangesClientInfo(userMail, newName, phonenumber, email, dateOfBirth, address, allergies);
-        Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}");
-        Console.WriteLine($"\nReservation complete!");
-        
+        Console.WriteLine($"\nName: {user.Name}, \nEmail: {user.EmailAddress}, \nBirthday: {user.DateOfBirth}, \nAddress: {user.Address}, \nPhonenumber: {user.PhoneNumber}");
+        Console.WriteLine("");
+        foreach (string allergy in allergies)
+        {
+            AnsiConsole.WriteLine($"Allergic to: {allergy}");
+        }
+        Console.WriteLine("");
     }
 }

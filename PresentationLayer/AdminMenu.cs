@@ -8,7 +8,7 @@ using Spectre.Console;
         
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Welcome to the starting menu!")
+                .Title("Welcome to the Admin menu!")
                 .PageSize(15)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)[/]")
                 .AddChoices(new[] {
