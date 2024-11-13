@@ -15,7 +15,7 @@ class ClientInfo
 
         UserModel account = accountsLogic.GetByEmail(userMail);
 
-        Console.WriteLine($"\nName: {account.Name}, \nEmail: {account.EmailAddress}, \nBirthday: {account.DateOfBirth}, \nAddress: {account.Address} \nPhonenumber: {account.PhoneNumber}");
+        Console.WriteLine($"\nName: {account.Name}, \nBirthday: {account.DateOfBirth}, \nAddress: {account.Address} \nPhonenumber: {account.PhoneNumber}, \nEmail: {account.EmailAddress}");
         foreach (string allergy in account.Preferences)
         {
             AnsiConsole.WriteLine($"Allergic to: {allergy}");
@@ -44,19 +44,19 @@ class ClientInfo
 
         
         var newName = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a Name: ").AllowEmpty());
+            new TextPrompt<string>("Enter a Name: (press enter to keep old info) ").AllowEmpty());
 
         var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a phone number: ").AllowEmpty());
+            new TextPrompt<string>("Enter a phone number: (press enter to keep old info)").AllowEmpty());
 
         var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an email: ").AllowEmpty());
+            new TextPrompt<string>("Enter an email: (press enter to keep old info)").AllowEmpty());
             
         var dateOfBirth = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an date of birth: ").AllowEmpty());
+            new TextPrompt<string>("Enter an date of birth: (press enter to keep old info)").AllowEmpty());
         
         var address = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an address: ").AllowEmpty());
+            new TextPrompt<string>("Enter an address: (press enter to keep old info)").AllowEmpty());
 
         var allergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
@@ -75,12 +75,8 @@ class ClientInfo
 
 
         accountsLogic.UpdateChangesClientInfo(userMail, newName, phonenumber, email, dateOfBirth, address, allergies);
-        Console.WriteLine($"\nName: {user.Name}, \nEmail: {user.EmailAddress}, \nBirthday: {user.DateOfBirth}, \nAddress: {user.Address}, \nPhonenumber: {user.PhoneNumber}");
-        Console.WriteLine("");
-        foreach (string allergy in allergies)
-        {
-            AnsiConsole.WriteLine($"Allergic to: {allergy}");
-        }
-        Console.WriteLine("");
+        Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}");
+        Console.WriteLine($"\nReservation complete!");
+        
     }
 }
