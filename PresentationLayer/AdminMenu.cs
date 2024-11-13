@@ -37,10 +37,12 @@ using Spectre.Console;
                 AdminMenuStart();
                 break;
             case "Change Client info":
-                Console.WriteLine("This feature is not yet implemented");
+                ClientInfo.ChangeClientInfo();
+                AdminMenuStart();
                 break;
             case "View Client info":
-                Console.WriteLine("This feature is not yet implemented");
+                ClientInfo.ViewClientInfo();
+                AdminMenuStart();
                 break;
             case "Edit Food menu": // Edit foods and prices
                 Console.WriteLine("This feature is not yet implemented");

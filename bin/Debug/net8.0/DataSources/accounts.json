@@ -8,12 +8,17 @@
     "isEmployee": false,
     "reservations": [
       {
-        "Date": "2024-11-13T00:00:00+01:00",
-        "Time": "13:00",
-        "PersonCount": "8"
+        "Date": "2024-11-22T00:00:00+01:00",
+        "Time": "10:00",
+        "PersonCount": "2"
+      },
+      {
+        "Date": "2024-11-20T12:00:00+01:00",
+        "Time": "12:00",
+        "PersonCount": "4"
       }
     ],
-    "name": "John Poe",
+    "name": "John Doe",
     "emailAddress": "john@example.com",
     "phoneNumber": "1234567890",
     "preferences": []
@@ -103,18 +108,86 @@
     "preferences": []
   },
   {
+    "password": "Qwerty123!",
+    "dateOfBirth": "01-11-2002",
+    "address": "dfter 123",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": true,
+    "reservations": [
+      {
+        "Date": "2024-11-14T18:00:00+01:00",
+        "Time": "18:00",
+        "PersonCount": "10"
+      }
+    ],
+    "name": "Ryan",
+    "emailAddress": "ryan@gmail.com",
+    "phoneNumber": "1234567890",
+    "preferences": []
+  },
+  {
+    "password": "Qwerty1234!",
+    "dateOfBirth": "12-12-2000",
+    "address": "Jailcell 1B",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [],
+    "name": "PE Diddy",
+    "emailAddress": "OiledUp2@gmail.com",
+    "phoneNumber": "0987654321",
+    "preferences": [
+      "Eggs"
+    ]
+  },
+  {
     "password": "User rights",
     "dateOfBirth": "",
     "address": "",
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [],
-    "name": "Koos",
-    "emailAddress": "frjeunferfe@hotmail.com",
-    "phoneNumber": "063423243",
+    "reservations": [
+      {
+        "Date": "2024-11-16T00:00:00",
+        "Time": "12:00",
+        "PersonCount": "4"
+      }
+    ],
+    "name": "testing",
+    "emailAddress": "test@example.com",
+    "phoneNumber": "0647856321",
     "preferences": [
-      "Soy"
+      "Tree Nuts",
+      "Soy",
+      "Eggs"
     ]
+  },
+  {
+    "password": "Password123!",
+    "dateOfBirth": "11-12-2002",
+    "address": "test street",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": true,
+    "reservations": [],
+    "name": "employee1",
+    "emailAddress": "test1@gmail.com",
+    "phoneNumber": "0645784521",
+    "preferences": []
+  },
+  {
+    "password": "Paaswoord123!",
+    "dateOfBirth": "11-11-1111",
+    "address": "sesamstraat",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [],
+    "name": "Eric",
+    "emailAddress": "eric@gmail.com",
+    "phoneNumber": "0623456987",
+    "preferences": []
   }
 ]

@@ -13,6 +13,23 @@ public class FoodMenu
         table.AddColumn("Description");
         table.AddColumn("Price");
 
+
+
+        // Surprise Menu
+        table.AddRow(
+        "Surprise Menu",
+        "Surprise 3-Course Platter",
+        "- A delicious assortment of **freshly prepared dishes**.\n- A Surpirse 3-Course Experience.\n- Each course is a unique surprise, made to order, for a truly\n  one-of-a-kind dining experience!",
+        "$54.99"
+        );
+
+        table.AddRow(
+            "[grey]────────────────────────────────────────────[/]",
+            "",
+            "",
+            ""
+        );
+
         // Appetizers
         table.AddRow(
             "Appetizers", 
@@ -200,7 +217,7 @@ public class FoodMenu
             "", 
             "Red Wine (Merlot/Cabernet Sauvignon)", 
             "- **Smooth red wine** available in Merlot or Cabernet Sauvignon.\n- A perfect pairing with any of your main courses.", 
-            "$7.49"
+            "$7.49."
         );
 
         // Pas stijl toe en render de tabel

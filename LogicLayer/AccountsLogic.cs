@@ -191,21 +191,34 @@ class AccountsLogic
         }
     }
 
-    public void UpdateChanges(string email, string newName, string newPhoneNumber, string newEmail, DateTime newDate, string newTime, string newPerson)
+    public void UpdateChangesReservatrion(string email, string newName, string newPhoneNumber, string newEmail, List<string> preferences, DateTime newDate, string newTime, string newPerson)
     {
         var user = GetByEmail(email);
-        if (user != null)
+        if (user != null && user.Reservations != null)
         {
-            if(!string.IsNullOrEmpty(newName)) user.Name = newName;
-            if(!string.IsNullOrEmpty(newPhoneNumber)) user.PhoneNumber = newPhoneNumber;
-            if(!string.IsNullOrEmpty(newEmail)) user.EmailAddress = newEmail;
+            user.Name = newName;
+            user.PhoneNumber = newPhoneNumber;
+            user.EmailAddress = newEmail;
+            user.Preferences = preferences; // allergies
+            user.Reservations[0].Date = newDate;
+            user.Reservations[0].Time = newTime;
+            user.Reservations[0].PersonCount = newPerson;
+            UpdateList(user);
+        }
+    }
 
-            if (user.Reservations != null)
-            {
-                user.Reservations[0].Date = newDate;
-                if(!string.IsNullOrEmpty(newName)) user.Name = newName;
-                if(!string.IsNullOrEmpty(newName)) user.Name = newName;
-            }    
+        public void UpdateChangesClientInfo(string email, string newName, string newPhoneNumber, string newEmail, string newPassword, string newDateOfBirth, string newAddress, List<string> preferences)
+    {
+        var user = GetByEmail(email);
+        if (user != null && user.Reservations != null)
+        {
+            user.Name = newName;
+            user.PhoneNumber = newPhoneNumber;
+            user.EmailAddress = newEmail;
+            user.Password = newPassword;
+            user.DateOfBirth = newDateOfBirth;
+            user.Address = newAddress;
+            user.Preferences = preferences; // allergies
             UpdateList(user);
         }
     }
