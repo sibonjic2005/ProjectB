@@ -156,7 +156,7 @@ static class AdminReservation
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an amount of people: "));
 
-        accountsLogic.UpdateChanges(getemail, newName, phonenumber, email, allergies, date, time ,person);
+        accountsLogic.UpdateChangesReservatrion(getemail, newName, phonenumber, email, allergies, date, time ,person);
         Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
         // AdminMenu.AdminMenuStart();

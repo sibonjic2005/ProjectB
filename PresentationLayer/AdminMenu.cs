@@ -37,7 +37,8 @@ using Spectre.Console;
                 AdminMenuStart();
                 break;
             case "Change Client info":
-                Console.WriteLine("This feature is not yet implemented");
+                ClientInfo.ChangeClientInfo();
+                AdminMenuStart();
                 break;
             case "View Client info":
                 ClientInfo.ViewClientInfo();

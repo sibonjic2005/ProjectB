@@ -191,7 +191,7 @@ class AccountsLogic
         }
     }
 
-    public void UpdateChanges(string email, string newName, string newPhoneNumber, string newEmail, List<string> preferences, DateTime newDate, string newTime, string newPerson)
+    public void UpdateChangesReservatrion(string email, string newName, string newPhoneNumber, string newEmail, List<string> preferences, DateTime newDate, string newTime, string newPerson)
     {
         var user = GetByEmail(email);
         if (user != null && user.Reservations != null)
@@ -203,6 +203,22 @@ class AccountsLogic
             user.Reservations[0].Date = newDate;
             user.Reservations[0].Time = newTime;
             user.Reservations[0].PersonCount = newPerson;
+            UpdateList(user);
+        }
+    }
+
+        public void UpdateChangesClientInfo(string email, string newName, string newPhoneNumber, string newEmail, string newPassword, string newDateOfBirth, string newAddress, List<string> preferences)
+    {
+        var user = GetByEmail(email);
+        if (user != null && user.Reservations != null)
+        {
+            user.Name = newName;
+            user.PhoneNumber = newPhoneNumber;
+            user.EmailAddress = newEmail;
+            user.Password = newPassword;
+            user.DateOfBirth = newDateOfBirth;
+            user.Address = newAddress;
+            user.Preferences = preferences; // allergies
             UpdateList(user);
         }
     }

@@ -122,18 +122,18 @@
     "preferences": []
   },
   {
-    "password": "Qwerty123!",
-    "dateOfBirth": "12-12-7000",
-    "address": "Jailcell 5A",
+    "password": "Qwerty1234!",
+    "dateOfBirth": "12-12-2000",
+    "address": "Jailcell 1B",
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
     "reservations": [],
-    "name": "P Diddy2",
-    "emailAddress": "OiledUp@gmail.com",
-    "phoneNumber": "7897897899",
+    "name": "PE Diddy",
+    "emailAddress": "OiledUp2@gmail.com",
+    "phoneNumber": "0987654321",
     "preferences": [
-      "Tree Nuts"
+      "Eggs"
     ]
   },
   {
