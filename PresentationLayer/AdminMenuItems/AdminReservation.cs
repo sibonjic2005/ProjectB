@@ -123,6 +123,7 @@ static class AdminReservation
 
     public static void ChangeReservation()
     {
+
         Console.WriteLine("Give the email of the reservation who you want to change?");
         string getEmail = Console.ReadLine();
 
@@ -151,7 +152,26 @@ static class AdminReservation
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an amount of people: "));
 
-        accountsLogic.UpdateChangesReservation(getEmail, date, time ,person);
+        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
+
+        if (!availableTables.Any())
+        {
+            Console.WriteLine("No tables available for the selected time.");
+            return;
+        }
+
+        var tableSelection = AnsiConsole.Prompt(
+            new SelectionPrompt<Tables>()
+                .Title("Select a table:")
+                .PageSize(10)
+                .AddChoices(availableTables)
+                .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
+        );
+
+
+        var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
+
+        accountsLogic.UpdateChangesReservation(getEmail, reservation);
         Console.WriteLine($"Date: {date}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
         // AdminMenu.AdminMenuStart();

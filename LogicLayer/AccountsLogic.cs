@@ -191,15 +191,16 @@ class AccountsLogic
         }
     }
 
-    public void UpdateChangesReservation(string email, DateTime newDate, string newTime, string newPerson)
+    public void UpdateChangesReservation(string email, Reservation reservation)
     {
         var user = GetByEmail(email);
         if (user != null && user.Reservations != null)
         {
             
-            user.Reservations[0].Date = newDate;
-            user.Reservations[0].Time = newTime;
-            user.Reservations[0].PersonCount = newPerson;
+            user.Reservations[0].Date = reservation.Date;
+            user.Reservations[0].Time = reservation.Time;
+            user.Reservations[0].PersonCount = reservation.PersonCount;
+            user.Reservations[0].TableNumber = reservation.TableNumber;
             UpdateList(user);
         }
     }
