@@ -29,12 +29,9 @@ static class UserReservation
         int selectedHour = int.Parse(time.Split(':')[0]);
         date = date.AddHours(selectedHour);
 
-        
-
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
 
-        Console.WriteLine($"DATE={date}");
         Console.WriteLine($"\nDate: {date:dddd, MMMM dd, yyyy, hh:mm tt}, Time: {time}, Amount of persons: {person}");
 
         var reservation = new Reservation(
@@ -102,7 +99,7 @@ static class UserReservation
                 Console.WriteLine("Your reservations:");
             foreach (Reservation reservation in currentUser.Reservations)
             {
-                Console.WriteLine($"  - Date: {reservation.Date}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
+                Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
             }
         }
         // UserMenu.UserMenuStart();

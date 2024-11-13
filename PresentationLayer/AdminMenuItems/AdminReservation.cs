@@ -44,7 +44,6 @@ static class AdminReservation
             new TextPrompt<string>("Enter an amount of people: "));
 
         var reservation = new Reservation(
-        
             date,
             time,
             person 
@@ -97,7 +96,7 @@ static class AdminReservation
                 Console.WriteLine($"Name: {user.Name}\nemail: {user.EmailAddress}:");
                 foreach (Reservation reservation in user.Reservations)
                 {
-                    Console.WriteLine($"  - Date: {reservation.Date}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
+                    Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
                 }
             }
         }
