@@ -118,35 +118,45 @@ static class AdminReservation
                 return;
             }
 
-
-        //accountsLogic.ChangeReservation(getemail);
-    
-        //View old information
-
-        //New information
-        //if left empty(null) keep old information
         
         var newName = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new Name (leave empty to keep current): "));
-            
+            new TextPrompt<string>("Enter a Name: "));
+
         var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new phone number (leave empty to keep current): "));
+            new TextPrompt<string>("Enter a phone number: "));
 
         var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new email (leave empty to keep current): "));
+            new TextPrompt<string>("Enter an email: "));
 
-        var dateString = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new date (leave empty to keep current): "));
+        var allergies = AnsiConsole.Prompt(
+            new MultiSelectionPrompt<string>()
+                .Title("Do have any allergies?")
+                .NotRequired()
+                .PageSize(10)
+                .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
+                .InstructionsText(
+                    "[grey](Press [blue]<space>[/] to choose your allergy, " + 
+                    "[green]<enter>[/] to accept)[/]")
+                .AddChoices(new[] {
+                    "Tree Nuts", "Soy", "Fish",
+                    "Peanuts", "Shellfish", "Eggs",
+                    "Wheats", "Dairy"
+        }));
 
-        DateTime date = DateTime.Parse(dateString);
+        DateTime date = Calendar.CalendarDate();
+        List<string> timeOptions = Calendar.GetTimeOptions(date);
 
         var time = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a new time (leave empty to keep current): "));
+            new SelectionPrompt<string>()
+                .Title("Select a reservation time:")
+                .PageSize(10)
+                .AddChoices(timeOptions)
+        );
         
         var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an amount of people (leave empty to keep current): "));
+            new TextPrompt<string>("Enter an amount of people: "));
 
-        accountsLogic.UpdateChanges(getemail, newName, phonenumber, email, date, time ,person);
+        accountsLogic.UpdateChanges(getemail, newName, phonenumber, email, allergies, date, time ,person);
         Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
         // AdminMenu.AdminMenuStart();
