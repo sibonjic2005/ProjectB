@@ -191,15 +191,12 @@ class AccountsLogic
         }
     }
 
-    public void UpdateChangesReservation(string email, string newName, string newPhoneNumber, string newEmail, List<string> preferences, DateTime newDate, string newTime, string newPerson)
+    public void UpdateChangesReservation(string email, DateTime newDate, string newTime, string newPerson)
     {
         var user = GetByEmail(email);
         if (user != null && user.Reservations != null)
         {
-            user.Name = newName;
-            user.PhoneNumber = newPhoneNumber;
-            user.EmailAddress = newEmail;
-            user.Preferences = preferences; // allergies
+            
             user.Reservations[0].Date = newDate;
             user.Reservations[0].Time = newTime;
             user.Reservations[0].PersonCount = newPerson;
@@ -207,17 +204,16 @@ class AccountsLogic
         }
     }
 
-    public void UpdateChangesClientInfo(string email, string newName, string newPhoneNumber, string newEmail, string newPassword, string newDateOfBirth, string newAddress, List<string> preferences)
+    public void UpdateChangesClientInfo(string email, string newName, string newPhoneNumber, string newEmail, string newDateOfBirth, string newAddress, List<string> preferences)
     {
         var user = GetByEmail(email);
         if (user != null && user.Reservations != null)
         {
-            user.Name = newName;
-            user.PhoneNumber = newPhoneNumber;
-            user.EmailAddress = newEmail;
-            user.Password = newPassword;
-            user.DateOfBirth = newDateOfBirth;
-            user.Address = newAddress;
+            user.Name = string.IsNullOrEmpty(newName) ? user.Name : newName;
+            user.EmailAddress = string.IsNullOrEmpty(newEmail) ? user.EmailAddress : newEmail;
+            user.PhoneNumber = string.IsNullOrEmpty(newPhoneNumber) ? user.PhoneNumber : newPhoneNumber;
+            user.DateOfBirth = string.IsNullOrEmpty(newDateOfBirth) ? user.DateOfBirth : newDateOfBirth;
+            user.Address = string.IsNullOrEmpty(newAddress) ? user.Address : newAddress;
             user.Preferences = preferences; // allergies
             UpdateList(user);
         }

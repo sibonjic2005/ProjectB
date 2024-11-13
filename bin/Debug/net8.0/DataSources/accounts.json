@@ -10,12 +10,14 @@
       {
         "Date": "2024-11-22T00:00:00+01:00",
         "Time": "10:00",
-        "PersonCount": "2"
+        "PersonCount": "2",
+        "TableNumber": 0
       },
       {
         "Date": "2024-11-20T12:00:00+01:00",
         "Time": "12:00",
-        "PersonCount": "4"
+        "PersonCount": "4",
+        "TableNumber": 0
       }
     ],
     "name": "John Doe",
@@ -118,7 +120,8 @@
       {
         "Date": "2024-11-14T18:00:00+01:00",
         "Time": "18:00",
-        "PersonCount": "10"
+        "PersonCount": "10",
+        "TableNumber": 0
       }
     ],
     "name": "Ryan",
@@ -128,18 +131,16 @@
   },
   {
     "password": "Qwerty1234!",
-    "dateOfBirth": "12-12-2000",
-    "address": "Jailcell 1B",
+    "dateOfBirth": "9-11-2004",
+    "address": "Kitchen",
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
     "reservations": [],
-    "name": "PE Diddy",
+    "name": "Diddy",
     "emailAddress": "OiledUp2@gmail.com",
-    "phoneNumber": "0987654321",
-    "preferences": [
-      "Eggs"
-    ]
+    "phoneNumber": "123456789",
+    "preferences": []
   },
   {
     "password": "User rights",
@@ -152,7 +153,8 @@
       {
         "Date": "2024-11-16T00:00:00",
         "Time": "12:00",
-        "PersonCount": "4"
+        "PersonCount": "4",
+        "TableNumber": 0
       }
     ],
     "name": "testing",
@@ -188,6 +190,26 @@
     "name": "Eric",
     "emailAddress": "eric@gmail.com",
     "phoneNumber": "0623456987",
+    "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-11-14T13:00:00+01:00",
+        "Time": "13:00",
+        "PersonCount": "4",
+        "TableNumber": 15
+      }
+    ],
+    "name": "Jacky",
+    "emailAddress": "jacky@gmail.com",
+    "phoneNumber": "1234567890",
     "preferences": []
   }
 ]

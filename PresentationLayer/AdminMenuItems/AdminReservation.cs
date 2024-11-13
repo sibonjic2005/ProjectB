@@ -135,31 +135,6 @@ static class AdminReservation
                 return;
             }
 
-        
-        var newName = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a Name: "));
-
-        var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a phone number: "));
-
-        var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an email: "));
-
-        var allergies = AnsiConsole.Prompt(
-            new MultiSelectionPrompt<string>()
-                .Title("Do have any allergies?")
-                .NotRequired()
-                .PageSize(10)
-                .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
-                .InstructionsText(
-                    "[grey](Press [blue]<space>[/] to choose your allergy, " + 
-                    "[green]<enter>[/] to accept)[/]")
-                .AddChoices(new[] {
-                    "Tree Nuts", "Soy", "Fish",
-                    "Peanuts", "Shellfish", "Eggs",
-                    "Wheats", "Dairy"
-        }));
-
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
@@ -176,8 +151,8 @@ static class AdminReservation
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an amount of people: "));
 
-        accountsLogic.UpdateChangesReservation(getEmail, newName, phonenumber, email, allergies, date, time ,person);
-        Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
+        accountsLogic.UpdateChangesReservation(getEmail, date, time ,person);
+        Console.WriteLine($"Date: {date}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
         // AdminMenu.AdminMenuStart();
     }

@@ -44,19 +44,19 @@ class ClientInfo
 
         
         var newName = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a Name: "));
+            new TextPrompt<string>("Enter a Name: ").AllowEmpty());
 
         var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a phone number: "));
+            new TextPrompt<string>("Enter a phone number: ").AllowEmpty());
 
         var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an email: "));
+            new TextPrompt<string>("Enter an email: ").AllowEmpty());
             
         var dateOfBirth = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an date of birth: "));
+            new TextPrompt<string>("Enter an date of birth: ").AllowEmpty());
         
         var address = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an address: "));
+            new TextPrompt<string>("Enter an address: ").AllowEmpty());
 
         var allergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
