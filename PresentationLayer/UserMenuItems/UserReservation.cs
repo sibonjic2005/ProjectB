@@ -51,6 +51,7 @@ static class UserReservation
 
         Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
 
+        Console.Clear();
         Console.WriteLine($"\nDate: {date:dddd, MMMM dd, yyyy, hh:mm tt}, Time: {time}, Amount of persons: {person}");
 
         var reservation = new Reservation(date, time, person, tableSelection.TableNumber);

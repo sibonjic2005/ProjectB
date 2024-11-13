@@ -211,5 +211,25 @@
     "emailAddress": "jacky@gmail.com",
     "phoneNumber": "1234567890",
     "preferences": []
+  },
+  {
+    "password": "aaaaaaaaaa!1A",
+    "dateOfBirth": "11-11-1111",
+    "address": "a@gmail.com",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-11-13T23:00:00+01:00",
+        "Time": "23:00",
+        "PersonCount": "2",
+        "TableNumber": 3
+      }
+    ],
+    "name": "s",
+    "emailAddress": "a@gmail.com",
+    "phoneNumber": "11111111111111",
+    "preferences": []
   }
 ]
