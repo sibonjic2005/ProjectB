@@ -29,9 +29,6 @@ static class AdminReservation
                     "Wheats", "Dairy"
         }));
 
-        // var date = AnsiConsole.Prompt(
-        //     new TextPrompt<string>("Enter a date: "));
-
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
@@ -44,6 +41,12 @@ static class AdminReservation
 
         int selectedHour = int.Parse(time.Split(':')[0]);
         date = date.AddHours(selectedHour);
+
+        if (accountsLogic.HasReservationForTimeSlot(email, date, time))
+        {
+            Console.WriteLine("You already have a reservation for this time slot.");
+            return;
+        }
         
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
@@ -78,27 +81,38 @@ static class AdminReservation
     public static void CancelReservation()
     {
         ViewReservation();
-        // Console.WriteLine("What is the name on the reservation");
-        // string name = Console.ReadLine();
-        // Console.WriteLine("What is the phonenumber of the reservation");
-        // string phonenumber = Console.ReadLine();
-        Console.WriteLine("What is the email of the guest?");
+
+        Console.WriteLine("What is the email of the guest whose reservation you want to cancel?");
         string email = Console.ReadLine();
+        
+        AccountsLogic accountsLogic = new AccountsLogic();
+        var user = accountsLogic.GetByEmail(email);
 
-        var confirmation = AnsiConsole.Prompt(
-        new TextPrompt<bool>($"Do you want to cancel the reservation of {email}?")
-            .AddChoice(true)
-            .AddChoice(false)
-            .WithConverter(choice => choice ? "y" : "n"));
-
-        if (confirmation)
+        if (user == null || user.Reservations.Count == 0)
         {
-            AccountsLogic accountsLogic = new AccountsLogic();
-            accountsLogic.RemoveReservations(email);
+            Console.WriteLine("No reservations found for this email.");
+            return;
         }
 
-        Console.WriteLine(confirmation ? "Confirmed, reservation cancelled." : "Declined, reservation is still there.");
-        // AdminMenu.AdminMenuStart();
+        var reservationSelection = AnsiConsole.Prompt(
+        new SelectionPrompt<Reservation>()
+            .Title("Select the reservation you want to cancel:")
+            .PageSize(10)
+            .AddChoices(user.Reservations)
+            .UseConverter(reservation =>
+                $"Date: {reservation.Date:dddd, MMMM dd, yyyy} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
+        );
+
+        var confirmation = AnsiConsole.Confirm($"Are you sure you want to cancel this reservation?");
+        if (confirmation)
+        {
+            accountsLogic.RemoveSpecificReservation(email, reservationSelection);
+            Console.WriteLine("Reservation cancelled successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Cancellation aborted.");
+        }
     }
 
     public static void ViewReservation()
@@ -123,18 +137,26 @@ static class AdminReservation
 
     public static void ChangeReservation()
     {
-
-        Console.WriteLine("Give the email of the reservation who you want to change?");
+        Console.WriteLine("Enter the email of the guest whose reservation you want to change?");
         string getEmail = Console.ReadLine();
 
         AccountsLogic accountsLogic = new AccountsLogic();
         var user = accountsLogic.GetByEmail(getEmail);
-            if (user == null)
-            {
-                Console.WriteLine("No reservation found with the given email.");
-                // AdminMenu.AdminMenuStart();
-                return;
-            }
+    
+        if (user == null || user.Reservations.Count == 0)
+        {
+            Console.WriteLine("No reservations found for this email.");
+            return;
+        }
+
+        var reservationSelection = AnsiConsole.Prompt(
+            new SelectionPrompt<Reservation>()
+                .Title("Select the reservation you want to change:")
+                .PageSize(10)
+                .AddChoices(user.Reservations)
+                .UseConverter(reservation =>
+                    $"Date: {reservation.Date:dddd, MMMM dd, yyyy} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
+        );
 
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
@@ -149,10 +171,11 @@ static class AdminReservation
         int selectedHour = int.Parse(time.Split(':')[0]);
         date = date.AddHours(selectedHour);
         
-        var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an amount of people: "));
+        var personCount = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter the updated amount of people: ")
+        );
 
-        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
+        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(personCount));
 
         if (!availableTables.Any())
         {
@@ -168,12 +191,20 @@ static class AdminReservation
                 .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
         );
 
+        reservationSelection.Date = date;
+        reservationSelection.Time = time;
+        reservationSelection.PersonCount = personCount;
+        reservationSelection.TableNumber = tableSelection.TableNumber;
 
-        var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
+        accountsLogic.UpdateReservation(getEmail, reservationSelection);
 
-        accountsLogic.UpdateChangesReservation(getEmail, reservation);
-        Console.WriteLine($"Date: {date}, Time: {time}, Amount of persons: {person}");
-        Console.WriteLine($"\nReservation complete!");
+        Console.WriteLine($"Reservation updated: Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, People: {personCount}, Table: {tableSelection.TableNumber}");
+
+        // var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
+
+        // accountsLogic.UpdateChangesReservation(getEmail, reservation);
+        // Console.WriteLine($"Date: {date}, Time: {time}, Amount of persons: {person}");
+        // Console.WriteLine($"\nReservation complete!");
         // AdminMenu.AdminMenuStart();
     }
 }

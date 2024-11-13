@@ -191,6 +191,38 @@ class AccountsLogic
         }
     }
 
+    public void RemoveSpecificReservation(string email, Reservation reservation)
+    {
+        var user = GetByEmail(email);
+        if (user != null)
+        {
+            user.Reservations.Remove(reservation);
+            UpdateList(user);
+
+            if (CurrentAccount != null && CurrentAccount.EmailAddress == email)
+            {
+                CurrentAccount.Reservations.Remove(reservation);
+            }
+        }
+    }
+
+    public void UpdateReservation(string email, Reservation updatedReservation)
+    {
+        var user = GetByEmail(email);
+        if (user != null)
+        {
+            var reservation = user.Reservations.FirstOrDefault(r => r.Equals(updatedReservation));
+            if (reservation != null)
+            {
+                reservation.Date = updatedReservation.Date;
+                reservation.Time = updatedReservation.Time;
+                reservation.PersonCount = updatedReservation.PersonCount;
+                reservation.TableNumber = updatedReservation.TableNumber;
+                UpdateList(user);
+            }
+        }
+    }
+
     public void UpdateChangesReservation(string email, Reservation reservation)
     {
         var user = GetByEmail(email);
@@ -250,5 +282,14 @@ class AccountsLogic
         return tables
             .Where(t => !unavailableTables.Contains(t.TableNumber) && t.Capacity >= personCount)
             .ToList();
+    }
+
+    public bool HasReservationForTimeSlot(string email, DateTime date, string time)
+    {
+        var user = GetByEmail(email);
+        if (user == null)
+            return false;
+        
+        return user.Reservations.Any(reservation => reservation.Date.Date == date.Date && reservation.Time == time);
     }
 }

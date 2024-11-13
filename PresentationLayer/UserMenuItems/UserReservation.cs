@@ -14,9 +14,6 @@ static class UserReservation
             return;
         }
 
-        // var date = AnsiConsole.Prompt(
-        //     new TextPrompt<string>("Enter a date: "));
-
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
@@ -30,6 +27,12 @@ static class UserReservation
         int selectedHour = int.Parse(time.Split(':')[0]);
         date = date.AddHours(selectedHour);
 
+        if (accountsLogic.HasReservationForTimeSlot(email, date, time))
+        {
+            Console.WriteLine("You already have a reservation for this time slot.");
+            UserMenu.UserMenuStart();
+        }
+
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
 
@@ -38,7 +41,7 @@ static class UserReservation
         if (!availableTables.Any())
         {
             Console.WriteLine("No tables available for the selected time.");
-            return;
+            UserMenu.UserMenuStart();
         }
 
         var tableSelection = AnsiConsole.Prompt(
@@ -64,11 +67,6 @@ static class UserReservation
 
     public static void CancelReservation()
     {
-        // ViewReservation() aan roepen
-        // hierzo code om te laten zien over welke reservering het gaat
-        // date: \n time: \ person:
-        // use the json file i guess
-
         string email = AccountsLogic.CurrentAccount?.EmailAddress;
         if (email == null)
         {
@@ -76,21 +74,37 @@ static class UserReservation
             return;
         }
 
-        ViewReservation();
+        // ViewReservation();
 
-        var confirmation = AnsiConsole.Prompt(
-        new TextPrompt<bool>("\nDo you want to cancel your reservation?")
-            .AddChoice(true)
-            .AddChoice(false)
-            .WithConverter(choice => choice ? "y" : "n"));
+        var currentUser = AccountsLogic.CurrentAccount;
+        if (currentUser?.Reservations == null || currentUser.Reservations.Count == 0)
+        {
+            Console.WriteLine("No reservations found.");
+            return;
+        }
 
+        var reservationSelection = AnsiConsole.Prompt(
+        new SelectionPrompt<Reservation>()
+            .Title("Select the reservation you want to cancel:")
+            .PageSize(10)
+            .AddChoices(currentUser.Reservations)
+            .UseConverter(reservation =>
+                $"Date: {reservation.Date:dddd, MMMM dd, yyyy} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
+        );
+
+        var confirmation = AnsiConsole.Confirm("Are you sure you want to cancel this reservation?");
         if (confirmation)
         {
             AccountsLogic accountsLogic = new AccountsLogic();
-            accountsLogic.RemoveReservations(email);
+            accountsLogic.RemoveSpecificReservation(email, reservationSelection);
+
+            Console.WriteLine("Reservation cancelled successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Cancellation aborted.");
         }
 
-        Console.WriteLine(confirmation ? "Confirmed, reservation cancelled." : "Declined, reservation is still there.");
         UserMenu.UserMenuStart();
     }
 
