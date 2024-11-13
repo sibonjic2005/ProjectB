@@ -116,5 +116,54 @@
     "preferences": [
       "Soy"
     ]
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-11-16T00:00:00",
+        "Time": "12:00",
+        "PersonCount": "4"
+      }
+    ],
+    "name": "testing",
+    "emailAddress": "test@example.com",
+    "phoneNumber": "0647856321",
+    "preferences": [
+      "Tree Nuts",
+      "Soy",
+      "Eggs"
+    ]
+  },
+  {
+    "password": "Password123!",
+    "dateOfBirth": "11-12-2002",
+    "address": "test street",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": true,
+    "reservations": [],
+    "name": "employee1",
+    "emailAddress": "test1@gmail.com",
+    "phoneNumber": "0645784521",
+    "preferences": []
+  },
+  {
+    "password": "Paaswoord123!",
+    "dateOfBirth": "11-11-1111",
+    "address": "sesamstraat",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [],
+    "name": "Eric",
+    "emailAddress": "eric@gmail.com",
+    "phoneNumber": "0623456987",
+    "preferences": []
   }
 ]

@@ -13,6 +13,23 @@ public class FoodMenu
         table.AddColumn("Description");
         table.AddColumn("Price");
 
+
+
+        // Surprise Menu
+        table.AddRow(
+        "Surprise Menu",
+        "Surprise Platter",
+        "- A delicious assortment of **freshly prepared dishes**.\n- Choose from a variety of appetizers, main courses, and desserts.\n- Served with a side of garlic bread or mashed potatoes.",
+        "$12.99"
+        );
+        
+        table.AddRow(
+            "[grey]────────────────────────────────────────────[/]",
+            "",
+            "",
+            ""
+        );
+
         // Appetizers
         table.AddRow(
             "Appetizers", 
