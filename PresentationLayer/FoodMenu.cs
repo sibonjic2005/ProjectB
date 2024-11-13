@@ -18,9 +18,9 @@ public class FoodMenu
         // Surprise Menu
         table.AddRow(
         "Surprise Menu",
-        "Surprise Platter",
-        "- A delicious assortment of **freshly prepared dishes**.\n- Choose from a variety of appetizers, main courses, and desserts.\n- Served with a side of garlic bread or mashed potatoes.",
-        "$54,99"
+        "Surprise 3-Course Platter",
+        "- A delicious assortment of **freshly prepared dishes**.\n- A Surpirse 3-Course Experience.\n- Each course is a unique surprise, made to order, for a truly\n  one-of-a-kind dining experience!",
+        "$54.99"
         );
 
         table.AddRow(
