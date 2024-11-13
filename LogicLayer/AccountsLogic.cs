@@ -191,7 +191,7 @@ class AccountsLogic
         }
     }
 
-    public void UpdateChangesReservatrion(string email, string newName, string newPhoneNumber, string newEmail, List<string> preferences, DateTime newDate, string newTime, string newPerson)
+    public void UpdateChangesReservation(string email, string newName, string newPhoneNumber, string newEmail, List<string> preferences, DateTime newDate, string newTime, string newPerson)
     {
         var user = GetByEmail(email);
         if (user != null && user.Reservations != null)
@@ -207,7 +207,7 @@ class AccountsLogic
         }
     }
 
-        public void UpdateChangesClientInfo(string email, string newName, string newPhoneNumber, string newEmail, string newPassword, string newDateOfBirth, string newAddress, List<string> preferences)
+    public void UpdateChangesClientInfo(string email, string newName, string newPhoneNumber, string newEmail, string newPassword, string newDateOfBirth, string newAddress, List<string> preferences)
     {
         var user = GetByEmail(email);
         if (user != null && user.Reservations != null)
@@ -221,5 +221,37 @@ class AccountsLogic
             user.Preferences = preferences; // allergies
             UpdateList(user);
         }
+    }
+
+    public static List<Tables> InitializeTables()
+    {
+        List<Tables> tables = new List<Tables>();
+
+        for (int i = 1; i <= 8; i++)
+            tables.Add(new Tables(i, 2));
+
+        for (int i = 9; i<= 13; i++)
+            tables.Add(new Tables(i, 4));
+        
+        for (int i = 14; i <= 15; i++)
+            tables.Add(new Tables(i, 6));
+        
+        for (int i = 16; i <= 23; i++)
+            tables.Add(new Tables(i, 1));
+
+        return tables;
+    }
+
+    public List<Tables> GetAvailableTables(DateTime date, string time, int personCount)
+    {
+        var tables = InitializeTables();
+        var unavailableTables = _accounts
+            .SelectMany(account => account.Reservations)
+            .Where(r => r.Date == date && r.Time == time)
+            .Select(r => r.TableNumber);
+
+        return tables
+            .Where(t => !unavailableTables.Contains(t.TableNumber) && t.Capacity >= personCount)
+            .ToList();
     }
 }

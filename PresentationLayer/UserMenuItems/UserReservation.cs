@@ -5,6 +5,7 @@ static class UserReservation
 {
     public static void MakeReservation()
     {
+        AccountsLogic accountsLogic = new AccountsLogic();
         string email = AccountsLogic.CurrentAccount?.EmailAddress;
 
         if (email == null)
@@ -32,17 +33,29 @@ static class UserReservation
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
 
-        Console.WriteLine($"\nDate: {date:dddd, MMMM dd, yyyy, hh:mm tt}, Time: {time}, Amount of persons: {person}");
+        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
 
-        var reservation = new Reservation(
-            date,
-            time,
-            person 
+        if (!availableTables.Any())
+        {
+            Console.WriteLine("No tables available for the selected time.");
+            return;
+        }
+
+        var tableSelection = AnsiConsole.Prompt(
+            new SelectionPrompt<Tables>()
+                .Title("Select a table:")
+                .PageSize(10)
+                .AddChoices(availableTables)
+                .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
         );
 
-        AccountsLogic accountsLogic = new AccountsLogic();
-        accountsLogic.AddReservation(email, reservation);
+        Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
 
+        Console.WriteLine($"\nDate: {date:dddd, MMMM dd, yyyy, hh:mm tt}, Time: {time}, Amount of persons: {person}");
+
+        var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
+
+        accountsLogic.AddReservation(email, reservation);
 
         Console.WriteLine($"\nReservation complete!");
         UserMenu.UserMenuStart();

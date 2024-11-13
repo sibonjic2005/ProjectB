@@ -3,6 +3,8 @@ static class AdminReservation
 {
     public static void MakeReservation()
     {
+        AccountsLogic accountsLogic = new AccountsLogic();
+
         var name = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a Name: "));
 
@@ -39,17 +41,33 @@ static class AdminReservation
                 .PageSize(10)
                 .AddChoices(timeOptions)
         );
+
+        int selectedHour = int.Parse(time.Split(':')[0]);
+        date = date.AddHours(selectedHour);
         
         var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an amount of people: "));
+            new TextPrompt<string>("Enter the amount of people: "));
+        
+        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
 
-        var reservation = new Reservation(
-            date,
-            time,
-            person 
+        if (!availableTables.Any())
+        {
+            Console.WriteLine("No tables available for the selected time.");
+            return;
+        }
+
+        var tableSelection = AnsiConsole.Prompt(
+            new SelectionPrompt<Tables>()
+                .Title("Select a table:")
+                .PageSize(10)
+                .AddChoices(availableTables)
+                .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
         );
 
-        AccountsLogic accountsLogic = new AccountsLogic();
+        Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
+
+        var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
+
         accountsLogic.AddNewReservation(name, email, phonenumber, allergies, reservation);
 
         Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}");
@@ -106,10 +124,10 @@ static class AdminReservation
     public static void ChangeReservation()
     {
         Console.WriteLine("Give the email of the reservation who you want to change?");
-        string getemail = Console.ReadLine();
+        string getEmail = Console.ReadLine();
 
         AccountsLogic accountsLogic = new AccountsLogic();
-        var user = accountsLogic.GetByEmail(getemail);
+        var user = accountsLogic.GetByEmail(getEmail);
             if (user == null)
             {
                 Console.WriteLine("No reservation found with the given email.");
@@ -151,11 +169,14 @@ static class AdminReservation
                 .PageSize(10)
                 .AddChoices(timeOptions)
         );
+
+        int selectedHour = int.Parse(time.Split(':')[0]);
+        date = date.AddHours(selectedHour);
         
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an amount of people: "));
 
-        accountsLogic.UpdateChangesReservatrion(getemail, newName, phonenumber, email, allergies, date, time ,person);
+        accountsLogic.UpdateChangesReservation(getEmail, newName, phonenumber, email, allergies, date, time ,person);
         Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}, Email: {email}, Date: {date}, Time: {time}, Amount of persons: {person}");
         Console.WriteLine($"\nReservation complete!");
         // AdminMenu.AdminMenuStart();
