@@ -128,7 +128,7 @@ static class AdminReservation
                 Console.WriteLine($"Name: {user.Name}\nemail: {user.EmailAddress}:");
                 foreach (Reservation reservation in user.Reservations)
                 {
-                    Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n");
+                    Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n  - Table: {reservation.TableNumber}\n");
                 }
             }
         }
