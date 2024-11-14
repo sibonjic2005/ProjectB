@@ -67,27 +67,29 @@ static class UserReservation
 
     public static void CancelReservation()
     {
+        AccountsLogic accountsLogic = new AccountsLogic();
         string email = AccountsLogic.CurrentAccount?.EmailAddress;
+        var user = accountsLogic.GetByEmail(email);
+
         if (email == null)
         {
             Console.WriteLine("No account is currently logged in.");
-            return;
+            StartingMenu.Menu();
         }
 
         // ViewReservation();
 
-        var currentUser = AccountsLogic.CurrentAccount;
-        if (currentUser?.Reservations == null || currentUser.Reservations.Count == 0)
+        if (user.Reservations == null || user.Reservations.Count == 0)
         {
             Console.WriteLine("No reservations found.");
-            return;
+            UserMenu.UserMenuStart();
         }
 
         var reservationSelection = AnsiConsole.Prompt(
         new SelectionPrompt<Reservation>()
             .Title("Select the reservation you want to cancel:")
             .PageSize(10)
-            .AddChoices(currentUser.Reservations)
+            .AddChoices(user.Reservations)
             .UseConverter(reservation =>
                 $"Date: {reservation.Date:dddd, MMMM dd, yyyy} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
         );
@@ -95,7 +97,6 @@ static class UserReservation
         var confirmation = AnsiConsole.Confirm("Are you sure you want to cancel this reservation?");
         if (confirmation)
         {
-            AccountsLogic accountsLogic = new AccountsLogic();
             accountsLogic.RemoveSpecificReservation(email, reservationSelection);
 
             Console.WriteLine("Reservation cancelled successfully.");
