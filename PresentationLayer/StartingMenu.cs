@@ -12,7 +12,7 @@ public static class StartingMenu
                 .AddChoices(new[] {
                     "Login", 
                     "Create an account", 
-                    "Login as guest", 
+                    //"Login as guest", 
                     "Exit",
                     "FoodMenu",
                     "Information"
@@ -28,10 +28,10 @@ public static class StartingMenu
                 Console.Clear();
                 CreateAccount.CreateAcc();
                 break;
-            case "Login as guest":
-                Console.Clear();
-                GuestLogin.LoginGuest();
-                break;
+            // case "Login as guest":
+            //     Console.Clear();
+            //     GuestLogin.LoginGuest();
+            //     break;
             case "Exit":
                 Console.Clear();
                 Console.WriteLine("Thank you for visiting our website!");
