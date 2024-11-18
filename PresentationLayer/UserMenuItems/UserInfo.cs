@@ -21,6 +21,7 @@ public class UserInfo()
     public static void EditProfile()
     {
         AccountsLogic accountsLogic = new AccountsLogic();
+        SignUpChecker signUpChecker = new SignUpChecker();
 
         var user = accountsLogic.GetByEmail(AccountsLogic.CurrentAccount?.EmailAddress);
 
@@ -29,9 +30,9 @@ public class UserInfo()
         var updatedName = AnsiConsole.Prompt(
                     new TextPrompt<string>($"Enter new name [grey](current: {user.Name})[/]:")
                         .AllowEmpty());
-        var updatedPhone = AnsiConsole.Prompt(
-            new TextPrompt<string>($"Enter new phone number [grey](current: {user.PhoneNumber})[/]:")
-                .AllowEmpty());
+        var updatedPhone = signUpChecker.PhoneNumberRules(() =>
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Phone Number: ")
+                .AllowEmpty()));
         var updatedAllergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
                 .Title("Update allergies [grey](use <space> to select/deselect)[/]:")

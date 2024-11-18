@@ -8,24 +8,24 @@ static class CreateAccount
         AccountsLogic accounts_logic = new AccountsLogic();
 
         var name = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your name: "));
+            new TextPrompt<string>("Enter your Name: "));
 
         var dateofbirth = sign_up_checker.ValidateDate(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter date of birth (DD-MM-YYYY): ")));
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter Date of Birth (DD-MM-YYYY): ")));
         
         var address = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your address: "));
+            new TextPrompt<string>("Enter your Address: "));
 
         var phonenumber = sign_up_checker.PhoneNumberRules(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your phonenumber: "))
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Phone Number: "))
         );
 
         var email = sign_up_checker.ValidateEmail(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your email address:"))
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Email Address:"))
         );
 
         var password = sign_up_checker.PasswordRules(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your password: (Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.)").Secret())
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Password: (Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.)").Secret())
         );
 
         var allergies = AnsiConsole.Prompt(
@@ -63,13 +63,14 @@ static class CreateAccount
         AccountsLogic accountsLogic = new AccountsLogic();
 
         var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your email address: "));
+            new TextPrompt<string>("Enter your Email Address: "));
 
         var name = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your name: "));
+            new TextPrompt<string>("Enter your Name: "));
 
-        var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter your phonenumber: "));
+        var phonenumber = signUpChecker.PhoneNumberRules(() =>
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Phone Number: "))
+        );
 
         var allergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
@@ -110,8 +111,9 @@ static class CreateAccount
         var address = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an address: "));
 
-        var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a phonenumber: "));
+        var phonenumber = sign_up_checker.PhoneNumberRules(() =>
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your phonenumber: "))
+        );
 
         var email = sign_up_checker.ValidateEmail(() => 
             AnsiConsole.Prompt(new TextPrompt<string>("Enter an email address:"))
