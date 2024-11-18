@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Xml.Serialization;
 
 class AccountsLogic
 {
@@ -64,7 +65,6 @@ class AccountsLogic
 
     public UserModel? CheckLogin(string email, string password)
     {
-        // if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         if (string.IsNullOrEmpty(email))
         {
             return null;
@@ -291,5 +291,59 @@ class AccountsLogic
             return false;
         
         return user.Reservations.Any(reservation => reservation.Date.Date == date.Date && reservation.Time == time);
+    }
+
+    public string? GetAllergies()
+    {
+        if (CurrentAccount?.Preferences.Count > 0)
+            return string.Join(", ",  CurrentAccount.Preferences);
+        else
+            return null;
+    }
+//     public List<string> AllergyOptions()
+// {
+//     if (CurrentAccount?.Preferences == null)
+//     {
+//         CurrentAccount.Preferences = new List<string>();
+//     }
+
+//     var allergyOptions = new List<string>
+//     {
+//         CurrentAccount.Preferences.Contains("Tree Nuts") ? "[X] Tree Nuts" : "[ ] Tree Nuts",
+//         CurrentAccount.Preferences.Contains("Soy") ? "[X] Soy" : "[ ] Soy",
+//         CurrentAccount.Preferences.Contains("Fish") ? "[X] Fish" : "[ ] Fish",
+//         CurrentAccount.Preferences.Contains("Peanuts") ? "[X] Peanuts" : "[ ] Peanuts",
+//         CurrentAccount.Preferences.Contains("Shellfish") ? "[X] Shellfish" : "[ ] Shellfish",
+//         CurrentAccount.Preferences.Contains("Eggs") ? "[X] Eggs" : "[ ] Eggs",
+//         CurrentAccount.Preferences.Contains("Wheats") ? "[X] Wheats" : "[ ] Wheats",
+//         CurrentAccount.Preferences.Contains("Dairy") ? "[X] Dairy" : "[ ] Dairy"
+//     };
+
+//     return allergyOptions;
+// }
+
+    // public List<string> CleanAllergyOptions(List<string> allergies)
+    // {
+    //     return allergies
+    //         .Select(a => a.Replace("[X] ", "").Replace("[ ] ", ""))
+    //         .ToList();
+    // }
+
+    public static List<string> GetAllergyOptions()
+    {
+        return new List<string> {
+                    "Tree Nuts", "Soy", "Fish",
+                    "Peanuts", "Shellfish", "Eggs",
+                    "Wheats", "Dairy"
+        };
+    }
+
+    public void EditUserInfo(string name, string phone, List<string> allergies)
+    {
+        if (!string.IsNullOrWhiteSpace(name)) CurrentAccount.Name = name;
+        if (!string.IsNullOrWhiteSpace(phone)) CurrentAccount.PhoneNumber = phone;
+        if (allergies.Any()) CurrentAccount.Preferences = allergies;
+
+        UpdateList(CurrentAccount);
     }
 }

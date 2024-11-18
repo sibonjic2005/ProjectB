@@ -12,7 +12,7 @@ using Spectre.Console;
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
                         "Make a reservation", "Cancel a reservation", "View your reservation",
-                        "See Foodmenu", "Information", "Log out"           
+                        "See Foodmenu", "Information", "Profile", "Log out"           
                 }));
 
         switch (choices)
@@ -39,6 +39,38 @@ using Spectre.Console;
                 Console.Clear();
                 RestaurantInformation.PrintRestaurantInformation();
                 GoBack.GoBackUserMenu();
+                break;
+            case "Profile":
+                Console.Clear();
+
+                bool inProfile = true;
+                while (inProfile)
+                {
+                var profileChoice = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("What would you like to do?")
+                        .AddChoices("View Profile", "Edit Profile", "Go Back to User Menu"));
+
+                Console.Clear();
+
+                switch (profileChoice)
+                {
+                    case "View Profile":
+                        UserInfo.ViewProfile();
+                        GoBack.GoBackProfileMenu();
+                        break;
+                    case "Edit Profile":
+                        UserInfo.EditProfile();
+                        GoBack.GoBackProfileMenu();
+                        break;
+                    case "Go Back to User Menu":
+                        inProfile = false;
+                        UserMenuStart();
+                        break;
+                    default:
+                        break;
+                }
+                }
                 break;
             case "Log out":
                 Console.Clear();
