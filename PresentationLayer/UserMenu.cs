@@ -49,7 +49,7 @@ using Spectre.Console;
                 var profileChoice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("What would you like to do?")
-                        .AddChoices("View Profile", "Edit Profile", "Go Back to User Menu"));
+                        .AddChoices("View Profile", "Edit Profile", "Delete account", "Go Back to User Menu"));
 
                 Console.Clear();
 
@@ -61,6 +61,10 @@ using Spectre.Console;
                         break;
                     case "Edit Profile":
                         UserInfo.EditProfile();
+                        GoBack.GoBackProfileMenu();
+                        break;
+                    case "Delete account":
+                        Console.WriteLine("This feature is not yet implemented");
                         GoBack.GoBackProfileMenu();
                         break;
                     case "Go Back to User Menu":

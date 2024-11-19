@@ -15,7 +15,8 @@ using Spectre.Console;
                         "Make a reservation", "Change a reservation","Cancel reservation", "View reservations", 
                         "Change Client info", "View Client info", 
                         // "Edit Food menu", "Edit restaurant information",
-                        "Create employee account", "Promote/Demote accounts", "Log out"        
+                        "Create employee account", "Promote/Demote accounts",
+                        "Delete account", "Log out"        
                 }));
 
         switch (choices)
@@ -57,6 +58,10 @@ using Spectre.Console;
             case "Promote/Demote accounts":
                 // Console.WriteLine("This feature is not yet implemented");
                 AdminRights.PromoteDemoteUser();
+                AdminMenuStart();
+                break;
+            case "Delete account":
+                Console.WriteLine("This feature is not yet implemented");
                 AdminMenuStart();
                 break;
              case "Log out":
