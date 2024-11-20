@@ -1,8 +1,8 @@
 using System;
 
-class RestaurantSeatingPlan
+public static class TableLayout
 {
-    static void Main()
+    public static void SeatingPlan()
     {
         string[] divider = new string[] { "+", "-", "+", "-" }; // To create borders
 

@@ -35,6 +35,7 @@ static class UserReservation
 
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
+            TableLayout.SeatingPlan();
 
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
 

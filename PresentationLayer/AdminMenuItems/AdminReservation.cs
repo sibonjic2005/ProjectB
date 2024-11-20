@@ -50,7 +50,7 @@ static class AdminReservation
         
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
-        
+            TableLayout.SeatingPlan();
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
 
         if (!availableTables.Any())
@@ -173,8 +173,9 @@ static class AdminReservation
         
         var personCount = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the updated amount of people: ")
+            
         );
-
+        TableLayout.SeatingPlan();
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(personCount));
 
         if (!availableTables.Any())
