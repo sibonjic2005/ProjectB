@@ -55,7 +55,8 @@ static class UserReservation
         Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
 
         Console.Clear();
-        Console.WriteLine($"\nDate: {date:dddd, MMMM dd, yyyy, hh:mm tt}, Time: {time}, Amount of persons: {person}");
+        string formattedDate = date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"));
+        Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}, Time: {time}, Amount of persons: {person}");
 
         var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
 
@@ -91,7 +92,7 @@ static class UserReservation
             .PageSize(10)
             .AddChoices(user.Reservations)
             .UseConverter(reservation =>
-                $"Date: {reservation.Date:dddd, MMMM dd, yyyy} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
+                $"Date: {reservation.Date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"))} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
         );
 
         var confirmation = AnsiConsole.Confirm("Are you sure you want to cancel this reservation?");

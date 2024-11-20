@@ -6,7 +6,20 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [],
+    "reservations": [
+      {
+        "Date": "2025-05-07T15:00:00+02:00",
+        "Time": "15:00",
+        "PersonCount": "6",
+        "TableNumber": 14
+      },
+      {
+        "Date": "2024-11-22T12:00:00+01:00",
+        "Time": "12:00",
+        "PersonCount": "6",
+        "TableNumber": 15
+      }
+    ],
     "name": "John Doe",
     "emailAddress": "john@example.com",
     "phoneNumber": "1234567890",

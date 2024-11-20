@@ -32,7 +32,8 @@ static class Calendar
                     selectedDate = selectedDate.AddDays(7);
                     break;
                 case ConsoleKey.Enter:
-                    AnsiConsole.MarkupLine($"You selected: [bold yellow]{selectedDate:dddd, MMMM dd, yyyy}[/]");
+                    string formattedDate = selectedDate.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"));
+                    AnsiConsole.MarkupLine($"You selected: [bold yellow]{formattedDate}[/]");
                     return selectedDate;
             }
         }
@@ -47,7 +48,7 @@ static class Calendar
         }
 
         var timeOptions = new List<string> ();
-        for (int hour = startHour; hour <= 23; hour++)
+        for (int hour = startHour; hour <= 21; hour++)
         {
             timeOptions.Add($"{hour:00}:00");
         }
@@ -60,8 +61,10 @@ static class Calendar
         DateTime firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
         int daysInMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
 
+        string formattedMonth = selectedDate.ToString("MMMM yyyy", new System.Globalization.CultureInfo("en-US"));
+
         AnsiConsole.MarkupLine($"[underline bold]Select a Date (Use Arrows)[/]\n");
-        AnsiConsole.MarkupLine($"{selectedDate:MMMM yyyy}");
+        AnsiConsole.MarkupLine($"{formattedMonth:MMMM yyyy}");
         AnsiConsole.MarkupLine("Su Mo Tu We Th Fr Sa");
 
         int leadingSpaces = (int)firstDayOfMonth.DayOfWeek;

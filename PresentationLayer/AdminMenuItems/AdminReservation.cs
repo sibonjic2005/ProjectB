@@ -100,7 +100,7 @@ static class AdminReservation
             .PageSize(10)
             .AddChoices(user.Reservations)
             .UseConverter(reservation =>
-                $"Date: {reservation.Date:dddd, MMMM dd, yyyy} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
+                $"Date: {reservation.Date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"))} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
         );
 
         var confirmation = AnsiConsole.Confirm($"Are you sure you want to cancel this reservation?");
@@ -155,7 +155,7 @@ static class AdminReservation
                 .PageSize(10)
                 .AddChoices(user.Reservations)
                 .UseConverter(reservation =>
-                    $"Date: {reservation.Date:dddd, MMMM dd, yyyy} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
+                    $"Date: {reservation.Date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"))} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
         );
 
         DateTime date = Calendar.CalendarDate();
