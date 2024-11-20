@@ -61,7 +61,7 @@ using Spectre.Console;
                 AdminMenuStart();
                 break;
             case "Delete account":
-                Console.WriteLine("This feature is not yet implemented");
+                AdminRights.DeleteAccount();
                 AdminMenuStart();
                 break;
              case "Log out":

@@ -64,7 +64,8 @@ using Spectre.Console;
                         GoBack.GoBackProfileMenu();
                         break;
                     case "Delete account":
-                        Console.WriteLine("This feature is not yet implemented");
+                        UserInfo.DeleteAccount();
+                        // if user deletes their account it should go back to main menu
                         GoBack.GoBackProfileMenu();
                         break;
                     case "Go Back to User Menu":

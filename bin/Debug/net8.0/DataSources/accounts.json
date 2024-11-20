@@ -6,8 +6,7 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [
-    ],
+    "reservations": [],
     "name": "John Doe",
     "emailAddress": "john@example.com",
     "phoneNumber": "1234567890",

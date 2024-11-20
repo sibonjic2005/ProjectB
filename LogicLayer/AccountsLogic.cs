@@ -346,4 +346,13 @@ class AccountsLogic
 
         UpdateList(CurrentAccount);
     }
+
+    public void AdminDeleteAccount()
+    {
+        // Delete any account as an admin and update the json
+    }
+    public void UserDeleteAccount()
+    {
+        // Let the user delete themselfs and update the json
+    }
 }
