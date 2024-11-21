@@ -4,7 +4,7 @@ public static class RestaurantInformation
     
     public static void PrintRestaurantInformation()
     {
-        Console.WriteLine("Restaurant Name: xx ");
+        Console.WriteLine("Restaurant Name: Blind Ate ");
         Console.WriteLine("Address: Wijnhaven 61 3011WJ Rotterdam");
         Console.WriteLine("Phone Number: +31 10 223 4598");
         Console.WriteLine("Cuisine Type: Blind experience or A la Carte");

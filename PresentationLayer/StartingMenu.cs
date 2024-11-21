@@ -4,6 +4,23 @@ public static class StartingMenu
 {
     public static void Menu()
     {
+        Console.WriteLine("**************************************************");
+        Console.WriteLine("*                                                *");
+        Console.WriteLine("*       ██████╗ ██╗     ██╗███╗   ██╗██████╗      *");
+        Console.WriteLine("*       ██╔══██╗██║     ██║████╗  ██║██╔══██╗     *");
+        Console.WriteLine("*       ██████╔╝██║     ██║██╔██╗ ██║██║  ██║     *");
+        Console.WriteLine("*       ██╔══██╗██║     ██║██║╚██╗██║██║  ██║     *");
+        Console.WriteLine("*       ██████╗ ███████╗██║██║ ╚████║██████╔╝     *");
+        Console.WriteLine("*       ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝╚═════╝      *");
+        Console.WriteLine("*                                                *");
+        Console.WriteLine("*        █████╗ ████████╗███████╗                *");
+        Console.WriteLine("*       ██╔══██╗╚══██╔══╝██╔════╝                *");
+        Console.WriteLine("*       ███████║   ██║   █████╗                  *");
+        Console.WriteLine("*       ██╔══██║   ██║   ██╔══╝                  *");
+        Console.WriteLine("*       ██║  ██║   ██║   ███████╗                *");
+        Console.WriteLine("*       ╚═╝  ╚═╝   ╚═╝   ╚══════╝                *");
+        Console.WriteLine("*                                                *");
+        Console.WriteLine("**************************************************");
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Welcome to the starting menu?")
