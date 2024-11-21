@@ -97,7 +97,10 @@ class AccountsLogic
 
     public void CreateGuestUser(string name, string email, string phone, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
     {
-        var guest = new UserModel(name, email, phone, "", dateOfBirth, address, preferences);
+        var guest = new UserModel(name, email, phone, "", dateOfBirth, address, preferences)
+        {
+            IsGuest = true
+        };
         UpdateList(guest);
     }
 
