@@ -29,7 +29,6 @@ class AccountsLogic
         {
             accountMails.Add(user.EmailAddress);
         }
-
         return accountMails;
     }
 
@@ -96,10 +95,10 @@ class AccountsLogic
         
     }
 
-    public void CreateGuestUser(string name, string email, string phone)
+    public void CreateGuestUser(string name, string email, string phone, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
     {
-        var user = new UserModel(name, email, phone) { IsGuest = true };
-        UpdateList(user);
+        var guest = new UserModel(name, email, phone, "", dateOfBirth, address, preferences);
+        UpdateList(guest);
     }
 
     public void CreateEmployee(string name, string email, string phone, string password, string dateOfBirth = "", string address = "", List<string> preferences = null)
