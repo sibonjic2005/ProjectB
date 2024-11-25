@@ -9,7 +9,7 @@ public static class StartingMenu
         Console.WriteLine("*       ██████╗ ██╗     ██╗███╗   ██╗██████╗      *");
         Console.WriteLine("*       ██╔══██╗██║     ██║████╗  ██║██╔══██╗     *");
         Console.WriteLine("*       ██████╔╝██║     ██║██╔██╗ ██║██║  ██║     *");
-        Console.WriteLine("*       ██╔══██╗██║     ██║██║╚██╗██║██║  ██║     *");
+        Console.WriteLine("*       ██╔══██ ██║     ██║██║╚██╗██║██║  ██║     *");
         Console.WriteLine("*       ██████╗ ███████╗██║██║ ╚████║██████╔╝     *");
         Console.WriteLine("*       ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝╚═════╝      *");
         Console.WriteLine("*                                                *");
