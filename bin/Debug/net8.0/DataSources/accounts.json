@@ -11,13 +11,15 @@
         "Date": "2025-05-07T15:00:00+02:00",
         "Time": "15:00",
         "PersonCount": "6",
-        "TableNumber": 14
+        "TableNumber": 14,
+        "BlindExperience": false
       },
       {
         "Date": "2024-11-22T12:00:00+01:00",
         "Time": "12:00",
         "PersonCount": "6",
-        "TableNumber": 15
+        "TableNumber": 15,
+        "BlindExperience": false
       }
     ],
     "name": "John Doe",
@@ -121,7 +123,8 @@
         "Date": "2024-11-14T18:00:00+01:00",
         "Time": "18:00",
         "PersonCount": "10",
-        "TableNumber": 0
+        "TableNumber": 0,
+        "BlindExperience": false
       }
     ],
     "name": "Ryan",
@@ -154,7 +157,8 @@
         "Date": "2024-11-16T00:00:00",
         "Time": "12:00",
         "PersonCount": "4",
-        "TableNumber": 0
+        "TableNumber": 0,
+        "BlindExperience": false
       }
     ],
     "name": "testing",
@@ -204,7 +208,8 @@
         "Date": "2024-11-14T13:00:00+01:00",
         "Time": "13:00",
         "PersonCount": "4",
-        "TableNumber": 15
+        "TableNumber": 15,
+        "BlindExperience": false
       }
     ],
     "name": "Jacky",
@@ -224,12 +229,62 @@
         "Date": "2024-11-13T23:00:00+01:00",
         "Time": "23:00",
         "PersonCount": "2",
-        "TableNumber": 3
+        "TableNumber": 3,
+        "BlindExperience": false
       }
     ],
     "name": "s",
     "emailAddress": "a@gmail.com",
     "phoneNumber": "11111111111111",
+    "preferences": []
+  },
+  {
+    "password": "Iopooeiei1!",
+    "dateOfBirth": "12-12-1010",
+    "address": "qwedsa",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-11-26T15:00:00+01:00",
+        "Time": "15:00",
+        "PersonCount": "2",
+        "TableNumber": 1,
+        "BlindExperience": false
+      }
+    ],
+    "name": "za",
+    "emailAddress": "w@yo.com",
+    "phoneNumber": "12928309280239",
+    "preferences": []
+  },
+  {
+    "password": "Werk123!",
+    "dateOfBirth": "11-11-3456",
+    "address": "werk",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-11-26T16:00:00+01:00",
+        "Time": "16:00",
+        "PersonCount": "2",
+        "TableNumber": 1,
+        "BlindExperience": true
+      },
+      {
+        "Date": "2024-11-28T11:00:00+01:00",
+        "Time": "11:00",
+        "PersonCount": "3",
+        "TableNumber": 9,
+        "BlindExperience": false
+      }
+    ],
+    "name": "Ammar",
+    "emailAddress": "werk@gmail.com",
+    "phoneNumber": "1234567889",
     "preferences": []
   }
 ]

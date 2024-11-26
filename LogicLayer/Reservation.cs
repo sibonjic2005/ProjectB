@@ -1,9 +1,11 @@
 public class Reservation
 {
+
     public DateTime Date { get; set; }
     public string Time { get; set; }
     public string PersonCount { get; set; }
     public int TableNumber { get; set; }
+    public bool BlindExperience { get; set; }
 
     public Reservation(DateTime date, string time, string personCount, int tableNumber)
     {
@@ -11,6 +13,6 @@ public class Reservation
         Time = time;
         PersonCount = personCount;
         TableNumber = tableNumber;
+        BlindExperience = false;
     }
-    
 }

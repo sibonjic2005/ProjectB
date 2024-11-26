@@ -4,24 +4,24 @@ public static class StartingMenu
 {
     public static void Menu()
     {
-        Console.WriteLine("**************************************************");
-        Console.WriteLine("*                                                *");
-        Console.WriteLine("*       ██████╗ ██╗     ██╗███╗   ██╗██████╗     *");
-        Console.WriteLine("*       ██╔══██╗██║     ██║████╗  ██║██╔══██╗    *");
-        Console.WriteLine("*       ██████╔╝██║     ██║██╔██╗ ██║██║  ██║    *");
-        Console.WriteLine("*       ██╔══██ ██║     ██║██║╚██╗██║██║  ██║    *");
-        Console.WriteLine("*       ██████╗ ███████╗██║██║ ╚████║██████╔╝    *");
-        Console.WriteLine("*       ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝╚═════╝     *");
-        Console.WriteLine("*                                                *");
-        Console.WriteLine("*             █████╗ ████████╗███████╗           *");
-        Console.WriteLine("*            ██╔══██╗╚══██╔══╝██╔════╝           *");
-        Console.WriteLine("*            ███████║   ██║   █████╗             *");
-        Console.WriteLine("*            ██╔══██║   ██║   ██╔══╝             *");
-        Console.WriteLine("*            ██║  ██║   ██║   ███████╗           *");
-        Console.WriteLine("*            ╚═╝  ╚═╝   ╚═╝   ╚══════╝           *");
-        Console.WriteLine("*                                                *");
-        Console.WriteLine("**************************************************");
-        Console.WriteLine("");
+        AnsiConsole.MarkupLine("[deepskyblue1]**************************************************[/]");
+        AnsiConsole.MarkupLine("[violet]*                                                *[/]");
+        AnsiConsole.MarkupLine("[deeppink3]*       ██████╗ ██╗     ██╗███╗   ██╗██████╗     *[/]");
+        AnsiConsole.MarkupLine("[paleturquoise1]*       ██╔══██╗██║     ██║████╗  ██║██╔══██╗    *[/]");
+        AnsiConsole.MarkupLine("[magenta3]*       ██████╔╝██║     ██║██╔██╗ ██║██║  ██║    *[/]");
+        AnsiConsole.MarkupLine("[darkslategray3]*       ██╔══██ ██║     ██║██║╚██╗██║██║  ██║    *[/]");
+        AnsiConsole.MarkupLine("[mediumpurple]*       ██████╗ ███████╗██║██║ ╚████║██████╔╝    *[/]");
+        AnsiConsole.MarkupLine("[seagreen1_1]*       ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝╚═════╝     *[/]");
+        AnsiConsole.MarkupLine("[steelblue1]*                                                *[/]");
+        AnsiConsole.MarkupLine("[mediumspringgreen]*             █████╗ ████████╗███████╗           *[/]");
+        AnsiConsole.MarkupLine("[fuchsia]*            ██╔══██╗╚══██╔══╝██╔════╝           *[/]");
+        AnsiConsole.MarkupLine("[green1]*            ███████║   ██║   █████╗             *[/]");
+        AnsiConsole.MarkupLine("[khaki1]*            ██╔══██║   ██║   ██╔══╝             *[/]");
+        AnsiConsole.MarkupLine("[lightcyan1]*            ██║  ██║   ██║   ███████╗           *[/]");
+        AnsiConsole.MarkupLine("[orchid]*            ╚═╝  ╚═╝   ╚═╝   ╚══════╝           *[/]");
+        AnsiConsole.MarkupLine("[lightsteelblue]*                                                *[/]");
+        AnsiConsole.MarkupLine("[palegreen1]**************************************************[/]");
+        AnsiConsole.WriteLine("");
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Welcome to the starting menu?")
