@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using Spectre.Console;
 static class CreateAccount
 {

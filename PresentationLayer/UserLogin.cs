@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Spectre.Console;
 static class UserLogin
 {

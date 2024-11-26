@@ -1,5 +1,3 @@
-using System;
-
 public static class TableLayout
 {
     public static void SeatingPlan()

@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices;
-using System.Windows.Markup;
 using Spectre.Console;
 static class UserReservation
 {
