@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
-
+using Spectre.Console;
 
 class UserModel : GuestModel
 {

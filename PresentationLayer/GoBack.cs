@@ -32,7 +32,7 @@ static class GoBack
                 
         if (choices == "Go back")
         {
-            Console.Clear();
+            Console.Clear();  
             StartingMenu.Menu();
         }
     }
