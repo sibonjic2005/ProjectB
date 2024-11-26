@@ -12,6 +12,13 @@ static class UserReservation
             return;
         }
 
+        var option = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Do you want a blind experience?")
+                .PageSize(10)
+                .AddChoices("Blind Experience", "Normal Dining")
+        );
+
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
@@ -58,6 +65,14 @@ static class UserReservation
         Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}, Time: {time}, Amount of persons: {person}");
 
         var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
+        if (option == "Blind Experience")
+        {
+            reservation.BlindExperience = true;
+        }
+        else
+        {
+            reservation.BlindExperience = false;
+        }
 
         accountsLogic.AddReservation(email, reservation);
 
