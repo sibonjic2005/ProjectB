@@ -1,0 +1,161 @@
+{
+    "Surprise Menu": [
+      {
+        "Category": "Surprise Menu",
+        "Dish": "Surprise 3-Course Platter",
+        "Description": "- A delicious assortment of **freshly prepared dishes**.\n- A Surprise 3-Course Experience.\n- Each course is a unique surprise, made to order, for a truly one-of-a-kind dining experience!",
+        "Price": "$54.99"
+      }
+    ],
+    "Appetizers": [
+      {
+        "Category": "Appetizers",
+        "Dish": "Bruschetta with Tomato and Basil",
+        "Description": "- **Crispy bread** topped with fresh tomatoes, garlic, and basil.\n- A light and flavorful start to your meal.",
+        "Price": "$6.99"
+      },
+      {
+        "Category": "Appetizers",
+        "Dish": "Garlic Parmesan Breadsticks",
+        "Description": "- **Warm breadsticks** coated with garlic butter and parmesan.\n- Perfectly crispy and savory.",
+        "Price": "$5.49"
+      },
+      {
+        "Category": "Appetizers",
+        "Dish": "Spinach and Artichoke Dip",
+        "Description": "- **Creamy dip** made with spinach, artichokes, and cheese.\n- Served with crunchy crackers for dipping.",
+        "Price": "$7.99"
+      }
+    ],
+    "Soups & Salads": [
+      {
+        "Category": "Soups & Salads",
+        "Dish": "Classic Caesar Salad",
+        "Description": "- **Fresh romaine lettuce**, croutons, parmesan, and Caesar dressing.\n- A perfect balance of crunchy and creamy.",
+        "Price": "$8.49"
+      },
+      {
+        "Category": "Soups & Salads",
+        "Dish": "Tomato Basil Soup",
+        "Description": "- **Creamy tomato soup** with a hint of basil.\n- Perfect for dipping with your favorite bread.",
+        "Price": "$5.99"
+      },
+      {
+        "Category": "Soups & Salads",
+        "Dish": "Greek Salad with Feta Cheese and Olives",
+        "Description": "- **Cucumbers, tomatoes, feta, and olives** with a lemon-oregano dressing.\n- Light and refreshing with bold flavors.",
+        "Price": "$9.49"
+      }
+    ],
+    "Main Courses": [
+      {
+        "Category": "Main Courses",
+        "Dish": "Grilled Chicken with Lemon Herb Sauce",
+        "Description": "- **Grilled chicken** served with a fresh lemon herb sauce.\n- Tender and flavorful with a citrusy touch.",
+        "Price": "$15.99"
+      },
+      {
+        "Category": "Main Courses",
+        "Dish": "Spaghetti Carbonara",
+        "Description": "- **Pasta with eggs, bacon, parmesan, and black pepper**.\n- A creamy and savory Italian classic.",
+        "Price": "$14.99"
+      },
+      {
+        "Category": "Main Courses",
+        "Dish": "Beef Tenderloin with Garlic Mashed Potatoes",
+        "Description": "- **Juicy beef tenderloin** paired with creamy garlic mashed potatoes.\n- A hearty and satisfying combination.",
+        "Price": "$22.99"
+      },
+      {
+        "Category": "Main Courses",
+        "Dish": "Vegetable Stir-Fry with Tofu",
+        "Description": "- **Stir-fried vegetables** and tofu in a savory sauce.\n- A vibrant and healthy option for vegetarians.",
+        "Price": "$12.99"
+      },
+      {
+        "Category": "Main Courses",
+        "Dish": "Shrimp Scampi with Linguine",
+        "Description": "- **Juicy shrimp** cooked in a garlic butter sauce.\n- Served over linguine pasta for a satisfying meal.",
+        "Price": "$18.99"
+      }
+    ],
+    "Side Dishes": [
+      {
+        "Category": "Side Dishes",
+        "Dish": "Roasted Brussels Sprouts with Balsamic Glaze",
+        "Description": "- **Crispy roasted Brussels sprouts** drizzled with balsamic glaze.\n- A sweet and savory complement to any dish.",
+        "Price": "$5.99"
+      },
+      {
+        "Category": "Side Dishes",
+        "Dish": "Sweet Potato Fries",
+        "Description": "- **Golden sweet potato fries** with a perfect balance of sweetness and salt.\n- A crispy and satisfying side.",
+        "Price": "$4.99"
+      },
+      {
+        "Category": "Side Dishes",
+        "Dish": "Creamed Spinach",
+        "Description": "- **Rich and creamy spinach** cooked to perfection.\n- A classic favorite with a velvety texture.",
+        "Price": "$6.49"
+      }
+    ],
+    "Desserts": [
+      {
+        "Category": "Desserts",
+        "Dish": "New York Cheesecake with Strawberry Topping",
+        "Description": "- **Smooth and creamy cheesecake** topped with fresh strawberries.\n- A classic dessert with a sweet and tangy topping.",
+        "Price": "$6.99"
+      },
+      {
+        "Category": "Desserts",
+        "Dish": "Tiramisu",
+        "Description": "- **Coffee-soaked ladyfingers** with mascarpone cream.\n- A rich and indulgent Italian dessert.",
+        "Price": "$7.49"
+      },
+      {
+        "Category": "Desserts",
+        "Dish": "Chocolate Lava Cake",
+        "Description": "- **Warm chocolate cake** with a gooey molten center.\n- Served with vanilla ice cream for the perfect combination.",
+        "Price": "$8.99"
+      },
+      {
+        "Category": "Desserts",
+        "Dish": "Fruit Salad with Honey and Mint",
+        "Description": "- **Fresh seasonal fruits** drizzled with honey and topped with mint.\n- A light and refreshing dessert option.",
+        "Price": "$5.99"
+      }
+    ],
+    "Drinks": [
+      {
+        "Category": "Drinks",
+        "Dish": "Fresh Lemonade",
+        "Description": "- **Sweet and sour lemonade** made with fresh lemons.\n- A refreshing drink to cool you down.",
+        "Price": "$3.99"
+      },
+      {
+        "Category": "Drinks",
+        "Dish": "Iced Green Tea",
+        "Description": "- **Cool iced green tea** perfect for a hot day.\n- A light and refreshing beverage to accompany your meal.",
+        "Price": "$3.49"
+      },
+      {
+        "Category": "Drinks",
+        "Dish": "Espresso",
+        "Description": "- **Strong Italian espresso** served black.\n- A rich and bold coffee experience.",
+        "Price": "$2.99"
+      },
+      {
+        "Category": "Drinks",
+        "Dish": "Mango Smoothie",
+        "Description": "- **Creamy mango smoothie** made with fresh mangoes.\n- Sweet and tropical, perfect for a treat.",
+        "Price": "$4.99"
+      },
+      {
+        "Category": "Drinks",
+        "Dish": "Red Wine (Merlot/Cabernet Sauvignon)",
+        "Description": "- **Smooth red wine** available in Merlot or Cabernet Sauvignon.\n- A perfect pairing with any of your main courses.",
+        "Price": "$7.49"
+      }
+    ]
+  }
+  
