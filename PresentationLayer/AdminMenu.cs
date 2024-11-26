@@ -14,7 +14,7 @@ using Spectre.Console;
                 .AddChoices(new[] {
                         "Make a reservation", "Change a reservation","Cancel reservation", "View reservations", 
                         "Change Client info", "View Client info", 
-                        // "Edit Food menu", "Edit restaurant information",
+                        "Edit Food menu", "Edit restaurant information",
                         "Create employee account", "Promote/Demote accounts", "Log out"        
                 }));
 
@@ -49,9 +49,9 @@ using Spectre.Console;
                 foodMenuManager.ManageMenu();
                 AdminMenuStart();
                 break;
-            // case "Edit restaurant information":
-            //     Console.WriteLine("This feature is not yet implemented");
-            //     break;
+            case "Edit restaurant information":
+                Console.WriteLine("This feature is not yet implemented");
+                break;
             case "Create employee account":
                 CreateAccount.CreateAdmin();
                 AdminMenuStart();
