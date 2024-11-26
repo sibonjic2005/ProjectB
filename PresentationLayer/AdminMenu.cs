@@ -44,9 +44,11 @@ using Spectre.Console;
                 ClientInfo.ViewClientInfo();
                 AdminMenuStart();
                 break;
-            // case "Edit Food menu": // Edit foods and prices
-            //     Console.WriteLine("This feature is not yet implemented");
-            //     break;
+             case "Edit Food menu": // Edit foods and prices
+                var foodMenuManager = new FoodMenuManager();
+                foodMenuManager.ManageMenu();
+                AdminMenuStart();
+                break;
             // case "Edit restaurant information":
             //     Console.WriteLine("This feature is not yet implemented");
             //     break;

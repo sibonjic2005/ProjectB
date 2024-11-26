@@ -32,8 +32,9 @@ using Spectre.Console;
                 break;
             case "See Foodmenu":
                 Console.Clear();
-                FoodMenu.DisplayFoodMenu();
-                GoBack.GoBackUserMenu();
+                var foodMenu = new FoodMenu();
+                foodMenu.DisplayFoodMenu();
+                GoBack.GoBackStartingMenu();
                 break;
             case "Information":
                 Console.Clear();

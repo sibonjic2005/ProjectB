@@ -32,7 +32,7 @@ public class UserInfo()
 
         var updatedPhone = signUpChecker.PhoneNumberRules(() =>
             AnsiConsole.Prompt(new TextPrompt<string>($"Enter your Phone Number [grey](current: {user.PhoneNumber})").AllowEmpty()));
-            
+
         var updatedAllergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
                 .Title("Update allergies [grey](use <space> to select/deselect)[/]:")

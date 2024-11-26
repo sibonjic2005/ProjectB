@@ -6,21 +6,22 @@ public static class StartingMenu
     {
         Console.WriteLine("**************************************************");
         Console.WriteLine("*                                                *");
-        Console.WriteLine("*       ██████╗ ██╗     ██╗███╗   ██╗██████╗      *");
-        Console.WriteLine("*       ██╔══██╗██║     ██║████╗  ██║██╔══██╗     *");
-        Console.WriteLine("*       ██████╔╝██║     ██║██╔██╗ ██║██║  ██║     *");
-        Console.WriteLine("*       ██╔══██ ██║     ██║██║╚██╗██║██║  ██║     *");
-        Console.WriteLine("*       ██████╗ ███████╗██║██║ ╚████║██████╔╝     *");
-        Console.WriteLine("*       ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝╚═════╝      *");
+        Console.WriteLine("*       ██████╗ ██╗     ██╗███╗   ██╗██████╗     *");
+        Console.WriteLine("*       ██╔══██╗██║     ██║████╗  ██║██╔══██╗    *");
+        Console.WriteLine("*       ██████╔╝██║     ██║██╔██╗ ██║██║  ██║    *");
+        Console.WriteLine("*       ██╔══██ ██║     ██║██║╚██╗██║██║  ██║    *");
+        Console.WriteLine("*       ██████╗ ███████╗██║██║ ╚████║██████╔╝    *");
+        Console.WriteLine("*       ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝╚═════╝     *");
         Console.WriteLine("*                                                *");
-        Console.WriteLine("*        █████╗ ████████╗███████╗                *");
-        Console.WriteLine("*       ██╔══██╗╚══██╔══╝██╔════╝                *");
-        Console.WriteLine("*       ███████║   ██║   █████╗                  *");
-        Console.WriteLine("*       ██╔══██║   ██║   ██╔══╝                  *");
-        Console.WriteLine("*       ██║  ██║   ██║   ███████╗                *");
-        Console.WriteLine("*       ╚═╝  ╚═╝   ╚═╝   ╚══════╝                *");
+        Console.WriteLine("*             █████╗ ████████╗███████╗           *");
+        Console.WriteLine("*            ██╔══██╗╚══██╔══╝██╔════╝           *");
+        Console.WriteLine("*            ███████║   ██║   █████╗             *");
+        Console.WriteLine("*            ██╔══██║   ██║   ██╔══╝             *");
+        Console.WriteLine("*            ██║  ██║   ██║   ███████╗           *");
+        Console.WriteLine("*            ╚═╝  ╚═╝   ╚═╝   ╚══════╝           *");
         Console.WriteLine("*                                                *");
         Console.WriteLine("**************************************************");
+        Console.WriteLine("");
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Welcome to the starting menu?")
@@ -51,7 +52,8 @@ public static class StartingMenu
                 break;
             case "FoodMenu":
                 Console.Clear();
-                FoodMenu.DisplayFoodMenu();
+                var foodMenu = new FoodMenu();
+                foodMenu.DisplayFoodMenu();
                 GoBack.GoBackStartingMenu();
                 break;
             case "Information":
