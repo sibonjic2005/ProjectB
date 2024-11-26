@@ -28,11 +28,11 @@ public class UserInfo()
         List<string> allergyOptions = AccountsLogic.GetAllergyOptions();
 
         var updatedName = AnsiConsole.Prompt(
-                    new TextPrompt<string>($"Enter Name [grey](current: {user.Name})[/]:")
-                        .AllowEmpty());
+            new TextPrompt<string>($"Enter Name [grey](current: {user.Name})[/]:").AllowEmpty());
+
         var updatedPhone = signUpChecker.PhoneNumberRules(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>($"Enter your Phone Number [grey](current: {user.PhoneNumber})")
-                .AllowEmpty()));
+            AnsiConsole.Prompt(new TextPrompt<string>($"Enter your Phone Number [grey](current: {user.PhoneNumber})").AllowEmpty()));
+            
         var updatedAllergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
                 .Title("Update allergies [grey](use <space> to select/deselect)[/]:")
