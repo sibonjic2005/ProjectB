@@ -31,7 +31,7 @@ public class UserInfo()
             new TextPrompt<string>($"Enter Name [grey](current: {user.Name})[/]:").AllowEmpty());
 
         var updatedPhone = signUpChecker.PhoneNumberRules(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>($"Enter your Phone Number [grey](current: {user.PhoneNumber})").AllowEmpty()));
+            AnsiConsole.Prompt(new TextPrompt<string>($"Enter your Phone Number [grey](current: {user.PhoneNumber})[/]").AllowEmpty()));
 
         var updatedAllergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()

@@ -49,8 +49,11 @@ static class AdminReservation
         }
         
         var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter the amount of people: "));
-            TableLayout.SeatingPlan();
+            new TextPrompt<string>("Enter the amount of people: ")
+        );
+        
+        TableLayout.SeatingPlan();
+
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
 
         if (!availableTables.Any())
@@ -73,7 +76,7 @@ static class AdminReservation
 
         accountsLogic.AddNewReservation(name, email, phonenumber, allergies, reservation);
 
-        Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}");
+        Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}, End time: {reservation.EndTime}");
         Console.WriteLine($"\nReservation complete!");
         // AdminMenu.AdminMenuStart();
     }
@@ -128,7 +131,7 @@ static class AdminReservation
                 Console.WriteLine($"Name: {user.Name}\nemail: {user.EmailAddress}:");
                 foreach (Reservation reservation in user.Reservations)
                 {
-                    Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n  - Table: {reservation.TableNumber}\n");
+                    Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Start Time: {reservation.Time}\n  - End time: {reservation.EndTime}\n  - People: {reservation.PersonCount}\n  - Table: {reservation.TableNumber}\n");
                 }
             }
         }
@@ -199,13 +202,6 @@ static class AdminReservation
 
         accountsLogic.UpdateReservation(getEmail, reservationSelection);
 
-        Console.WriteLine($"Reservation updated: Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, People: {personCount}, Table: {tableSelection.TableNumber}");
-
-        // var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
-
-        // accountsLogic.UpdateChangesReservation(getEmail, reservation);
-        // Console.WriteLine($"Date: {date}, Time: {time}, Amount of persons: {person}");
-        // Console.WriteLine($"\nReservation complete!");
-        // AdminMenu.AdminMenuStart();
+        Console.WriteLine($"Reservation updated:\nDate: {date:dddd, MMMM dd, yyyy}\nStart Time: {time}\nEnd Time: {reservationSelection.EndTime}\nPeople: {personCount}\nTable: {tableSelection.TableNumber}");
     }
 }

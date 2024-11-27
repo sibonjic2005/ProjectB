@@ -269,13 +269,27 @@ class AccountsLogic
     public List<Tables> GetAvailableTables(DateTime date, string time, int personCount)
     {
         var tables = InitializeTables();
+
+        int selectedHour = int.Parse(time.Split(':')[0]);
+        DateTime selectedStartTime = date.Date.AddHours(selectedHour);
+        DateTime selectedEndTime = selectedStartTime.AddHours(selectedHour == 20 ? 3 : 2);
+    
+
         var unavailableTables = _accounts
             .SelectMany(account => account.Reservations)
-            .Where(r => r.Date == date && r.Time == time)
+            .Where(reservation =>
+            {
+                int reservationHour = int.Parse(reservation.Time.Split(':')[0]);
+                DateTime reservationStartTime = reservation.Date.Date.AddHours(reservationHour);
+                DateTime reservationEndTime = reservationStartTime.AddHours(reservationHour == 20 ? 3 : 2);
+
+                return reservation.Date.Date == date.Date &&
+                   !(selectedEndTime <= reservationStartTime || selectedStartTime >= reservationEndTime);
+            })
             .Select(r => r.TableNumber);
 
         return tables
-            .Where(t => !unavailableTables.Contains(t.TableNumber) && t.Capacity >= personCount)
+            .Where(table => !unavailableTables.Contains(table.TableNumber) && table.Capacity >= personCount)
             .ToList();
     }
 

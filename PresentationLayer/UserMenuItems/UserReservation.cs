@@ -62,7 +62,6 @@ static class UserReservation
 
         Console.Clear();
         string formattedDate = date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"));
-        Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}, Time: {time}, Amount of persons: {person}");
 
         var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
         if (option == "Blind Experience")
@@ -73,6 +72,8 @@ static class UserReservation
         {
             reservation.BlindExperience = false;
         }
+
+        Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}\nStart Time: {time}\nEnd Time: {reservation.EndTime}\nAmount of persons: {person}\n");
 
         accountsLogic.AddReservation(email, reservation);
 
@@ -126,24 +127,27 @@ static class UserReservation
 
     public static void ViewReservation()
     {
-        var currentUser = AccountsLogic.CurrentAccount;
-        if (currentUser == null)
+        AccountsLogic accountsLogic = new AccountsLogic();
+        string email = AccountsLogic.CurrentAccount?.EmailAddress;
+        var user = accountsLogic.GetByEmail(email);
+
+        if (user == null)
         {
             Console.WriteLine("No account is currently logged in.");
         }
-        else if (currentUser.Reservations == null || currentUser.Reservations.Count == 0)
+        else if (user.Reservations == null || user.Reservations.Count == 0)
         {
             Console.WriteLine("No reservations found.");
         }
         else
         {
-            if (currentUser.Reservations.Count == 1)
+            if (user.Reservations.Count == 1)
                 Console.WriteLine("Your reservation:");
             else
                 Console.WriteLine("Your reservations:");
-            foreach (Reservation reservation in currentUser.Reservations)
+            foreach (Reservation reservation in user.Reservations)
             {
-                Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Time: {reservation.Time}\n  - People: {reservation.PersonCount}\n  - Table: {reservation.TableNumber}\n");
+                Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Start Time: {reservation.Time}\n  - End Time: {reservation.EndTime}\n- People: {reservation.PersonCount}\n  - Table: {reservation.TableNumber}\n");
             }
         }
         // UserMenu.UserMenuStart();
