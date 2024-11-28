@@ -6,22 +6,7 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [
-      {
-        "Date": "2025-05-07T15:00:00+02:00",
-        "Time": "15:00",
-        "PersonCount": "6",
-        "TableNumber": 14,
-        "BlindExperience": false
-      },
-      {
-        "Date": "2024-11-22T12:00:00+01:00",
-        "Time": "12:00",
-        "PersonCount": "6",
-        "TableNumber": 15,
-        "BlindExperience": false
-      }
-    ],
+    "reservations": [],
     "name": "John Doe",
     "emailAddress": "john@example.com",
     "phoneNumber": "1234567890",
@@ -41,38 +26,6 @@
     "preferences": []
   },
   {
-    "password": "KanusManus!102",
-    "dateOfBirth": "01-01-2000",
-    "address": "Gaatjenixaanlaan 10",
-    "isAdmin": true,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [],
-    "name": "mo",
-    "emailAddress": "modeadmin@yooo.com",
-    "phoneNumber": "0672382912",
-    "preferences": []
-  },
-  {
-    "password": "aaaaaaA1!",
-    "dateOfBirth": "12-10-1200",
-    "address": "Amma",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [],
-    "name": "amma",
-    "emailAddress": "a@hotmail.com",
-    "phoneNumber": "11111111111111",
-    "preferences": [
-      "Tree Nuts",
-      "Soy",
-      "Fish",
-      "Peanuts",
-      "Shellfish"
-    ]
-  },
-  {
     "password": "Ikbenammar1!",
     "dateOfBirth": "12-10-2005",
     "address": "ammarsibonjic@gmail.com",
@@ -83,19 +36,6 @@
     "name": "ammar",
     "emailAddress": "ammarsibonjic@gmail.com",
     "phoneNumber": "0687694016",
-    "preferences": []
-  },
-  {
-    "password": "!Ammmmmm!1M",
-    "dateOfBirth": "12-12-1222",
-    "address": "q",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [],
-    "name": "a",
-    "emailAddress": "1@d.com",
-    "phoneNumber": "1111111111",
     "preferences": []
   },
   {
@@ -118,15 +58,7 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": true,
-    "reservations": [
-      {
-        "Date": "2024-11-14T18:00:00+01:00",
-        "Time": "18:00",
-        "PersonCount": "10",
-        "TableNumber": 0,
-        "BlindExperience": false
-      }
-    ],
+    "reservations": [],
     "name": "Ryan",
     "emailAddress": "ryan@gmail.com",
     "phoneNumber": "1234567890",
@@ -146,44 +78,6 @@
     "preferences": []
   },
   {
-    "password": "User rights",
-    "dateOfBirth": "",
-    "address": "",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [
-      {
-        "Date": "2024-11-16T00:00:00",
-        "Time": "12:00",
-        "PersonCount": "4",
-        "TableNumber": 0,
-        "BlindExperience": false
-      }
-    ],
-    "name": "testing",
-    "emailAddress": "test@example.com",
-    "phoneNumber": "0647856321",
-    "preferences": [
-      "Tree Nuts",
-      "Soy",
-      "Eggs"
-    ]
-  },
-  {
-    "password": "Password123!",
-    "dateOfBirth": "11-12-2002",
-    "address": "test street",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": true,
-    "reservations": [],
-    "name": "employee1",
-    "emailAddress": "test1@gmail.com",
-    "phoneNumber": "0645784521",
-    "preferences": []
-  },
-  {
     "password": "Paaswoord123!",
     "dateOfBirth": "11-11-1111",
     "address": "sesamstraat",
@@ -197,42 +91,13 @@
     "preferences": []
   },
   {
-    "password": "User rights",
-    "dateOfBirth": "",
-    "address": "",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [
-      {
-        "Date": "2024-11-14T13:00:00+01:00",
-        "Time": "13:00",
-        "PersonCount": "4",
-        "TableNumber": 15,
-        "BlindExperience": false
-      }
-    ],
-    "name": "Jacky",
-    "emailAddress": "jacky@gmail.com",
-    "phoneNumber": "1234567890",
-    "preferences": []
-  },
-  {
     "password": "aaaaaaaaaa!1A",
     "dateOfBirth": "11-11-1111",
     "address": "a@gmail.com",
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [
-      {
-        "Date": "2024-11-13T23:00:00+01:00",
-        "Time": "23:00",
-        "PersonCount": "2",
-        "TableNumber": 3,
-        "BlindExperience": false
-      }
-    ],
+    "reservations": [],
     "name": "s",
     "emailAddress": "a@gmail.com",
     "phoneNumber": "11111111111111",
@@ -245,15 +110,7 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [
-      {
-        "Date": "2024-11-26T15:00:00+01:00",
-        "Time": "15:00",
-        "PersonCount": "2",
-        "TableNumber": 1,
-        "BlindExperience": false
-      }
-    ],
+    "reservations": [],
     "name": "za",
     "emailAddress": "w@yo.com",
     "phoneNumber": "12928309280239",
@@ -266,22 +123,7 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [
-      {
-        "Date": "2024-11-26T16:00:00+01:00",
-        "Time": "16:00",
-        "PersonCount": "2",
-        "TableNumber": 1,
-        "BlindExperience": true
-      },
-      {
-        "Date": "2024-11-28T11:00:00+01:00",
-        "Time": "11:00",
-        "PersonCount": "3",
-        "TableNumber": 9,
-        "BlindExperience": false
-      }
-    ],
+    "reservations": [],
     "name": "Ammar",
     "emailAddress": "werk@gmail.com",
     "phoneNumber": "1234567889",
