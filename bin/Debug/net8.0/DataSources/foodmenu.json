@@ -80,6 +80,12 @@
   "Main Courses": [
     {
       "Category": "Main Courses",
+      "Dish": "Seared Wagyu Ribeye",
+      "Description": "-Tender, marbled Wagyu ribeye, perfectly seared to lock in its rich flavor, served with truffle mashed potatoes, roasted vegetables.",
+      "Price": "$60.00"
+    },
+    {
+      "Category": "Main Courses",
       "Dish": "Grilled Chicken",
       "Description": "-Grilled chicken served with a fresh lemon herb sauce.",
       "Price": "$23.00"
@@ -220,7 +226,7 @@
       "Category": "Drinks",
       "Dish": "Classic Mojito",
       "Description": "-Refreshing cocktail with white rum, lime, mint, sugar, and soda water.",
-      "Price": "$8.00"
+      "Price": "€8.00"
     }
   ]
 }
