@@ -12,7 +12,7 @@ using Spectre.Console;
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
                         "Make a reservation", "Cancel a reservation", "View your reservation",
-                        "See Foodmenu", "Information", "Profile", "Log out"           
+                        "View Foodmenu", "View Restaurant Information", "Profile", "Log out"           
                 }));
 
         switch (choices)
@@ -30,13 +30,13 @@ using Spectre.Console;
                 UserReservation.ViewReservation();
                 UserMenuStart();
                 break;
-            case "See Foodmenu":
+            case "View Foodmenu":
                 Console.Clear();
                 var foodMenu = new FoodMenu();
                 foodMenu.DisplayFoodMenu();
                 GoBack.GoBackStartingMenu();
                 break;
-            case "Information":
+            case "View Restaurant Information":
                 Console.Clear();
                 RestaurantInformation.PrintRestaurantInformation();
                 GoBack.GoBackUserMenu();
