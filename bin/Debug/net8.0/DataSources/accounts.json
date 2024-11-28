@@ -65,19 +65,6 @@
     "preferences": []
   },
   {
-    "password": "Qwerty1234!",
-    "dateOfBirth": "9-11-2004",
-    "address": "Kitchen",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [],
-    "name": "Diddy",
-    "emailAddress": "OiledUp2@gmail.com",
-    "phoneNumber": "123456789",
-    "preferences": []
-  },
-  {
     "password": "Paaswoord123!",
     "dateOfBirth": "11-11-1111",
     "address": "sesamstraat",
@@ -88,45 +75,6 @@
     "name": "Eric",
     "emailAddress": "eric@gmail.com",
     "phoneNumber": "0623456987",
-    "preferences": []
-  },
-  {
-    "password": "aaaaaaaaaa!1A",
-    "dateOfBirth": "11-11-1111",
-    "address": "a@gmail.com",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [],
-    "name": "s",
-    "emailAddress": "a@gmail.com",
-    "phoneNumber": "11111111111111",
-    "preferences": []
-  },
-  {
-    "password": "Iopooeiei1!",
-    "dateOfBirth": "12-12-1010",
-    "address": "qwedsa",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [],
-    "name": "za",
-    "emailAddress": "w@yo.com",
-    "phoneNumber": "12928309280239",
-    "preferences": []
-  },
-  {
-    "password": "Werk123!",
-    "dateOfBirth": "11-11-3456",
-    "address": "werk",
-    "isAdmin": false,
-    "isGuest": false,
-    "isEmployee": false,
-    "reservations": [],
-    "name": "Ammar",
-    "emailAddress": "werk@gmail.com",
-    "phoneNumber": "1234567889",
     "preferences": []
   }
 ]
