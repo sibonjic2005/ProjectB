@@ -103,20 +103,58 @@ public class FoodMenu
     // Updates a menu item based on its dish name
     public void UpdateItem(string dishName, string? newCategory, string? newDish, string? newDescription, string? newPrice)
     {
-        foreach (var category in _menuItems.Values)
-        {
-            var item = category.FirstOrDefault(i => i.Dish.Equals(dishName, StringComparison.OrdinalIgnoreCase));
-            if (item != null)
-            {
-                if (!string.IsNullOrEmpty(newCategory)) item.Category = newCategory;
-                if (!string.IsNullOrEmpty(newDish)) item.Dish = newDish;
-                if (!string.IsNullOrEmpty(newDescription)) item.Description = newDescription;
-                if (!string.IsNullOrEmpty(newPrice)) item.Price = newPrice;
+        MenuItem? itemToUpdate = null;
+        string? oldCategory = null;
 
-                SaveMenu();
-                return; // Exit after updating the item
+        // Locate the item in the current menu
+        foreach (var category in _menuItems)
+        {
+            itemToUpdate = category.Value.FirstOrDefault(i => i.Dish.Equals(dishName, StringComparison.OrdinalIgnoreCase));
+            if (itemToUpdate != null)
+            {
+                oldCategory = category.Key;
+                break;
             }
         }
+
+        // If the item is not found, exit
+        if (itemToUpdate == null)
+        {
+            Console.WriteLine($"Dish '{dishName}' not found in the menu.");
+            return;
+        }
+
+        // Remove the item from the old category if the category is changing
+        if (!string.IsNullOrEmpty(newCategory) && !newCategory.Equals(oldCategory, StringComparison.OrdinalIgnoreCase))
+        {
+            _menuItems[oldCategory].Remove(itemToUpdate);
+
+            // Clean up the old category if it's now empty
+            if (_menuItems[oldCategory].Count == 0)
+            {
+                _menuItems.Remove(oldCategory);
+            }
+
+            // Add the item to the new category
+            if (!_menuItems.ContainsKey(newCategory))
+            {
+                _menuItems[newCategory] = new List<MenuItem>();
+            }
+            _menuItems[newCategory].Add(itemToUpdate);
+
+            // Update the item's category field
+            itemToUpdate.Category = newCategory;
+        }
+
+        // Update other fields
+        if (!string.IsNullOrEmpty(newDish)) itemToUpdate.Dish = newDish;
+        if (!string.IsNullOrEmpty(newDescription)) itemToUpdate.Description = newDescription;
+        if (!string.IsNullOrEmpty(newPrice)) itemToUpdate.Price = newPrice;
+
+        // Save changes
+        SaveMenu();
+
+        Console.WriteLine($"Dish '{dishName}' has been updated.");
     }
 
     // Method to display the food menu using Spectre.Console table
