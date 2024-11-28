@@ -40,6 +40,24 @@ static class UserReservation
 
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
+
+            if (int.TryParse(person, out int personCount))
+            {
+                if (personCount > 6)
+                {
+                    Console.Clear();
+                    Console.WriteLine("For reservations of more than 6 people, please call the restaurant.");
+                    UserMenu.UserMenuStart();
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                UserMenu.UserMenuStart();
+                return;
+            }
+
             TableLayout.SeatingPlan();
 
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
@@ -67,10 +85,37 @@ static class UserReservation
         if (option == "Blind Experience")
         {
             reservation.BlindExperience = true;
+            Console.WriteLine("Your meal is a secret...");
+            Console.WriteLine("Costs: €60");
+            reservation.Food.Add("SURPRISE-MEAL");
+            var payment = new Payment();
+            payment.StartPayment();
         }
         else
         {
             reservation.BlindExperience = false;
+            var foodMenu = new FoodMenu();
+            Console.WriteLine("Do you want to select your food? (y/n)");
+            string choosefood = Console.ReadLine();
+            if (choosefood == "y" || choosefood == "Y")
+            {
+                foodMenu.DisplayFoodMenu();
+                Console.WriteLine("Enter your food selection (you can add multiple items separated by commas):");
+                string foodInput = Console.ReadLine();
+                
+                if (!string.IsNullOrWhiteSpace(foodInput))
+                {
+                    var selectedFoods = foodInput.Split(',').Select(f => f.Trim()).ToList();
+                    foreach (var food in selectedFoods)
+                    {
+                        reservation.Food.Add(food);
+                    }
+                    Console.WriteLine("Your selected food has been added to the reservation.");
+
+                    var payment = new Payment();
+                    payment.StartPayment();
+                }
+            }
         }
 
         Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}\nStart Time: {time}\nEnd Time: {reservation.EndTime}\nAmount of persons: {person}\n");
