@@ -48,21 +48,6 @@ public class UserInfo()
     {
         AccountsLogic accountsLogic = new AccountsLogic();
 
-        var user = accountsLogic.GetByEmail(AccountsLogic.CurrentAccount?.EmailAddress);
-
-        var confirmation = AnsiConsole.Prompt(
-            new TextPrompt<bool>("Are you sure you want to delete your account? This action cannot be undone. (yes/no)")
-                .AddChoice(true)
-                .AddChoice(false)
-                .WithConverter(choice => choice ? "y" : "n"));
-
-        if (confirmation)
-        {
-            //accountsLogic.UserDeleteAccount();
-        }
-        else //dont delete the account and return to the previous menu
-        {
-
-        }
+        accountsLogic.UserDeleteAccount();
     }
 }

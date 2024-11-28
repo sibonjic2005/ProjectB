@@ -15,7 +15,7 @@ using Spectre.Console;
                         "Make a reservation", "Change a reservation","Cancel reservation", "View reservations", 
                         "Change Client info", "View Client info", 
                         "Edit Food menu", "Edit restaurant information",
-                        "Create employee account", "Promote/Demote accounts", "Log out"        
+                        "Create employee account", "Promote/Demote accounts","Delete user", "Log out"        
                 }));
 
         switch (choices)
@@ -61,7 +61,11 @@ using Spectre.Console;
                 AdminRights.PromoteDemoteUser();
                 AdminMenuStart();
                 break;
-             case "Log out":
+            case "Delete user":
+                AdminRights.DeleteAccount();
+                AdminMenuStart();
+                break;
+            case "Log out":
                 Console.WriteLine("You sucessfully logged out.");
                 StartingMenu.Menu();
                 break;

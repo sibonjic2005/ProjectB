@@ -356,12 +356,69 @@ class AccountsLogic
         UpdateList(CurrentAccount);
     }
 
-    public void AdminDeleteAccount()
+    public void AdminDeleteAccount(string email)
     {
-        // Delete any account as an admin and update the json
+        var userToDelete = GetByEmail(email);
+        if (userToDelete != null)
+        {
+            Console.WriteLine($"Are you sure you want to delete the following account? (yes/no)");
+            Console.WriteLine($"Name: {userToDelete.Name}");
+            Console.WriteLine($"Email: {userToDelete.EmailAddress}");
+
+        var confirmation = Console.ReadLine()?.Trim().ToLower();
+        if (confirmation == "yes")
+        {
+            _accounts.Remove(userToDelete);
+            AccountsAccess.WriteAll(_accounts);
+            Console.WriteLine($"Account with email {email} has been successfully deleted.");
+        }
+        else
+        {
+            Console.WriteLine("Operation canceled. No account was deleted.");
+        }
     }
+    else
+    {
+        Console.WriteLine($"No account found with the email {email}.");
+    }
+}
+
     public void UserDeleteAccount()
     {
-        // Let the user delete themselfs and update the json
+        if (CurrentAccount == null)
+        {
+            Console.WriteLine("No user is currently logged in.");
+            return;
+        }
+
+        Console.WriteLine($"Are you sure you want to delete your account? This action cannot be undone. (yes/no)");
+        Console.WriteLine($"Name: {CurrentAccount.Name}");
+        Console.WriteLine($"Email: {CurrentAccount.EmailAddress}");
+
+        var confirmation = Console.ReadLine()?.Trim().ToLower();
+        if (confirmation == "yes")
+        {
+            var email = CurrentAccount.EmailAddress;
+            var userToDelete = GetByEmail(email);
+
+            if (userToDelete != null)
+            {
+                _accounts.Remove(userToDelete);
+                AccountsAccess.WriteAll(_accounts);
+                CurrentAccount = null; // Log the user out
+                Console.WriteLine("Your account has been successfully deleted.");
+                Console.ReadLine();
+                StartingMenu.Menu();
+            }
+            else
+            {
+                Console.WriteLine("An error occurred while trying to delete your account.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Operation canceled. Your account was not deleted.");
+        }
     }
+
 }

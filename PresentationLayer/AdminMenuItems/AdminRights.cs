@@ -46,19 +46,6 @@ class AdminRights
             return;
         }
 
-        var confirmation = AnsiConsole.Prompt(
-            new TextPrompt<bool>("Are you sure you want to delete your account? This action cannot be undone. (yes/no)")
-                .AddChoice(true)
-                .AddChoice(false)
-                .WithConverter(choice => choice ? "y" : "n"));
-
-        if (confirmation)
-        {
-            //accountsLogic.AdminDeleteAccount();
-        }
-        else //dont delete the account and return to the previous admin menu
-        {
-
-        }
+        accountsLogic.AdminDeleteAccount(getEmail);
     }
 }
