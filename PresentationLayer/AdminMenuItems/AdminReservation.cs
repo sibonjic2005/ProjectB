@@ -41,12 +41,6 @@ static class AdminReservation
 
         int selectedHour = int.Parse(time.Split(':')[0]);
         date = date.AddHours(selectedHour);
-
-        if (accountsLogic.HasReservationForTimeSlot(email, date, time))
-        {
-            Console.WriteLine("You already have a reservation for this time slot.");
-            return;
-        }
         
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: ")
