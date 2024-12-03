@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.Marshalling;
 using System.Text.RegularExpressions;
 
 public class SignUpChecker
@@ -68,6 +69,26 @@ public class SignUpChecker
             phoneNumber = getPhoneNumber();
 
             if (!Regex.IsMatch(phoneNumber, phonePattern))
+            {
+                Console.WriteLine("Phone number is invalid. It must contain 10 to 15 digits.");
+                continue;
+            }
+            else
+            {
+                return phoneNumber;
+            }
+        }
+    }
+
+    public string EditPhoneNumber(Func<string> getPhoneNumber)
+    {
+        string phoneNumber;
+        string phonePattern = @"^\+?\d{10,15}$";
+
+        while (true)
+        {
+            phoneNumber = getPhoneNumber();
+            if (!Regex.IsMatch(phoneNumber, phonePattern) && phoneNumber != String.Empty)
             {
                 Console.WriteLine("Phone number is invalid. It must contain 10 to 15 digits.");
                 continue;

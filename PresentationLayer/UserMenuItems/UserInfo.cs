@@ -14,8 +14,18 @@ public class UserInfo()
             Console.WriteLine($"Date of birth: {user.DateOfBirth}");
         Console.WriteLine($"Email: {user.EmailAddress}");
         Console.WriteLine($"Phone: {user.PhoneNumber}");
+        if (user.Address.Length > 0)
+        {
+            Console.WriteLine($"Address: {user.Address}");
+        }
         if (user.Preferences.Count > 0 )
+        {
             Console.WriteLine($"Allergies: {accountsLogic.GetAllergies()}\n");
+        }
+        else
+        {
+            Console.WriteLine("Allergies: None");
+        }
     }
 
     public static void EditProfile()
@@ -30,8 +40,11 @@ public class UserInfo()
         var updatedName = AnsiConsole.Prompt(
             new TextPrompt<string>($"Enter Name [grey](current: {user.Name})[/]:").AllowEmpty());
 
-        var updatedPhone = signUpChecker.PhoneNumberRules(() =>
+        var updatedPhone = signUpChecker.EditPhoneNumber(() =>
             AnsiConsole.Prompt(new TextPrompt<string>($"Enter your Phone Number [grey](current: {user.PhoneNumber})[/]").AllowEmpty()));
+
+        var updatedAddress = AnsiConsole.Prompt(
+            new TextPrompt<string>($"Enter your Address [grey](current: {user.Address})[/]").AllowEmpty());
 
         var updatedAllergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
@@ -40,7 +53,7 @@ public class UserInfo()
                 .PageSize(10)
                 .AddChoices(allergyOptions));
 
-        accountsLogic.EditUserInfo(updatedName, updatedPhone, updatedAllergies);
+        accountsLogic.EditUserInfo(updatedName, updatedPhone, updatedAddress, updatedAllergies);
         AnsiConsole.MarkupLine("[green]Profile updated successfully![/]\n");
     }
 

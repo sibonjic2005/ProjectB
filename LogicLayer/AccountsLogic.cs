@@ -366,11 +366,12 @@ class AccountsLogic
         };
     }
 
-    public void EditUserInfo(string name, string phone, List<string> allergies)
+    public void EditUserInfo(string name, string phone, string address, List<string> allergies)
     {
         if (!string.IsNullOrWhiteSpace(name)) CurrentAccount.Name = name;
         if (!string.IsNullOrWhiteSpace(phone)) CurrentAccount.PhoneNumber = phone;
-        if (allergies.Any()) CurrentAccount.Preferences = allergies;
+        if (!string.IsNullOrWhiteSpace(address)) CurrentAccount.Address = address;
+        CurrentAccount.Preferences = allergies;
 
         UpdateList(CurrentAccount);
     }
