@@ -311,6 +311,16 @@ class AccountsLogic
         return user.Reservations.Any(reservation => reservation.Date.Date == date.Date && reservation.Time == time);
     }
 
+    public bool HasReservationForDay(string email, DateTime date)
+    {
+        var user = _accounts.FirstOrDefault(account => account.EmailAddress == email);
+
+        if (user == null || user.Reservations == null)
+            return false;
+
+        return user.Reservations.Any(reservation => reservation.Date.Date == date.Date);
+    }
+
     public string? GetAllergies()
     {
         if (CurrentAccount?.Preferences.Count > 0)

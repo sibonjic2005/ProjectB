@@ -12,14 +12,22 @@ static class UserReservation
             return;
         }
 
+        DateTime date = Calendar.CalendarDate();
+
+        if (accountsLogic.HasReservationForDay(email, date))
+        {
+            Console.WriteLine("You already have a reservation for this day.");
+            UserMenu.UserMenuStart();
+            return;
+        }
+
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Do you want a blind experience?")
-                .PageSize(10)
-                .AddChoices("Blind Experience", "Normal Dining")
+            .Title("Do you want a blind experience?")
+            .PageSize(10)
+            .AddChoices("Blind Experience", "Normal Dining")
         );
 
-        DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
         var time = AnsiConsole.Prompt(
@@ -32,11 +40,7 @@ static class UserReservation
         int selectedHour = int.Parse(time.Split(':')[0]);
         date = date.AddHours(selectedHour);
 
-        if (accountsLogic.HasReservationForTimeSlot(email, date, time))
-        {
-            Console.WriteLine("You already have a reservation for this time slot.");
-            UserMenu.UserMenuStart();
-        }
+        // if (accountsLogic.HasReservationForTimeSlot(email, date, time))
 
         var person = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter the amount of people: "));
