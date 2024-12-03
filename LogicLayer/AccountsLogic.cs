@@ -273,7 +273,6 @@ class AccountsLogic
         int selectedHour = int.Parse(time.Split(':')[0]);
         DateTime selectedStartTime = date.Date.AddHours(selectedHour);
         DateTime selectedEndTime = selectedStartTime.AddHours(selectedHour == 20 ? 3 : 2);
-    
 
         var unavailableTables = _accounts
             .SelectMany(account => account.Reservations)
@@ -284,14 +283,24 @@ class AccountsLogic
                 DateTime reservationEndTime = reservationStartTime.AddHours(reservationHour == 20 ? 3 : 2);
 
                 return reservation.Date.Date == date.Date &&
-                   !(selectedEndTime <= reservationStartTime || selectedStartTime >= reservationEndTime);
+                    !(selectedEndTime <= reservationStartTime || selectedStartTime >= reservationEndTime);
             })
             .Select(r => r.TableNumber);
 
-        return tables
+        var availableTables = tables
             .Where(table => !unavailableTables.Contains(table.TableNumber) && table.Capacity >= personCount)
+            .OrderBy(table => table.Capacity)
             .ToList();
+
+        if (!availableTables.Any())
+        {
+            return new List<Tables>();
+        }
+
+        int minCapacity = availableTables.First().Capacity;
+        return availableTables.Where(table => table.Capacity == minCapacity).ToList();
     }
+
 
     public bool HasReservationForTimeSlot(string email, DateTime date, string time)
     {
