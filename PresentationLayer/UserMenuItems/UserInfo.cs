@@ -36,6 +36,7 @@ public class UserInfo()
         var user = accountsLogic.GetByEmail(AccountsLogic.CurrentAccount?.EmailAddress);
 
         List<string> allergyOptions = AccountsLogic.GetAllergyOptions();
+        List<string> userAllergies = user.Preferences;
 
         var updatedName = AnsiConsole.Prompt(
             new TextPrompt<string>($"Enter Name [grey](current: {user.Name})[/]:").AllowEmpty());
@@ -46,12 +47,18 @@ public class UserInfo()
         var updatedAddress = AnsiConsole.Prompt(
             new TextPrompt<string>($"Enter your Address [grey](current: {user.Address})[/]").AllowEmpty());
 
-        var updatedAllergies = AnsiConsole.Prompt(
-            new MultiSelectionPrompt<string>()
+        var allergyPrompt = new MultiSelectionPrompt<string>()
                 .Title("Update allergies [grey](use <space> to select/deselect)[/]:")
                 .NotRequired()
                 .PageSize(10)
-                .AddChoices(allergyOptions));
+                .AddChoices(allergyOptions);
+        
+        foreach (var allergy in userAllergies.Where(allergyOptions.Contains))
+        {
+            allergyPrompt.Select(allergy);
+        }
+
+        var updatedAllergies = AnsiConsole.Prompt(allergyPrompt);
 
         accountsLogic.EditUserInfo(updatedName, updatedPhone, updatedAddress, updatedAllergies);
         AnsiConsole.MarkupLine("[green]Profile updated successfully![/]\n");
