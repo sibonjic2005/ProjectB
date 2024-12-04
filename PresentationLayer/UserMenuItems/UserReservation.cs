@@ -159,12 +159,17 @@ static class UserReservation
                 $"Date: {reservation.Date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"))} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
         );
 
-        var confirmation = AnsiConsole.Confirm("Are you sure you want to cancel this reservation?");
+        var confirmation = AnsiConsole.Prompt(
+            new TextPrompt<bool>($"Are you sure you want to cancel this reservation?")
+                .AddChoice(true)
+                .AddChoice(false)
+                .WithConverter(choice => choice ? "y" : "n"));
+
         if (confirmation)
         {
             accountsLogic.RemoveSpecificReservation(email, reservationSelection);
 
-            Console.WriteLine("Reservation cancelled successfully.");
+            Console.WriteLine("Reservation cancelled successfully.\n");
         }
         else
         {
@@ -186,7 +191,7 @@ static class UserReservation
         }
         else if (user.Reservations == null || user.Reservations.Count == 0)
         {
-            Console.WriteLine("No reservations found.");
+            Console.WriteLine("No reservations found.\n");
         }
         else
         {
