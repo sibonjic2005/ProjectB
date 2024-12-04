@@ -35,19 +35,52 @@ public class Payment
 
     private void PayWithCreditCard()
     {
-        Console.WriteLine("Enter your credit card details below:");
-        Console.Write("Card Number: ");
-        string cardNumber = Console.ReadLine();
-        Console.Write("Expiration Date (MM/YY): ");
-        string expirationDate = Console.ReadLine();
-        Console.Write("CVV: ");
-        string cvv = Console.ReadLine();
+    Console.WriteLine("Enter your credit card details below:");
 
-        Console.WriteLine("Processing credit card payment...");
-        // Simulate a delay for processing
-        System.Threading.Thread.Sleep(2000);
-        Console.WriteLine("Payment successful! Thank you for your purchase.");
+    // Validate card number (16 digits)
+    string cardNumber;
+    while (true)
+    {
+        Console.Write("Card Number: ");
+        cardNumber = Console.ReadLine();
+        if (cardNumber.Length == 16 && long.TryParse(cardNumber, out _))
+        {
+            break;
+        }
+        Console.WriteLine("Invalid card number. It must be 16 digits long.");
     }
+
+    // Validate expiration date (MM/YY format)
+    string expirationDate;
+    while (true)
+    {
+        Console.Write("Expiration Date (MM/YY): ");
+        expirationDate = Console.ReadLine();
+        if (DateTime.TryParseExact(expirationDate, "MM/yy", null, System.Globalization.DateTimeStyles.None, out DateTime date) && date > DateTime.Now)
+        {
+            break;
+        }
+        Console.WriteLine("Invalid expiration date. Please enter a valid future date in MM/YY format.");
+    }
+
+    // Validate CVV (3 digits)
+    string cvv;
+    while (true)
+    {
+        Console.Write("CVV: ");
+        cvv = Console.ReadLine();
+        if (cvv.Length == 3 && int.TryParse(cvv, out _))
+        {
+            break;
+        }
+        Console.WriteLine("Invalid CVV. It must be 3 digits long.");
+    }
+
+    Console.WriteLine("Processing credit card payment...");
+    // Simulate a delay for processing
+    System.Threading.Thread.Sleep(2000);
+    Console.WriteLine("Payment successful! Thank you for your purchase.");
+}
 
     private void GenerateTikkieQR()
     {

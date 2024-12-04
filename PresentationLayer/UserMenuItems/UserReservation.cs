@@ -23,7 +23,7 @@ static class UserReservation
 
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .Title("Do you want a blind experience?")
+            .Title("What kind of experience are you looking for with this reservation?")
             .PageSize(10)
             .AddChoices("Blind Experience", "Normal Dining")
         );
