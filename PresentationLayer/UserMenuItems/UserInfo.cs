@@ -13,7 +13,7 @@ public class UserInfo()
         if (user.DateOfBirth.Length > 0)
             Console.WriteLine($"Date of birth: {user.DateOfBirth}");
         Console.WriteLine($"Email: {user.EmailAddress}");
-        Console.WriteLine($"Phone: {user.PhoneNumber}");
+        Console.WriteLine($"Phonenumber: {user.PhoneNumber}");
         if (user.Address.Length > 0)
         {
             Console.WriteLine($"Address: {user.Address}");
