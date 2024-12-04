@@ -13,6 +13,7 @@ static class UserReservation
         }
 
         DateTime date = Calendar.CalendarDate();
+<<<<<<< Updated upstream
 
         if (accountsLogic.HasReservationForDay(email, date))
         {
@@ -28,6 +29,8 @@ static class UserReservation
             .AddChoices("Blind Experience", "Normal Dining")
         );
 
+=======
+>>>>>>> Stashed changes
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
         var time = AnsiConsole.Prompt(
@@ -40,36 +43,44 @@ static class UserReservation
         int selectedHour = int.Parse(time.Split(':')[0]);
         date = date.AddHours(selectedHour);
 
+<<<<<<< Updated upstream
         // if (accountsLogic.HasReservationForTimeSlot(email, date, time))
+=======
+        if (accountsLogic.HasReservationForTimeSlot(email, date, time))
+        {
+            Console.WriteLine("You already have a reservation for this time slot.");
+            UserMenu.UserMenuStart();
+            return;
+        }
+>>>>>>> Stashed changes
 
         var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter the amount of people: "));
+            new TextPrompt<string>("Enter the amount of people:"));
 
-            if (int.TryParse(person, out int personCount))
-            {
-                if (personCount > 6)
-                {
-                    Console.Clear();
-                    Console.WriteLine("For reservations of more than 6 people, please call the restaurant.");
-                    UserMenu.UserMenuStart();
-                    return;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-                UserMenu.UserMenuStart();
-                return;
-            }
+        if (!int.TryParse(person, out int personCount) || personCount <= 0)
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+            UserMenu.UserMenuStart();
+            return;
+        }
 
-            TableLayout.SeatingPlan();
+        if (personCount > 6)
+        {
+            Console.Clear();
+            Console.WriteLine("For reservations of more than 6 people, please call the restaurant.");
+            UserMenu.UserMenuStart();
+            return;
+        }
 
-        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
+        TableLayout.SeatingPlan();
+
+        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, personCount);
 
         if (!availableTables.Any())
         {
             Console.WriteLine("No tables available for the selected time.");
             UserMenu.UserMenuStart();
+            return;
         }
 
         var tableSelection = AnsiConsole.Prompt(
@@ -77,8 +88,7 @@ static class UserReservation
                 .Title("Select a table:")
                 .PageSize(10)
                 .AddChoices(availableTables)
-                .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
-        );
+                .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)"));
 
         Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
 
@@ -86,49 +96,131 @@ static class UserReservation
         string formattedDate = date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"));
 
         var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
-        if (option == "Blind Experience")
-        {
-            reservation.BlindExperience = true;
-            Console.WriteLine("Your meal is a secret...");
-            Console.WriteLine("Costs: €60");
-            reservation.Food.Add("SURPRISE-MEAL");
-            var payment = new Payment();
-            payment.StartPayment();
-        }
-        else
-        {
-            reservation.BlindExperience = false;
-            var foodMenu = new FoodMenu();
-            Console.WriteLine("Do you want to select your food? (y/n)");
-            string choosefood = Console.ReadLine();
-            if (choosefood == "y" || choosefood == "Y")
-            {
-                foodMenu.DisplayFoodMenu();
-                Console.WriteLine("Enter your food selection (you can add multiple items separated by commas):");
-                string foodInput = Console.ReadLine();
-                
-                if (!string.IsNullOrWhiteSpace(foodInput))
-                {
-                    var selectedFoods = foodInput.Split(',').Select(f => f.Trim()).ToList();
-                    foreach (var food in selectedFoods)
-                    {
-                        reservation.Food.Add(food);
-                    }
-                    Console.WriteLine("Your selected food has been added to the reservation.");
 
-                    var payment = new Payment();
-                    payment.StartPayment();
+        var foodMenu = new FoodMenu();
+
+        List<string> personNames = new List<string>();
+        for (int i = 0; i < personCount; i++)
+        {
+            Console.Write($"Enter the name for person {i + 1}: ");
+            string personName = Console.ReadLine();
+            personNames.Add(personName);
+        }
+
+        // Vraag voor elke persoon om te kiezen voor blind experience en hun voedselkeuzes
+        foreach (var personName in personNames)
+        {
+            var personReservation = new PersonReservation(personName);
+
+            Console.WriteLine($"\n{personName}, do you want a blind experience? (y/n)");
+            string chooseBlindExperience = Console.ReadLine();
+            if (chooseBlindExperience == "y" || chooseBlindExperience == "Y")
+            {
+                personReservation.BlindExperience = true;
+                Console.WriteLine($"{personName} has chosen a blind experience.");
+                personReservation.Food.Add("SURPRISE-MEAL");
+            }
+            else
+            {
+                Console.WriteLine($"\n{personName}: Do you want to select your food? (y/n)");
+                string chooseFood = Console.ReadLine();
+                if (chooseFood == "y" || chooseFood == "Y")
+                {
+                    foodMenu.DisplayFoodMenu();
+
+                    var selectedAppetizers = AnsiConsole.Prompt(
+                        new MultiSelectionPrompt<string>()
+                            .Title($"{personName}, select your Appetizer(s) (Press <enter> to skip):")
+                            .PageSize(10)
+                            .InstructionsText(
+                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                            .AddChoices(foodMenu.GetAppetizersItems())
+                            .Required(false)
+                    );
+
+                    // Voeg de overige voedselkeuzes toe voor de persoon (soups, main courses, side dishes, etc.)
+                    var selectedSoupsAndSalads = AnsiConsole.Prompt(
+                        new MultiSelectionPrompt<string>()
+                            .Title($"{personName}, select your Soups and Salads (Press <enter> to skip):")
+                            .PageSize(10)
+                            .InstructionsText(
+                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                            .AddChoices(foodMenu.GetSoupsandSaladsItems())
+                            .Required(false)
+                    );
+
+                    var selectedMainCourses = AnsiConsole.Prompt(
+                        new MultiSelectionPrompt<string>()
+                            .Title($"{personName}, select your Main course(s) (Press <enter> to skip):")
+                            .PageSize(10)
+                            .InstructionsText(
+                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                            .AddChoices(foodMenu.GetMainCourserItems())
+                            .Required(false)
+                    );
+
+                    var selectedSideDishes = AnsiConsole.Prompt(
+                        new MultiSelectionPrompt<string>()
+                            .Title($"{personName}, select your Side dishe(s) (Press <enter> to skip):")
+                            .PageSize(10)
+                            .InstructionsText(
+                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                            .AddChoices(foodMenu.GetSideDishesItems())
+                            .Required(false)
+                    );
+
+                    var selectedDesserts = AnsiConsole.Prompt(
+                        new MultiSelectionPrompt<string>()
+                            .Title($"{personName}, select your Dessert(s) (Press <enter> to skip):")
+                            .PageSize(10)
+                            .InstructionsText(
+                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                            .AddChoices(foodMenu.GetDessertsItems())
+                            .Required(false)
+                    );
+
+                    var selectedDrinks = AnsiConsole.Prompt(
+                        new MultiSelectionPrompt<string>()
+                            .Title($"{personName}, select your Drink(s) (Press <enter> to skip):")
+                            .PageSize(10)
+                            .InstructionsText(
+                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                            .AddChoices(foodMenu.GetDrinksItems())
+                            .Required(false)
+                    );
+
+                    // Voeg de geselecteerde items toe aan de persoon zijn voedselkeuzes
+                    personReservation.Food.AddRange(selectedAppetizers);
+                    personReservation.Food.AddRange(selectedSoupsAndSalads);
+                    personReservation.Food.AddRange(selectedMainCourses);
+                    personReservation.Food.AddRange(selectedSideDishes);
+                    personReservation.Food.AddRange(selectedDesserts);
+                    personReservation.Food.AddRange(selectedDrinks);
+                }
+                else
+                {
+                    Console.WriteLine($"{personName} chose not to select any food.");
+                    personReservation.Food.Add("Will choose in the restaurant");
                 }
             }
+
+            // Voeg de persoon toe aan de lijst van mensen in de reservering
+            reservation.People.Add(personReservation);
         }
 
-        Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}\nStart Time: {time}\nEnd Time: {reservation.EndTime}\nAmount of persons: {person}\n");
+        // Start de betaling
+        var payment = new Payment();
+        payment.StartPayment();
+
+        Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}\nStart Time: {time}\nEnd Time: {reservation.EndTime}\nAmount of persons: {personCount}\n");
 
         accountsLogic.AddReservation(email, reservation);
 
         Console.WriteLine($"\nReservation complete!");
         UserMenu.UserMenuStart();
     }
+
+
 
     public static void CancelReservation()
     {

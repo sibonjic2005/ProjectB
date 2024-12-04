@@ -189,4 +189,76 @@ public class FoodMenu
         AnsiConsole.Clear();
         AnsiConsole.Render(table);
     }
+
+    public List<string> GetAppetizersItems()
+    {
+        return new List<string>
+        {
+            "Bruschetta with Tomato and Basil",
+            "Stuffed Mushrooms",
+            "Arancini",
+            "Calamari Fritti",
+            "Spring Rolls",
+        };
+    }
+    public List<string> GetSoupsandSaladsItems()
+    {
+        return new List<string>
+        {
+            "Caesar Salad",
+            "Tomato Basil Soup",
+            "Greek Salad",
+            "Clam Chowder",
+            "Minestrone",
+            "Nicoise Salad"
+        };
+    }
+    public List<string> GetMainCourserItems()
+    {
+        return new List<string>
+        {
+            "Seared Wagyu Ribeye",
+            "Grilled Chicken",
+            "Spaghetti Carbonara",
+            "Beef Wellington",
+            "Vegetable Stir-Fry Tofu",
+            "Shrimp Scampi with Linguine",
+            "Grilled Salmon Teriyaki"
+        };
+    }
+    public List<string> GetSideDishesItems()
+    {
+        return new List<string>
+        {
+            "Roasted Brussels Sprouts with Balsamic Glaze",
+            "Sweet Potato Fries",
+            "Creamed Spinach"
+        };
+    }
+    public List<string> GetDessertsItems()
+    {
+        return new List<string>
+        {
+            "New York Cheesecake",
+            "Tiramisu",
+            "Chocolate Fondant",
+            "Fruit Salad",
+            "Crème Brûlée",
+            "Grand Dessert Platter"
+        };
+    }
+    public List<string> GetDrinksItems()
+    {
+        return new List<string>
+        {
+            "Fresh Orange Juice",
+            "Cappuccino",
+            "Espresso",
+            "Latte",
+            "House Red Wine",
+            "Coca-Cola",
+            "Tonic Water",
+            "Classic Mojito"
+        };
+    }
 }
