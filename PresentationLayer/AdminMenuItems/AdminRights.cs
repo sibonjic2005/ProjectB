@@ -28,8 +28,8 @@ class AdminRights
                 })
         );
 
-                var confirmation = AnsiConsole.Prompt(
-            new TextPrompt<bool>($"Are you sure you want to cancel this reservation?")
+        var confirmation = AnsiConsole.Prompt(
+            new TextPrompt<bool>($"Are you sure you want to promote/demote this user?")
                 .AddChoice(true)
                 .AddChoice(false)
                 .WithConverter(choice => choice ? "y" : "n"));
@@ -37,11 +37,11 @@ class AdminRights
         if (confirmation)
         {
             accountsLogic.ChangeRights(account, newUserRights);
-            Console.WriteLine("Reservation cancelled successfully.");
+            Console.WriteLine("User right changed successfully.");
         }
         else
         {
-            Console.WriteLine("Cancellation aborted.");
+            Console.WriteLine("Changing User rights cancelled.");
         }
     }
 

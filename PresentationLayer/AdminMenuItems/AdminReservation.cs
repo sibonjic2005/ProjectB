@@ -199,8 +199,22 @@ static class AdminReservation
         reservationSelection.PersonCount = personCount;
         reservationSelection.TableNumber = tableSelection.TableNumber;
 
-        accountsLogic.UpdateReservation(getEmail, reservationSelection);
+        var confirmation = AnsiConsole.Prompt(
+            new TextPrompt<bool>($"Are you sure you want to change this reservation?")
+                .AddChoice(true)
+                .AddChoice(false)
+                .WithConverter(choice => choice ? "y" : "n"));
+                
+        if (confirmation)
+        {
+            accountsLogic.UpdateReservation(getEmail, reservationSelection);
+            Console.WriteLine("Reservation changed successfully.\n");
 
-        Console.WriteLine($"Reservation updated:\nDate: {date:dddd, MMMM dd, yyyy}\nStart Time: {time}\nEnd Time: {reservationSelection.EndTime}\nPeople: {personCount}\nTable: {tableSelection.TableNumber}");
+            Console.WriteLine($"Reservation updated:\nDate: {date:dddd, MMMM dd, yyyy}\nStart Time: {time}\nEnd Time: {reservationSelection.EndTime}\nPeople: {personCount}\nTable: {tableSelection.TableNumber}\n");
+        }
+        else
+        {
+            Console.WriteLine("Changing Reservation aborted.");
+        }
     }
 }
