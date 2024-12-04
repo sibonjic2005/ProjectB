@@ -100,7 +100,12 @@ static class AdminReservation
                 $"Date: {reservation.Date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"))} Time: {reservation.Time} for {reservation.PersonCount} people at Table {reservation.TableNumber}")
         );
 
-        var confirmation = AnsiConsole.Confirm($"Are you sure you want to cancel this reservation?");
+        var confirmation = AnsiConsole.Prompt(
+            new TextPrompt<bool>($"Are you sure you want to cancel this reservation?")
+                .AddChoice(true)
+                .AddChoice(false)
+                .WithConverter(choice => choice ? "y" : "n"));
+                
         if (confirmation)
         {
             accountsLogic.RemoveSpecificReservation(email, reservationSelection);
@@ -134,7 +139,7 @@ static class AdminReservation
 
     public static void ChangeReservation()
     {
-        Console.WriteLine("Enter the email of the guest whose reservation you want to change?");
+        Console.WriteLine("Enter the user's email to change their reservation:");
         string getEmail = Console.ReadLine();
 
         AccountsLogic accountsLogic = new AccountsLogic();
@@ -148,7 +153,7 @@ static class AdminReservation
 
         var reservationSelection = AnsiConsole.Prompt(
             new SelectionPrompt<Reservation>()
-                .Title("Select the reservation you want to change:")
+                .Title("\nSelect the reservation you want to change:")
                 .PageSize(10)
                 .AddChoices(user.Reservations)
                 .UseConverter(reservation =>

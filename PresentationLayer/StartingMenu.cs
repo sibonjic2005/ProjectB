@@ -24,7 +24,7 @@ public static class StartingMenu
         AnsiConsole.WriteLine("");
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Welcome to the starting menu?")
+                .Title("Welcome to the starting menu!\n[grey](Move up and down with arrow keys)[/]")
                 .PageSize(7)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)[/]")
                 .AddChoices(new[] {
