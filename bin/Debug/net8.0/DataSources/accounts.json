@@ -6,7 +6,43 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [],
+    "reservations": [
+      {
+        "Date": "2024-12-04T21:00:00+01:00",
+        "Time": "21:00",
+        "EndTime": "23:00",
+        "PersonCount": "3",
+        "TableNumber": 9,
+        "People": [
+          {
+            "Name": "w",
+            "BlindExperience": true,
+            "Food": [
+              "SURPRISE-MEAL"
+            ]
+          },
+          {
+            "Name": "e",
+            "BlindExperience": false,
+            "Food": [
+              "Will choose in the restaurant"
+            ]
+          },
+          {
+            "Name": "r",
+            "BlindExperience": false,
+            "Food": [
+              "Bruschetta with Tomato and Basil",
+              "Caesar Salad",
+              "Seared Wagyu Ribeye",
+              "Roasted Brussels Sprouts with Balsamic Glaze",
+              "New York Cheesecake",
+              "Fresh Orange Juice"
+            ]
+          }
+        ]
+      }
+    ],
     "name": "John Doe",
     "emailAddress": "john@example.com",
     "phoneNumber": "1234567890",

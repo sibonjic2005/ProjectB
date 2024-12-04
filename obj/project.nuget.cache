@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "avKyp6w2tE4=",
+  "dgSpecHash": "eNVM3EldR9QyBR5ugY/7ok8DloFarPQDLnjE1lVTi8QDD7agdvrPSw3nsw+KD/ApNh/3y3qNmAxVrRBIDp7nkA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cgeri\\OneDrive\\Documenten\\GitHub\\ProjectB\\ProjectB.csproj",
+  "projectFilePath": "C:\\Users\\ammar\\Documents\\GitHub\\ProjectB\\ProjectB.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\cgeri\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
-    "C:\\Users\\cgeri\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512",
-    "C:\\Users\\cgeri\\.nuget\\packages\\spectre.console.cli\\0.49.1\\spectre.console.cli.0.49.1.nupkg.sha512"
+    "C:\\Users\\ammar\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\ammar\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512",
+    "C:\\Users\\ammar\\.nuget\\packages\\spectre.console.cli\\0.49.1\\spectre.console.cli.0.49.1.nupkg.sha512"
   ],
   "logs": []
 }

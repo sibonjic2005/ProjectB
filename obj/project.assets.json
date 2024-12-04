@@ -149,19 +149,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cgeri\\.nuget\\packages\\": {}
+    "C:\\Users\\ammar\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cgeri\\OneDrive\\Documenten\\GitHub\\ProjectB\\ProjectB.csproj",
+      "projectUniqueName": "C:\\Users\\ammar\\Documents\\GitHub\\ProjectB\\ProjectB.csproj",
       "projectName": "ProjectB",
-      "projectPath": "C:\\Users\\cgeri\\OneDrive\\Documenten\\GitHub\\ProjectB\\ProjectB.csproj",
-      "packagesPath": "C:\\Users\\cgeri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cgeri\\OneDrive\\Documenten\\GitHub\\ProjectB\\obj\\",
+      "projectPath": "C:\\Users\\ammar\\Documents\\GitHub\\ProjectB\\ProjectB.csproj",
+      "packagesPath": "C:\\Users\\ammar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ammar\\Documents\\GitHub\\ProjectB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\cgeri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\ammar\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -179,11 +179,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -219,7 +214,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
