@@ -28,8 +28,21 @@ class AdminRights
                 })
         );
 
-        accountsLogic.ChangeRights(account, newUserRights);
-
+                var confirmation = AnsiConsole.Prompt(
+            new TextPrompt<bool>($"Are you sure you want to cancel this reservation?")
+                .AddChoice(true)
+                .AddChoice(false)
+                .WithConverter(choice => choice ? "y" : "n"));
+                
+        if (confirmation)
+        {
+            accountsLogic.ChangeRights(account, newUserRights);
+            Console.WriteLine("Reservation cancelled successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Cancellation aborted.");
+        }
     }
 
     public static void DeleteAccount()
