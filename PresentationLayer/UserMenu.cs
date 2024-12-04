@@ -7,25 +7,25 @@ using Spectre.Console;
     {
         var choices = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Welcome to the Login Menu")
+                .Title("Welcome to the User Menu!")
                 .PageSize(10)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        "Make a reservation", "Cancel a reservation", "View your reservation",
+                        "Make a Reservation", "Cancel a Reservation", "View your Reservation",
                         "View Foodmenu", "View Restaurant Information", "Profile", "Log out"           
                 }));
 
         switch (choices)
         {
-            case "Make a reservation":
+            case "Make a Reservation":
                 Console.Clear();
                 UserReservation.MakeReservation();
                 break;
-            case "Cancel a reservation":
+            case "Cancel a Reservation":
                 Console.Clear();
                 UserReservation.CancelReservation();
                 break;
-            case "View your reservation":
+            case "View your Reservation":
                 Console.Clear();
                 UserReservation.ViewReservation();
                 UserMenuStart();
@@ -50,7 +50,7 @@ using Spectre.Console;
                 var profileChoice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("What would you like to do?")
-                        .AddChoices("View Profile", "Edit Profile", "Delete account", "Go Back to User Menu"));
+                        .AddChoices("View Profile", "Edit Profile", "Delete Account", "Go Back to User Menu"));
 
                 Console.Clear();
 
@@ -64,7 +64,7 @@ using Spectre.Console;
                         UserInfo.EditProfile();
                         GoBack.GoBackProfileMenu();
                         break;
-                    case "Delete account":
+                    case "Delete Account":
                         UserInfo.DeleteAccount();
                         // if user deletes their account it should go back to main menu
                         GoBack.GoBackProfileMenu();
