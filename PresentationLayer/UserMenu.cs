@@ -34,7 +34,9 @@ using Spectre.Console;
                 Console.Clear();
                 var foodMenu = new FoodMenu();
                 foodMenu.DisplayFoodMenu();
-                GoBack.GoBackStartingMenu();
+                GoBack.GoBackUserMenu();
+                Console.Clear();
+                UserMenuStart();
                 break;
             case "View Restaurant Information":
                 Console.Clear();

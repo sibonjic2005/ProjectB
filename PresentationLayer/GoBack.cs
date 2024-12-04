@@ -10,10 +10,10 @@ static class GoBack
                 .PageSize(3)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        "Go back"            
+                        "Press Enter to go back"            
                 }));   
                 
-        if (choices == "Go back")
+        if (choices == "Press Enter to go back")
         {
             Console.Clear();
             UserMenu.UserMenuStart();
@@ -27,10 +27,10 @@ static class GoBack
                 .PageSize(3)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        "Go back"            
+                        "Press Enter to go back"            
                 }));   
                 
-        if (choices == "Go back")
+        if (choices == "Press Enter to go back")
         {
             Console.Clear();  
             StartingMenu.Menu();
@@ -45,10 +45,10 @@ static class GoBack
                 .PageSize(3)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        "Go back"            
+                        "Press Enter to go back"            
                 }));   
                 
-        if (choices == "Go back")
+        if (choices == "Press Enter to go back")
         {
             Console.Clear();    
         }
