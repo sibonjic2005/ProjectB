@@ -79,7 +79,7 @@ static class AdminReservation
     {
         ViewReservation();
 
-        Console.WriteLine("What is the email of the guest whose reservation you want to cancel?");
+        Console.WriteLine("What is the email of the user to cancel the reservation?");
         string email = Console.ReadLine();
         
         AccountsLogic accountsLogic = new AccountsLogic();
@@ -93,7 +93,7 @@ static class AdminReservation
 
         var reservationSelection = AnsiConsole.Prompt(
         new SelectionPrompt<Reservation>()
-            .Title("Select the reservation you want to cancel:")
+            .Title("\nSelect the reservation you want to cancel:")
             .PageSize(10)
             .AddChoices(user.Reservations)
             .UseConverter(reservation =>
