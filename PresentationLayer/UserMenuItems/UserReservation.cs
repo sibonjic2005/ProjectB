@@ -93,7 +93,7 @@ static class UserReservation
         }
 
         var allergyPrompt = new MultiSelectionPrompt<string>()
-                .Title("Update allergies [grey](use <space> to select/deselect)[/]:")
+                .Title("[grey](use <space> to select/deselect)[/]:")
                 .NotRequired()
                 .PageSize(10)
                 .AddChoices(allergyOptions);
@@ -150,6 +150,11 @@ static class UserReservation
 
         Console.WriteLine($"\nReservation complete!");
         UserMenu.UserMenuStart();
+    }
+
+    private static void HandleFoodSelectionAdmin(PersonReservation personReservation)
+    {
+        return;
     }
 
     private static void HandleFoodSelection(PersonReservation personReservation, FoodMenu foodMenu, string personName)

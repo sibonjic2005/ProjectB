@@ -14,6 +14,8 @@ static class AdminReservation
         var email = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an email: "));
 
+        var user = accountsLogic.GetByEmail(email);
+
         var allergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
                 .Title("Do have any allergies?")
