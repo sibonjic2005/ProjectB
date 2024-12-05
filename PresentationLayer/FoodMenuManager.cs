@@ -23,8 +23,11 @@ public  class FoodMenuManager
             switch (choice)
             {
                 case "Add Item":
-                    // Gather input for the new item
-                    var category = AnsiConsole.Ask<string>("Enter the [green]category[/]:");
+                    var category = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                            .Title("Select a [green]category[/]:")
+                            .AddChoices(foodMenu._menuItems.Keys.ToArray()));
+
                     var dish = AnsiConsole.Ask<string>("Enter the [green]dish name[/]:");
                     var description = AnsiConsole.Ask<string>("Enter the [green]description[/]:");
                     var price = AnsiConsole.Ask<string>("Enter the [green]price[/]:");
@@ -35,8 +38,29 @@ public  class FoodMenuManager
                     break;
 
                 case "Delete Item":
-                    // Ask for the name of the dish to delete
-                    var dishToDelete = AnsiConsole.Ask<string>("Enter the [red]dish name[/] to delete:");
+                    var category1 = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("Select the [red]category[/] of the dish you'd like to delete:")
+                        .AddChoices(foodMenu._menuItems.Keys.ToArray())
+                    );
+                    List<string> dishesInCategory = new List<string>();
+
+                    foreach (var itemList in foodMenu._menuItems.Values)
+                    {
+                        foreach (MenuItem item in itemList)
+                        {
+                            if (item.Category == category1)
+                            {
+                                dishesInCategory.Add(item.Dish);
+                            }
+                        }
+                    }
+
+                    var dishToDelete = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("Select the [red]dish[/] you'd like to delete:")
+                        .AddChoices(dishesInCategory)
+                    );
 
                     // Attempt to delete the item
                     if (foodMenu.DeleteItem(dishToDelete))
@@ -50,13 +74,29 @@ public  class FoodMenuManager
                     break;
 
                 case "Update Item":
-                    // Ask for the name of the dish to update
-                    var dishToUpdate = AnsiConsole.Ask<string>("Enter the [yellow]dish name[/] to update:");
+                    var category2 = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("Select the [green]category[/] of the dish you'd like to update:")
+                        .AddChoices(foodMenu._menuItems.Keys.ToArray())
+                    );
+                    List<string> dishesInCategory1 = new List<string>();
 
-                    // Check if the dish exists within any category before asking for new values
-                    var itemToUpdate = foodMenu._menuItems
-                        .SelectMany(pair => pair.Value)  // Flatten the dictionary to access each MenuItem
-                        .FirstOrDefault(i => i.Dish.Equals(dishToUpdate, StringComparison.OrdinalIgnoreCase));
+                    foreach (var itemList in foodMenu._menuItems.Values)
+                    {
+                        foreach (MenuItem item in itemList)
+                        {
+                            if (item.Category == category2)
+                            {
+                                dishesInCategory1.Add(item.Dish);
+                            }
+                        }
+                    }
+
+                    var itemToUpdate = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("Select the [green]dish[/] you'd like to update:")
+                        .AddChoices(dishesInCategory1)
+                    );
 
                     if (itemToUpdate != null)
                     {
@@ -68,7 +108,7 @@ public  class FoodMenuManager
 
                         // Update the item
                         foodMenu.UpdateItem(
-                            dishToUpdate,
+                            itemToUpdate,
                             string.IsNullOrEmpty(newCategory) ? null : newCategory,
                             string.IsNullOrEmpty(newDish) ? null : newDish,
                             string.IsNullOrEmpty(newDescription) ? null : newDescription,

@@ -75,17 +75,22 @@ public class FoodMenu
     
     // Method to add a menu item to the correct category
     public void AddItem(string category, string dish, string description, string price)
+{
+    if (_menuItems.ContainsKey(category) && _menuItems[category].Any(i => i.Dish.Equals(dish, StringComparison.OrdinalIgnoreCase)))
     {
-        // If the category doesn't exist yet, create it
-        if (!_menuItems.ContainsKey(category))
-        {
-            _menuItems[category] = new List<MenuItem>();
-        }
-
-        // Add the new menu item to the category
-        _menuItems[category].Add(new MenuItem(category, dish, description, price));
-        SaveMenu();
+        AnsiConsole.MarkupLine("[red]Dish already exists in this category![/]");
+        return;
     }
+
+    if (!_menuItems.ContainsKey(category))
+    {
+        _menuItems[category] = new List<MenuItem>();
+    }
+
+    _menuItems[category].Add(new MenuItem(category, dish, description, price));
+    SaveMenu();
+}
+
 
     public bool DeleteItem(string dishName)
     {
@@ -95,6 +100,10 @@ public class FoodMenu
             if (item != null)
             {
                 category.Remove(item);
+                if (category.Count == 0)
+                {
+                    _menuItems = _menuItems.Where(c => c.Value.Count > 0).ToDictionary(c => c.Key, c => c.Value);
+                }
                 SaveMenu();
                 return true; // Exit after removing the item
             }
@@ -222,37 +231,60 @@ public class FoodMenu
     }
 
     // Method to display the food menu using Spectre.Console table
+    // public void DisplayFoodMenu()
+    // {
+    //     LoadMenu();
+    //     // Create a new table with headers
+    //     var table = new Table();
+    //     table.AddColumn("Category");
+    //     table.AddColumn("Dish");
+    //     table.AddColumn("Description");
+    //     table.AddColumn("Price");
+
+    //     // Loop through each category and add the menu items to the table
+    //     foreach (var category in _menuItems)
+    //     {
+    //         // Add the category name as the first row
+    //         table.AddRow(category.Key, "", "", "");
+    //         table.AddRow("[grey]────────────────────────────────────────────[/]", "", "", "");
+
+    //         // Add the menu items for this category
+    //         foreach (var item in category.Value)
+    //         {
+    //             table.AddRow("", item.Dish, item.Description, item.Price);
+    //         }
+
+    //         // Add a line between sections
+    //         table.AddRow("[grey]────────────────────────────────────────────[/]", "", "", "");
+    //     }
+
+    //     // Render the table in the console
+    //     AnsiConsole.Clear();
+    //     AnsiConsole.Render(table);
+    // }
+
     public void DisplayFoodMenu()
     {
         LoadMenu();
-        // Create a new table with headers
-        var table = new Table();
-        table.AddColumn("Category");
-        table.AddColumn("Dish");
-        table.AddColumn("Description");
-        table.AddColumn("Price");
+        var table = new Table().Expand();
+        table.AddColumn("[bold yellow]Category[/]");
+        table.AddColumn("[bold cyan]Dish[/]");
+        table.AddColumn("[bold green]Description[/]");
+        table.AddColumn("[bold magenta]Price[/]");
 
-        // Loop through each category and add the menu items to the table
         foreach (var category in _menuItems)
         {
-            // Add the category name as the first row
-            table.AddRow(category.Key, "", "", "");
-            table.AddRow("[grey]────────────────────────────────────────────[/]", "", "", "");
-
-            // Add the menu items for this category
+            table.AddRow($"[bold yellow]{category.Key}[/]", "", "", "");
             foreach (var item in category.Value)
             {
-                table.AddRow("", item.Dish, item.Description, item.Price);
+                table.AddRow("", $"[cyan]{item.Dish}[/]", item.Description, $"[magenta]{item.Price}[/]");
             }
-
-            // Add a line between sections
-            table.AddRow("[grey]────────────────────────────────────────────[/]", "", "", "");
         }
 
-        // Render the table in the console
         AnsiConsole.Clear();
         AnsiConsole.Render(table);
     }
+
 
     public List<string> GetAppetizersItems()
     {
