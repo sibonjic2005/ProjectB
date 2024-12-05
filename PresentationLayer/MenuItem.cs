@@ -1,4 +1,6 @@
 using Spectre.Console;
+using System.Data.Common;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 public class MenuItem
@@ -149,7 +151,69 @@ public class FoodMenu
         // Update other fields
         if (!string.IsNullOrEmpty(newDish)) itemToUpdate.Dish = newDish;
         if (!string.IsNullOrEmpty(newDescription)) itemToUpdate.Description = newDescription;
-        if (!string.IsNullOrEmpty(newPrice)) itemToUpdate.Price = newPrice;
+        if (!string.IsNullOrEmpty(newPrice))
+        {
+            if (newPrice.Contains('.'))
+            {
+                if (newPrice.Contains(','))
+                {
+                    newPrice = newPrice.Replace(',', '.');
+                }
+                bool isLast = false;
+                if (newPrice.Last() == '.')
+                {
+                    isLast = true;
+                }
+                string decimals;
+                string[] priceSplitted = newPrice.Split('.');
+                if (isLast)
+                {
+                    newPrice = $"\u20AC{priceSplitted[0]}.00";
+
+                }
+                else if (priceSplitted.Last().Length > 1)
+                {
+                    decimals = Convert.ToString(priceSplitted.Last()[0]) + Convert.ToString(priceSplitted.Last()[1]);
+                    newPrice = $"\u20AC{priceSplitted[0]}.{decimals}";
+                }
+                else if (priceSplitted.Last().Length == 1)
+                {
+                    decimals = Convert.ToString(priceSplitted.Last()[0]) + "0";
+                    newPrice = $"\u20AC{priceSplitted[0]}.{decimals}";
+                }
+                itemToUpdate.Price = newPrice;
+            }
+            else if (newPrice.Contains(','))
+            {
+                bool isLast = false;
+                if (newPrice.Last() == ',')
+                {
+                    isLast = true;
+                }
+                string decimals;
+                string[] priceSplitted = newPrice.Split(',');
+                if (isLast)
+                {
+                    newPrice = $"\u20AC{priceSplitted[0]}.00";
+                }
+                else if (priceSplitted.Last().Length > 1)
+                {
+                    decimals = Convert.ToString(priceSplitted.Last()[0]) + Convert.ToString(priceSplitted.Last()[1]);
+                    newPrice = $"\u20AC{priceSplitted[0]}.{decimals}";
+                }
+                else if (priceSplitted.Last().Length == 1)
+                {
+                    decimals = Convert.ToString(priceSplitted.Last()[0]) + "0";
+                    newPrice = $"\u20AC{priceSplitted[0]}.{decimals}";
+                }
+                itemToUpdate.Price = newPrice;
+            }
+            else
+            {
+                itemToUpdate.Price = $"\u20AC{newPrice}.00";
+            }
+        }
+        // if (!string.IsNullOrEmpty(newPrice)) itemToUpdate.Price = newPrice;
 
         // Save changes
         SaveMenu();

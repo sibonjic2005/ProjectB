@@ -3,7 +3,8 @@ static class Calendar
 {
      public static DateTime CalendarDate()
     {
-        DateTime selectedDate = DateTime.Today;
+        DateTime currentTime = DateTime.Now;
+        DateTime selectedDate = currentTime.Hour >= 21 ? DateTime.Today.AddDays(1) : DateTime.Today;
 
         while (true)
         {
@@ -14,7 +15,7 @@ static class Calendar
             switch (key)
             {
                 case ConsoleKey.LeftArrow:
-                    if (selectedDate > DateTime.Today)
+                    if (selectedDate > DateTime.Today.AddDays(currentTime.Hour >= 21 ? 1 : 0))
                     {
                         selectedDate = selectedDate.AddDays(-1);
                     }

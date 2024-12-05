@@ -308,7 +308,7 @@ class AccountsLogic
         if (user == null)
             return false;
         
-        return user.Reservations.Any(reservation => reservation.Date.Date == date.Date && reservation.Time == time);
+        return user.Reservations.Any(reservation => reservation.Date.Date == date.Date && reservation.Time == time || reservation.Date.Date == date.Date && Convert.ToInt32(reservation.Time.Split(':')[0]) + 1 == Convert.ToInt32(time.Split(':')[0]));
     }
 
     public bool HasReservationForDay(string email, DateTime date)
