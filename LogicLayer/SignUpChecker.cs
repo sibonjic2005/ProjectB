@@ -153,7 +153,7 @@ public class SignUpChecker
     public string ValidateAddress(Func<string> getAddress)
     {
         string address;
-        string addressPattern = @"^(?=.*[A-Za-z])(?=.*\d).{5,}$"; // Requires at least one letter, one digit, and a minimum length of 5
+        string addressPattern = @"^(?=.*[A-Za-z])(?=.*\d).{5,}$";
 
         while (true)
         {
@@ -161,7 +161,7 @@ public class SignUpChecker
 
             if (!Regex.IsMatch(address, addressPattern))
             {
-                Console.WriteLine("Address is invalid. It must contain at least one letter, one number, and be at least 5 characters long.");
+                Console.WriteLine("Address is invalid.");
                 continue;
             }
 
