@@ -4,7 +4,7 @@
       "Category": "Surprise Menu",
       "Dish": "Surprise 3-Course Platter",
       "Description": "- A delicious assortment of **freshly prepared dishes**.\n- A Surprise 3-Course Experience.\n- Each course is a unique surprise, made to order, for a truly one-of-a-kind dining experience!",
-      "Price": "$55.00"
+      "Price": "€55.00"
     }
   ],
   "Appetizers": [
@@ -12,31 +12,31 @@
       "Category": "Appetizers",
       "Dish": "Bruschetta with Tomato and Basil",
       "Description": "-Crispy toasted bread topped with fresh diced tomatoes, garlic, basil, and a drizzle of olive oil.",
-      "Price": "$6.00"
+      "Price": "€6.00"
     },
     {
       "Category": "Appetizers",
       "Dish": "Stuffed Mushrooms",
       "Description": "-Button mushrooms filled with a savory mix of breadcrumbs, garlic, herbs, and Parmesan cheese, baked to perfection.",
-      "Price": "$5.50"
+      "Price": "€5.50"
     },
     {
       "Category": "Appetizers",
       "Dish": "Arancini",
       "Description": "-Sicilian rice balls stuffed with mozzarella and peas, coated in breadcrumbs, and fried until golden.",
-      "Price": "$7.00"
+      "Price": "€7.00"
     },
     {
       "Category": "Appetizers",
       "Dish": "Calamari Fritti",
       "Description": "Lightly battered and golden-fried squid rings, served with a tangy marinara dipping sauce.",
-      "Price": "$8.50"
+      "Price": "€8.50"
     },
     {
       "Category": "Appetizers",
       "Dish": "Spring Rolls",
       "Description": "Crispy vegetable-filled rolls served with a sweet chili dipping sauce.",
-      "Price": "$6.50"
+      "Price": "€6.50"
     }
   ],
   "Soups & Salads": [
@@ -44,37 +44,37 @@
       "Category": "Soups & Salads",
       "Dish": "Caesar Salad",
       "Description": "-Crisp romaine lettuce, Parmesan cheese, croutons, and Caesar dressing; optional grilled chicken or shrimp.",
-      "Price": "$9.50"
+      "Price": "€9.50"
     },
     {
       "Category": "Soups & Salads",
       "Dish": "Tomato Basil Soup",
       "Description": "-Creamy tomato soup with a hint of basil.",
-      "Price": "$6.00"
+      "Price": "€6.00"
     },
     {
       "Category": "Soups & Salads",
       "Dish": "Greek Salad",
       "Description": "-Fresh tomatoes, cucumbers, olives, feta cheese, and red onions, drizzled with olive oil and oregano.",
-      "Price": "$9.50"
+      "Price": "€9.50"
     },
     {
       "Category": "Soups & Salads",
       "Dish": "Clam Chowder",
       "Description": "Creamy soup with fresh clams, potatoes, and a touch of smoky bacon.",
-      "Price": "$9.00"
+      "Price": "€9.00"
     },
     {
       "Category": "Soups & Salads",
       "Dish": "Minestrone",
       "Description": "A hearty Italian vegetable soup with pasta and beans, seasoned with fresh herbs.",
-      "Price": "$7.00"
+      "Price": "€7.00"
     },
     {
       "Category": "Soups & Salads",
       "Dish": "Nicoise Salad",
       "Description": "A classic French salad with tuna, hard-boiled eggs, green beans, potatoes, and olives.",
-      "Price": "$12.50"
+      "Price": "€12.50"
     }
   ],
   "Main Courses": [
@@ -82,43 +82,43 @@
       "Category": "Main Courses",
       "Dish": "Seared Wagyu Ribeye",
       "Description": "-Tender, marbled Wagyu ribeye, perfectly seared to lock in its rich flavor, served with truffle mashed potatoes, roasted vegetables.",
-      "Price": "$60.00"
+      "Price": "€60.00"
     },
     {
       "Category": "Main Courses",
       "Dish": "Grilled Chicken",
       "Description": "-Grilled chicken served with a fresh lemon herb sauce.",
-      "Price": "$23.00"
+      "Price": "€23.00"
     },
     {
       "Category": "Main Courses",
       "Dish": "Spaghetti Carbonara",
       "Description": "-Pasta with eggs, bacon, parmesan, and black pepper.",
-      "Price": "$17.00"
+      "Price": "€17.00"
     },
     {
       "Category": "Main Courses",
       "Dish": "Beef Wellington",
       "Description": "-Tender beef fillet wrapped in a layer of duxelles (finely chopped mushrooms) and golden puff pastry, cooked to perfection.",
-      "Price": "$34.50"
+      "Price": "€34.50"
     },
     {
       "Category": "Main Courses",
       "Dish": "Vegetable Stir-Fry Tofu",
       "Description": "-Stir-fried vegetables and tofu in a savory sauce.",
-      "Price": "$12.00"
+      "Price": "€12.00"
     },
     {
       "Category": "Main Courses",
       "Dish": "Shrimp Scampi with Linguine",
       "Description": "-Scampi cooked in a garlic butter sauce.",
-      "Price": "$24.50"
+      "Price": "€24.50"
     },
     {
       "Category": "Main Courses",
       "Dish": "Grilled Salmon Teriyaki",
       "Description": "Fresh salmon fillet glazed with teriyaki sauce, served with steamed rice and stir-fried vegetables.",
-      "Price": "$25.00"
+      "Price": "€25.00"
     }
   ],
   "Side Dishes": [
@@ -126,19 +126,19 @@
       "Category": "Side Dishes",
       "Dish": "Roasted Brussels Sprouts with Balsamic Glaze",
       "Description": "-Crispy roasted Brussels sprouts drizzled with balsamic glaze.",
-      "Price": "$6.00"
+      "Price": "€6.00"
     },
     {
       "Category": "Side Dishes",
       "Dish": "Sweet Potato Fries",
       "Description": "-Golden sweet potato fries with a perfect balance of sweetness and salt.",
-      "Price": "$5.00"
+      "Price": "€5.00"
     },
     {
       "Category": "Side Dishes",
       "Dish": "Creamed Spinach",
       "Description": "-Rich and creamy spinach cooked to perfection.",
-      "Price": "$6.50"
+      "Price": "€6.50"
     }
   ],
   "Desserts": [
@@ -146,37 +146,37 @@
       "Category": "Desserts",
       "Dish": "New York Cheesecake",
       "Description": "-Smooth and creamy cheesecake topped with fresh strawberries.",
-      "Price": "$7.00"
+      "Price": "€7.00"
     },
     {
       "Category": "Desserts",
       "Dish": "Tiramisu",
       "Description": "-A rich Italian dessert with layers of coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-      "Price": "$7.50"
+      "Price": "€7.50"
     },
     {
       "Category": "Desserts",
       "Dish": "Chocolate Fondant",
       "Description": "-Warm molten chocolate cake served with vanilla ice cream.",
-      "Price": "$8.00"
+      "Price": "€8.00"
     },
     {
       "Category": "Desserts",
       "Dish": "Fruit Salad",
       "Description": "-Fresh seasonal fruits drizzled with honey and topped with mint.",
-      "Price": "$6.00"
+      "Price": "€6.00"
     },
     {
       "Category": "Desserts",
       "Dish": "Crème Brûlée",
       "Description": "-Creamy vanilla custard topped with a caramelized sugar crust.",
-      "Price": "$6.50"
+      "Price": "€6.50"
     },
     {
       "Category": "Desserts",
       "Dish": "Grand Dessert Platter",
       "Description": "-A luxurious selection of mini desserts including Tiramisu, Crème Brûlée, Chocolate Fondant, Panna Cotta, and a scoop of artisan gelato. Perfect for sharing or indulging solo!",
-      "Price": "$15.00"
+      "Price": "€15.00"
     }
   ],
   "Drinks": [
@@ -184,43 +184,43 @@
       "Category": "Drinks",
       "Dish": "Fresh Orange Juice",
       "Description": "-Made from freshly squeezed oranges.",
-      "Price": "$4.00"
+      "Price": "€4.00"
     },
     {
       "Category": "Drinks",
       "Dish": "Cappuccino",
       "Description": "-Espresso with steamed milk and a layer of frothy foam.",
-      "Price": "$3.00"
+      "Price": "€3.00"
     },
     {
       "Category": "Drinks",
       "Dish": "Espresso",
       "Description": "-Classic Italian-style coffee shot.",
-      "Price": "$2.50"
+      "Price": "€2.50"
     },
     {
       "Category": "Drinks",
       "Dish": "Latte",
       "Description": "-Creamy espresso with steamed milk, topped with a light foam.",
-      "Price": "$3.50"
+      "Price": "€3.50"
     },
     {
       "Category": "Drinks",
       "Dish": "House Red Wine",
       "Description": "-A smooth, medium-bodied red wine from the region.",
-      "Price": "$7.50"
+      "Price": "€7.50"
     },
     {
       "Category": "Drinks",
       "Dish": "Coca-Cola",
       "Description": "-The classic fizzy cola drink, served chilled.",
-      "Price": "$3.00"
+      "Price": "€3.00"
     },
     {
       "Category": "Drinks",
       "Dish": "Tonic Water",
       "Description": "-A crisp and slightly bitter carbonated drink.",
-      "Price": "$3.50"
+      "Price": "€3.50"
     },
     {
       "Category": "Drinks",
