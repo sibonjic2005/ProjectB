@@ -35,7 +35,7 @@ public class Payment
 
     private void PayWithCreditCard()
     {
-    Console.WriteLine("Enter your credit card details below:");
+    AnsiConsole.MarkupLine("Enter your credit card details below [grey](enter a 16 digit number)[/]:");
 
     // Validate card number (16 digits)
     string cardNumber;
@@ -67,7 +67,7 @@ public class Payment
     string cvv;
     while (true)
     {
-        Console.Write("CVV: ");
+        AnsiConsole.MarkupLine("CVV [grey](enter a 3 digit cvv numbers)[/]:");
         cvv = Console.ReadLine();
         if (cvv.Length == 3 && int.TryParse(cvv, out _))
         {
@@ -87,13 +87,28 @@ public class Payment
         // Simulating a QR code display for Tikkie
         Console.WriteLine("Generating Tikkie QR code...");
         System.Threading.Thread.Sleep(1000); // Simulate loading time
-        Console.WriteLine(@"
- _______________________
-|                       |
-|      QR CODE HERE     |
-|                       |
-|_______________________|
-
-Scan this QR code with your Tikkie app to complete the payment.");
+        AnsiConsole.WriteLine("");
+        AnsiConsole.WriteLine("        ████████████                                       █████████████                                    ");
+        AnsiConsole.WriteLine("  ██████            ████              ████              ████            ██████  ");
+        AnsiConsole.WriteLine("  ████    ████████  ████    ██        ████████    ██    ████  ████████    ████  ");
+        AnsiConsole.WriteLine("  ████  ██████████  ████          ██  ██████  ██████    ████  ██████████  ████  ");
+        AnsiConsole.WriteLine("  ████              ████                          ████  ████              ████  ");
+        AnsiConsole.WriteLine("    ████████████████████  ████  ████  ██          ████  ████████████████████    ");
+        AnsiConsole.WriteLine("                              ████████                                          ");
+        AnsiConsole.WriteLine("  ████████                            ████    ████        ██        ████  ████  ");
+        AnsiConsole.WriteLine("    ██  ██████████    ████████    ████        ████    ██    ████████████████    ");
+        AnsiConsole.WriteLine("          ██      ████    ████    ████████          ██            ██            ");
+        AnsiConsole.WriteLine("            ██    ████████████████    ██████    ██    ██████      ██████  ████  ");
+        AnsiConsole.WriteLine("    ██████████████    ████████        ████████████          ██  ████████████    ");
+        AnsiConsole.WriteLine("            ████                ██████████  ██████████████    ██████            ");
+        AnsiConsole.WriteLine("                          ████  ████    ██████    ████        ██████████  ████  ");
+        AnsiConsole.WriteLine("    ████████████████████  ██████    ██            ████        ████      ████    ");
+        AnsiConsole.WriteLine("  ████              ████        ██          ████  ████        ████      ██      ");
+        AnsiConsole.WriteLine("  ████  ██████████  ████            ██  ████      ████          ██████████      ");
+        AnsiConsole.WriteLine("  ████    ████████  ████    ██      ██████████      ████    ████        ████    ");
+        AnsiConsole.WriteLine("  ██████            ████    ████████████          ██████    ██            ██       ");
+        AnsiConsole.WriteLine("        █████████████                                         ████████████                                 ");
+        AnsiConsole.WriteLine("");
+        Console.WriteLine("Scan this QR Code with your Tikkie app to complete your payment.");
     }
 }
