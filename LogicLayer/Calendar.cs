@@ -95,4 +95,9 @@ static class Calendar
 
         Console.WriteLine("\n\n[Press Enter to confirm selection]");
     }
+
+    public static string FormatDate(DateTime date)
+    {
+        return date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"));
+    }
 }

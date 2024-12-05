@@ -18,6 +18,11 @@ public class Reservation
         EndTime = $"{endHour:00}:00";
         People = new List<PersonReservation>();
     }
+
+    public static bool ValidPersonCount(string PersonCount)
+    {
+        return !int.TryParse(PersonCount, out int personCount) || personCount <= 0;
+    }
 }
 
 public class PersonReservation

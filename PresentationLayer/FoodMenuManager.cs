@@ -33,8 +33,15 @@ public  class FoodMenuManager
                     var price = AnsiConsole.Ask<string>("Enter the [green]price[/]:");
 
                     // Add the new item
-                    foodMenu.AddItem(category, dish, description, price);
-                    AnsiConsole.MarkupLine("[green]Item added successfully![/]");
+                    bool isAdded = foodMenu.AddItem(category, dish, description, price);
+                    if (isAdded)
+                    {
+                        AnsiConsole.MarkupLine("[green]Item added successfully![/]");
+                    }
+                    else
+                    {
+                        AnsiConsole.MarkupLine("[red]No item has been added![/]");
+                    }
                     break;
 
                 case "Delete Item":
@@ -101,20 +108,30 @@ public  class FoodMenuManager
                     if (itemToUpdate != null)
                     {
                         // Prompt for updated fields (skip any that user doesn't want to change)
-                        var newCategory = AnsiConsole.Ask<string>("Enter the new [green]category[/] (or press Enter to skip):", "");
-                        var newDish = AnsiConsole.Ask<string>("Enter the new [green]dish name[/] (or press Enter to skip):", "");
-                        var newDescription = AnsiConsole.Ask<string>("Enter the new [green]description[/] (or press Enter to skip):", "");
-                        var newPrice = AnsiConsole.Ask<string>("Enter the new [green]price[/] (or press Enter to skip):", "");
+                        var newCategory = AnsiConsole.Prompt(
+                            new TextPrompt<string>("Enter the new [green]category[/] (or press Enter to skip):").AllowEmpty()
+                        );
+                        var newDish = AnsiConsole.Prompt(
+                            new TextPrompt<string>("Enter the new [green]dish name[/] (or press Enter to skip):").AllowEmpty()
+                        );
+                        var newDescription = AnsiConsole.Prompt(
+                            new TextPrompt<string>("Enter the new [green]description[/] (or press Enter to skip):").AllowEmpty()
+                        );
+                        var newPrice = AnsiConsole.Prompt(
+                            new TextPrompt<string>("Enter the new [green]price[/] (or press Enter to skip):").AllowEmpty()
+                        );
 
-                        // Update the item
-                        foodMenu.UpdateItem(
+                        bool isUpdated = foodMenu.UpdateItem(
                             itemToUpdate,
                             string.IsNullOrEmpty(newCategory) ? null : newCategory,
                             string.IsNullOrEmpty(newDish) ? null : newDish,
                             string.IsNullOrEmpty(newDescription) ? null : newDescription,
                             string.IsNullOrEmpty(newPrice) ? null : newPrice);
 
-                        AnsiConsole.MarkupLine("[green]Item updated successfully![/]");
+                        if (isUpdated)
+                        {
+                            AnsiConsole.MarkupLine("[green]Item updated successfully![/]");
+                        }
                     }
                     else
                     {

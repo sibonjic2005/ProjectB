@@ -1,3 +1,5 @@
+using Spectre.Console;
+
 class AccountsLogic
 {
     private List<UserModel> _accounts;
@@ -245,6 +247,12 @@ class AccountsLogic
             user.Preferences = preferences; // allergies
             UpdateList(user);
         }
+    }
+
+    public static int SetTime(string time)
+    {
+        int selectedHour = int.Parse(time.Split(':')[0]);
+        return selectedHour;
     }
 
     public static List<Tables> InitializeTables()

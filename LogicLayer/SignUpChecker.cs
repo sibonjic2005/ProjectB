@@ -1,4 +1,5 @@
-using System.Runtime.InteropServices.Marshalling;
+using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 public class SignUpChecker
@@ -100,33 +101,71 @@ public class SignUpChecker
         }
     }
 
-    // Methode voor datumvalidatie met het formaat DD-MM-YYYY
     public string ValidateDate(Func<string> getDate)
     {
         string date;
-        string datePattern = @"^\d{2}-\d{2}-\d{4}$"; // DD-MM-YYYY formaat
+        string datePattern = @"^\d{2}-\d{2}-\d{4}$";
 
         while (true)
         {
             date = getDate();
 
-            // Eerst controleren op het formaat
             if (!Regex.IsMatch(date, datePattern))
             {
                 Console.WriteLine("Date is invalid. Please enter a valid date in the format DD-MM-YYYY.");
                 continue;
             }
 
-            // Vervolgens controleren of het een geldige datum is
-            if (!DateTime.TryParseExact(date, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out _))
+            if (!DateTime.TryParseExact(date, "dd-MM-yyyy", null, DateTimeStyles.None, out DateTime parsedDate))
             {
                 Console.WriteLine("Date is invalid. Please enter a valid calendar date.");
                 continue;
             }
-            else
+
+            if (parsedDate.Year < 1900)
             {
-                return date; // Geldige datum
+                Console.WriteLine("Year must not be earlier than 1900.");
+                continue;
             }
+
+            return date;
+        }
+    }
+    public string ValidateName(Func<string> getName)
+    {
+        string name;
+        string namePattern = @"^[A-Za-z\s]{2,}$";
+
+        while (true)
+        {
+            name = getName();
+
+            if (!Regex.IsMatch(name, namePattern))
+            {
+                Console.WriteLine("Name is invalid. It must contain only letters and be at least 2 characters long.");
+                continue;
+            }
+
+            return name;
+        }
+    }
+
+    public string ValidateAddress(Func<string> getAddress)
+    {
+        string address;
+        string addressPattern = @"^(?=.*[A-Za-z])(?=.*\d).{5,}$"; // Requires at least one letter, one digit, and a minimum length of 5
+
+        while (true)
+        {
+            address = getAddress();
+
+            if (!Regex.IsMatch(address, addressPattern))
+            {
+                Console.WriteLine("Address is invalid. It must contain at least one letter, one number, and be at least 5 characters long.");
+                continue;
+            }
+
+            return address;
         }
     }
 }

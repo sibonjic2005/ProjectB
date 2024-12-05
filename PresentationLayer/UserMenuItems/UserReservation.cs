@@ -5,7 +5,7 @@ static class UserReservation
     {
         AccountsLogic accountsLogic = new AccountsLogic();
         string email = AccountsLogic.CurrentAccount?.EmailAddress;
-        string accountName = AccountsLogic.CurrentAccount?.Name; // Haal de naam van de ingelogde gebruiker
+        string accountName = AccountsLogic.CurrentAccount?.Name;
         var user = accountsLogic.GetByEmail(email);
 
         if (email == null || accountName == null)
@@ -24,8 +24,7 @@ static class UserReservation
                 .AddChoices(timeOptions)
         );
 
-        int selectedHour = int.Parse(time.Split(':')[0]);
-        date = date.AddHours(selectedHour);
+        date = date.AddHours(AccountsLogic.SetTime(time));
 
         if (accountsLogic.HasReservationForTimeSlot(email, date, time))
         {
@@ -38,12 +37,14 @@ static class UserReservation
             new TextPrompt<string>("Enter the amount of people:")
         );
 
-        if (!int.TryParse(person, out int personCount) || personCount <= 0)
+        if (Reservation.ValidPersonCount(person))
         {
             Console.WriteLine("Invalid input. Please enter a valid number.");
             UserMenu.UserMenuStart();
             return;
         }
+
+        int personCount = int.Parse(person);
 
         if (personCount > 6)
         {
@@ -57,7 +58,7 @@ static class UserReservation
 
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, personCount);
 
-        if (!availableTables.Any())
+        if (availableTables.Count == 0)
         {
             Console.WriteLine("No tables available for the selected time.");
             UserMenu.UserMenuStart();
@@ -75,7 +76,8 @@ static class UserReservation
         Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
 
         Console.Clear();
-        string formattedDate = date.ToString("dddd, MMMM dd, yyyy", new System.Globalization.CultureInfo("en-US"));
+
+        string formattedDate = Calendar.FormatDate(date);
 
         var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
 
@@ -87,6 +89,7 @@ static class UserReservation
         var personReservation = new PersonReservation(accountName);
 
         Console.WriteLine($"Would you like to change the allergies of {accountName}?:");
+
         foreach (string allergy in user.Preferences)
         {
             personReservation.Allergies.Add(allergy);
