@@ -6,6 +6,7 @@ static class UserReservation
         AccountsLogic accountsLogic = new AccountsLogic();
         string email = AccountsLogic.CurrentAccount?.EmailAddress;
         string accountName = AccountsLogic.CurrentAccount?.Name; // Haal de naam van de ingelogde gebruiker
+        var user = accountsLogic.GetByEmail(email);
 
         if (email == null || accountName == null)
         {
@@ -80,9 +81,32 @@ static class UserReservation
 
         var foodMenu = new FoodMenu();
 
+        List<string> allergyOptions = AccountsLogic.GetAllergyOptions();
+
         Console.WriteLine($"The first person is the account holder: {accountName}");
         var personReservation = new PersonReservation(accountName);
-        personReservation.Allergies.Add("See User Preferences.");
+
+        Console.WriteLine($"Would you like to change the allergies of {accountName}?:");
+        foreach (string allergy in user.Preferences)
+        {
+            personReservation.Allergies.Add(allergy);
+        }
+
+        var allergyPrompt = new MultiSelectionPrompt<string>()
+                .Title("Update allergies [grey](use <space> to select/deselect)[/]:")
+                .NotRequired()
+                .PageSize(10)
+                .AddChoices(allergyOptions);
+        
+        foreach (var allergy in user.Preferences.Where(allergyOptions.Contains))
+        {
+            allergyPrompt.Select(allergy);
+        }
+
+        var updatedAllergies = AnsiConsole.Prompt(allergyPrompt);
+
+        personReservation.Allergies = updatedAllergies;
+        user.Preferences = updatedAllergies;
 
         HandleFoodSelection(personReservation, foodMenu, accountName);
         reservation.People.Add(personReservation);

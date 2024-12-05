@@ -6,7 +6,37 @@
     "isAdmin": false,
     "isGuest": false,
     "isEmployee": false,
-    "reservations": [],
+    "reservations": [
+      {
+        "Date": "2024-12-05T17:00:00+01:00",
+        "Time": "17:00",
+        "EndTime": "19:00",
+        "PersonCount": "2",
+        "TableNumber": 1,
+        "People": [
+          {
+            "Name": "John Doe",
+            "BlindExperience": true,
+            "Food": [
+              "SURPRISE-MEAL"
+            ],
+            "Allergies": []
+          },
+          {
+            "Name": "v",
+            "BlindExperience": true,
+            "Food": [
+              "SURPRISE-MEAL"
+            ],
+            "Allergies": [
+              "Fish",
+              "Peanuts",
+              "Eggs"
+            ]
+          }
+        ]
+      }
+    ],
     "name": "John Doe",
     "emailAddress": "john@example.com",
     "phoneNumber": "1234567890",
