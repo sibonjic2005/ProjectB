@@ -25,11 +25,13 @@ public class PersonReservation
     public string Name { get; set; }
     public bool BlindExperience { get; set; }
     public List<string> Food { get; set; }
+    public List<string> Allergies { get; set; }
 
     public PersonReservation(string name)
     {
         Name = name;
-        BlindExperience = false; // Standaard geen blind experience
+        BlindExperience = false;
         Food = new List<string>();
+        Allergies = new List<string>();
     }
 }

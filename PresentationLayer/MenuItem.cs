@@ -357,4 +357,13 @@ public class FoodMenu
             "Classic Mojito"
         };
     }
+
+    public static List<string> GetAllergyOptions()
+    {
+        return new List<string> {
+                    "Tree Nuts", "Soy", "Fish",
+                    "Peanuts", "Shellfish", "Eggs",
+                    "Wheats", "Dairy"
+        };
+    }
 }

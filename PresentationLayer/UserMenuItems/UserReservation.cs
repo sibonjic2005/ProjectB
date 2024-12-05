@@ -5,8 +5,9 @@ static class UserReservation
     {
         AccountsLogic accountsLogic = new AccountsLogic();
         string email = AccountsLogic.CurrentAccount?.EmailAddress;
+        string accountName = AccountsLogic.CurrentAccount?.Name; // Haal de naam van de ingelogde gebruiker
 
-        if (email == null)
+        if (email == null || accountName == null)
         {
             Console.WriteLine("No account is currently logged in.");
             return;
@@ -33,7 +34,8 @@ static class UserReservation
         }
 
         var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter the amount of people:"));
+            new TextPrompt<string>("Enter the amount of people:")
+        );
 
         if (!int.TryParse(person, out int personCount) || personCount <= 0)
         {
@@ -66,7 +68,8 @@ static class UserReservation
                 .Title("Select a table:")
                 .PageSize(10)
                 .AddChoices(availableTables)
-                .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)"));
+                .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
+        );
 
         Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
 
@@ -77,116 +80,43 @@ static class UserReservation
 
         var foodMenu = new FoodMenu();
 
-        List<string> personNames = new List<string>();
-        for (int i = 0; i < personCount; i++)
+        Console.WriteLine($"The first person is the account holder: {accountName}");
+        var personReservation = new PersonReservation(accountName);
+        personReservation.Allergies.Add("See User Preferences.");
+
+        HandleFoodSelection(personReservation, foodMenu, accountName);
+        reservation.People.Add(personReservation);
+
+        for (int i = 1; i < personCount; i++)
         {
             Console.Write($"Enter the name for person {i + 1}: ");
             string personName = Console.ReadLine();
-            personNames.Add(personName);
-        }
 
-        // Vraag voor elke persoon om te kiezen voor blind experience en hun voedselkeuzes
-        foreach (var personName in personNames)
-        {
-            var personReservation = new PersonReservation(personName);
+            var otherPersonReservation = new PersonReservation(personName);
 
-            Console.WriteLine($"\n{personName}, do you want a blind experience? (y/n)");
-            string chooseBlindExperience = Console.ReadLine();
-            if (chooseBlindExperience == "y" || chooseBlindExperience == "Y")
+            Console.WriteLine($"\n{personName}, do you have any allergies? (y/n)");
+            string hasOtherAllergies = Console.ReadLine();
+            if (hasOtherAllergies == "y" || hasOtherAllergies == "Y")
             {
-                personReservation.BlindExperience = true;
-                Console.WriteLine($"{personName} has chosen a blind experience.");
-                personReservation.Food.Add("SURPRISE-MEAL");
+                var allergies = AnsiConsole.Prompt(
+                    new MultiSelectionPrompt<string>()
+                        .Title($"{personName}, select your allergies (Press <enter> to skip):")
+                        .PageSize(10)
+                        .InstructionsText("[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                        .AddChoices(FoodMenu.GetAllergyOptions())
+                );
+
+                otherPersonReservation.Allergies.AddRange(allergies);
             }
             else
             {
-                Console.WriteLine($"\n{personName}: Do you want to select your food? (y/n)");
-                string chooseFood = Console.ReadLine();
-                if (chooseFood == "y" || chooseFood == "Y")
-                {
-                    foodMenu.DisplayFoodMenu();
-
-                    var selectedAppetizers = AnsiConsole.Prompt(
-                        new MultiSelectionPrompt<string>()
-                            .Title($"{personName}, select your Appetizer(s) (Press <enter> to skip):")
-                            .PageSize(10)
-                            .InstructionsText(
-                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                            .AddChoices(foodMenu.GetAppetizersItems())
-                            .Required(false)
-                    );
-
-                    // Voeg de overige voedselkeuzes toe voor de persoon (soups, main courses, side dishes, etc.)
-                    var selectedSoupsAndSalads = AnsiConsole.Prompt(
-                        new MultiSelectionPrompt<string>()
-                            .Title($"{personName}, select your Soups and Salads (Press <enter> to skip):")
-                            .PageSize(10)
-                            .InstructionsText(
-                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                            .AddChoices(foodMenu.GetSoupsandSaladsItems())
-                            .Required(false)
-                    );
-
-                    var selectedMainCourses = AnsiConsole.Prompt(
-                        new MultiSelectionPrompt<string>()
-                            .Title($"{personName}, select your Main course(s) (Press <enter> to skip):")
-                            .PageSize(10)
-                            .InstructionsText(
-                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                            .AddChoices(foodMenu.GetMainCourserItems())
-                            .Required(false)
-                    );
-
-                    var selectedSideDishes = AnsiConsole.Prompt(
-                        new MultiSelectionPrompt<string>()
-                            .Title($"{personName}, select your Side dishe(s) (Press <enter> to skip):")
-                            .PageSize(10)
-                            .InstructionsText(
-                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                            .AddChoices(foodMenu.GetSideDishesItems())
-                            .Required(false)
-                    );
-
-                    var selectedDesserts = AnsiConsole.Prompt(
-                        new MultiSelectionPrompt<string>()
-                            .Title($"{personName}, select your Dessert(s) (Press <enter> to skip):")
-                            .PageSize(10)
-                            .InstructionsText(
-                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                            .AddChoices(foodMenu.GetDessertsItems())
-                            .Required(false)
-                    );
-
-                    var selectedDrinks = AnsiConsole.Prompt(
-                        new MultiSelectionPrompt<string>()
-                            .Title($"{personName}, select your Drink(s) (Press <enter> to skip):")
-                            .PageSize(10)
-                            .InstructionsText(
-                                "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                            .AddChoices(foodMenu.GetDrinksItems())
-                            .Required(false)
-                    );
-
-                    // Voeg de geselecteerde items toe aan de persoon zijn voedselkeuzes
-                    personReservation.Food.AddRange(selectedAppetizers);
-                    personReservation.Food.AddRange(selectedSoupsAndSalads);
-                    personReservation.Food.AddRange(selectedMainCourses);
-                    personReservation.Food.AddRange(selectedSideDishes);
-                    personReservation.Food.AddRange(selectedDesserts);
-                    personReservation.Food.AddRange(selectedDrinks);
-                }
-                else
-                {
-                    Console.WriteLine($"{personName} chose not to select any food.");
-                    personReservation.Food.Add("Will choose in the restaurant");
-                }
+                Console.WriteLine($"{personName} has no allergies.");
             }
 
-            // Voeg de persoon toe aan de lijst van mensen in de reservering
-            reservation.People.Add(personReservation);
+            HandleFoodSelection(otherPersonReservation, foodMenu, personName);
+            reservation.People.Add(otherPersonReservation);
         }
 
-        // Start de betaling
         var payment = new Payment();
         payment.StartPayment();
 
@@ -197,6 +127,101 @@ static class UserReservation
         Console.WriteLine($"\nReservation complete!");
         UserMenu.UserMenuStart();
     }
+
+    private static void HandleFoodSelection(PersonReservation personReservation, FoodMenu foodMenu, string personName)
+    {
+        Console.WriteLine($"\n{personName}, do you want a blind experience? (y/n)");
+        string chooseBlindExperience = Console.ReadLine();
+        if (chooseBlindExperience == "y" || chooseBlindExperience == "Y")
+        {
+            personReservation.BlindExperience = true;
+            Console.WriteLine($"{personName} has chosen a blind experience.");
+            personReservation.Food.Add("SURPRISE-MEAL");
+        }
+        else
+        {
+            Console.WriteLine($"\n{personName}: Do you want to select your food? (y/n)");
+            string chooseFood = Console.ReadLine();
+            if (chooseFood == "y" || chooseFood == "Y")
+            {
+                foodMenu.DisplayFoodMenu();
+
+                var selectedAppetizers = AnsiConsole.Prompt(
+                    new MultiSelectionPrompt<string>()
+                        .Title($"{personName}, select your Appetizer(s) (Press <enter> to skip):")
+                        .PageSize(10)
+                        .InstructionsText(
+                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                        .AddChoices(foodMenu.GetAppetizersItems())
+                        .Required(false)
+                );
+
+                var selectedSoupsAndSalads = AnsiConsole.Prompt(
+                    new MultiSelectionPrompt<string>()
+                        .Title($"{personName}, select your Soups and Salads (Press <enter> to skip):")
+                        .PageSize(10)
+                        .InstructionsText(
+                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                        .AddChoices(foodMenu.GetSoupsandSaladsItems())
+                        .Required(false)
+                );
+
+                var selectedMainCourses = AnsiConsole.Prompt(
+                    new MultiSelectionPrompt<string>()
+                        .Title($"{personName}, select your Main course(s) (Press <enter> to skip):")
+                        .PageSize(10)
+                        .InstructionsText(
+                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                        .AddChoices(foodMenu.GetMainCourserItems())
+                        .Required(false)
+                );
+
+                var selectedSideDishes = AnsiConsole.Prompt(
+                    new MultiSelectionPrompt<string>()
+                        .Title($"{personName}, select your Side dishe(s) (Press <enter> to skip):")
+                        .PageSize(10)
+                        .InstructionsText(
+                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                        .AddChoices(foodMenu.GetSideDishesItems())
+                        .Required(false)
+                );
+
+                var selectedDesserts = AnsiConsole.Prompt(
+                    new MultiSelectionPrompt<string>()
+                        .Title($"{personName}, select your Dessert(s) (Press <enter> to skip):")
+                        .PageSize(10)
+                        .InstructionsText(
+                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                        .AddChoices(foodMenu.GetDessertsItems())
+                        .Required(false)
+                );
+
+                var selectedDrinks = AnsiConsole.Prompt(
+                    new MultiSelectionPrompt<string>()
+                        .Title($"{personName}, select your Drink(s) (Press <enter> to skip):")
+                        .PageSize(10)
+                        .InstructionsText(
+                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                        .AddChoices(foodMenu.GetDrinksItems())
+                        .Required(false)
+                );
+
+                personReservation.Food.AddRange(selectedAppetizers);
+                personReservation.Food.AddRange(selectedSoupsAndSalads);
+                personReservation.Food.AddRange(selectedMainCourses);
+                personReservation.Food.AddRange(selectedSideDishes);
+                personReservation.Food.AddRange(selectedDesserts);
+                personReservation.Food.AddRange(selectedDrinks);
+            }
+            else
+            {
+                Console.WriteLine($"{personName} chose not to select any food.");
+                personReservation.Food.Add("Will choose in the restaurant");
+            }
+        }
+    }
+
+
 
     public static void CancelReservation()
     {
