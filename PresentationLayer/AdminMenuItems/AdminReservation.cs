@@ -14,26 +14,6 @@ static class AdminReservation
         var email = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an email: "));
 
-<<<<<<< Updated upstream
-        var user = accountsLogic.GetByEmail(email);
-
-        var allergies = AnsiConsole.Prompt(
-            new MultiSelectionPrompt<string>()
-                .Title("Do have any allergies?")
-                .NotRequired()
-                .PageSize(10)
-                .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
-                .InstructionsText(
-                    "[grey](Press [blue]<space>[/] to choose your allergy, " + 
-                    "[green]<enter>[/] to accept)[/]")
-                .AddChoices(new[] {
-                    "Tree Nuts", "Soy", "Fish",
-                    "Peanuts", "Shellfish", "Eggs",
-                    "Wheats", "Dairy"
-        }));
-
-=======
->>>>>>> Stashed changes
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
@@ -59,7 +39,7 @@ static class AdminReservation
         TableLayout.SeatingPlan();
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, personCount);
 
-        if (availableTables.Count == 0)
+        if (!availableTables.Any())
         {
             Console.WriteLine("No tables available for the selected time.");
             return;
@@ -73,32 +53,10 @@ static class AdminReservation
                 .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
         );
 
-        Console.WriteLine($"Selected Table: {tableSelection.TableNumber}.");
-
-        var choices = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-                .Title("Press <enter> to continue")
-                .PageSize(3)
-                .MoreChoicesText("[grey](Move up and down to reveal more choices)")
-                .AddChoices(new[] {
-                        "Continue"            
-                }));   
-                
-        if (choices == "Continue")
-        {
-            Console.Clear();
-        }
+        Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
 
         var reservation = new Reservation(date, time, personCount.ToString(), tableSelection.TableNumber);
 
-<<<<<<< Updated upstream
-        accountsLogic.AddNewReservation(name, email, phoneNumber, allergies, reservation);
-
-        Console.WriteLine($"\nName: {name}\nPhone Number {phoneNumber}\nEmail: {email}\nDate: {date:dddd, MMMM dd, yyyy}\nTime: {time}\nAmount of persons: {person}\nEnd time: {reservation.EndTime}");
-        Console.WriteLine($"\nReservation complete!");
-        
-        GoBack.GoBackReservationOption();
-=======
         List<PersonReservation> personReservations = new List<PersonReservation>();
 
         Console.WriteLine($"\nThe first person is: {name}");
@@ -158,8 +116,8 @@ static class AdminReservation
         {
             Console.WriteLine($"{personName} chose not to have a blind experience.");
         }
->>>>>>> Stashed changes
     }
+
 
     public static void CancelReservation()
     {
