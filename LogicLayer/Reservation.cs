@@ -6,6 +6,8 @@ public class Reservation
     public string PersonCount { get; set; }
     public int TableNumber { get; set; }
     public List<PersonReservation> People { get; set; }
+    // public bool IsFullyPaid { get; set;}
+    // public double AmountPaid { get; set; }
 
     public Reservation(DateTime date, string time, string personCount, int tableNumber)
     {

@@ -14,6 +14,7 @@ static class AdminReservation
         var email = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter an email: "));
 
+<<<<<<< Updated upstream
         var user = accountsLogic.GetByEmail(email);
 
         var allergies = AnsiConsole.Prompt(
@@ -31,6 +32,8 @@ static class AdminReservation
                     "Wheats", "Dairy"
         }));
 
+=======
+>>>>>>> Stashed changes
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
 
@@ -43,14 +46,18 @@ static class AdminReservation
 
         int selectedHour = int.Parse(time.Split(':')[0]);
         date = date.AddHours(selectedHour);
-        
-        var person = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter the amount of people: ")
-        );
-        
-        TableLayout.SeatingPlan();
 
-        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
+        var personCountInput = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter the amount of people: "));
+
+        if (!int.TryParse(personCountInput, out int personCount) || personCount <= 0)
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+            return;
+        }
+
+        TableLayout.SeatingPlan();
+        List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, personCount);
 
         if (availableTables.Count == 0)
         {
@@ -82,14 +89,76 @@ static class AdminReservation
             Console.Clear();
         }
 
-        var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
+        var reservation = new Reservation(date, time, personCount.ToString(), tableSelection.TableNumber);
 
+<<<<<<< Updated upstream
         accountsLogic.AddNewReservation(name, email, phoneNumber, allergies, reservation);
 
         Console.WriteLine($"\nName: {name}\nPhone Number {phoneNumber}\nEmail: {email}\nDate: {date:dddd, MMMM dd, yyyy}\nTime: {time}\nAmount of persons: {person}\nEnd time: {reservation.EndTime}");
         Console.WriteLine($"\nReservation complete!");
         
         GoBack.GoBackReservationOption();
+=======
+        List<PersonReservation> personReservations = new List<PersonReservation>();
+
+        Console.WriteLine($"\nThe first person is: {name}");
+        var adminReservation = new PersonReservation(name);
+
+        HandleBlindExperience(adminReservation, name);
+        personReservations.Add(adminReservation);
+
+        for (int i = 2; i <= personCount; i++)
+        {
+            var otherPersonName = AnsiConsole.Prompt(
+                new TextPrompt<string>($"Enter the name for person {i}: ")
+            );
+
+            var otherPersonReservation = new PersonReservation(otherPersonName);
+
+            HandleBlindExperience(otherPersonReservation, otherPersonName);
+            personReservations.Add(otherPersonReservation);
+        }
+
+        foreach (var person in personReservations)
+        {
+            reservation.People.Add(person);
+        }
+
+        accountsLogic.AddNewReservation(name, email, phoneNumber, new List<string>(), reservation);
+
+        Console.WriteLine($"\nReservation complete!");
+        Console.WriteLine($"\nName: {name}, Phone Number: {phoneNumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {personCount}, End time: {reservation.EndTime}");
+    }
+
+    private static void HandleBlindExperience(PersonReservation personReservation, string personName)
+    {
+        Console.WriteLine($"\n{personName}, do you want a blind experience? (y/n)");
+        string blindExperienceResponse = Console.ReadLine();
+
+        if (blindExperienceResponse == "y" || blindExperienceResponse == "Y")
+        {
+            personReservation.BlindExperience = true;
+            Console.WriteLine($"{personName} has chosen a blind experience.");
+            personReservation.Food.Add("SURPRISE-MEAL");
+
+            var allergies = AnsiConsole.Prompt(
+                new MultiSelectionPrompt<string>()
+                    .Title($"{personName}, do you have any allergies?")
+                    .NotRequired()
+                    .PageSize(10)
+                    .MoreChoicesText("[grey](Move up and down to reveal more allergies)[/]")
+                    .InstructionsText(
+                        "[grey](Press [blue]<space>[/] to choose an allergy, [green]<enter>[/] to accept)[/]")
+                    .AddChoices(FoodMenu.GetAllergyOptions())
+            );
+
+            personReservation.Allergies.AddRange(allergies);
+        }
+        else
+        {
+            Console.WriteLine($"{personName} chose not to have a blind experience.");
+        }
+>>>>>>> Stashed changes
     }
 
     public static void CancelReservation()

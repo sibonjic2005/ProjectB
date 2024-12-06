@@ -106,5 +106,142 @@
     "emailAddress": "eric@gmail.com",
     "phoneNumber": "0623456987",
     "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-12-06T16:00:00+01:00",
+        "Time": "16:00",
+        "EndTime": "18:00",
+        "PersonCount": "2",
+        "TableNumber": 1,
+        "People": []
+      }
+    ],
+    "name": "d",
+    "emailAddress": "w",
+    "phoneNumber": "1",
+    "preferences": [
+      "Tree Nuts"
+    ]
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [],
+    "name": "ammar",
+    "emailAddress": "r@gmail.com",
+    "phoneNumber": "019292828982",
+    "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-12-06T16:00:00+01:00",
+        "Time": "16:00",
+        "EndTime": "18:00",
+        "PersonCount": "3",
+        "TableNumber": 9,
+        "People": [
+          {
+            "Name": "ss",
+            "BlindExperience": true,
+            "Food": [
+              "SURPRISE-MEAL"
+            ],
+            "Allergies": [
+              "Tree Nuts"
+            ]
+          },
+          {
+            "Name": "trv",
+            "BlindExperience": false,
+            "Food": [],
+            "Allergies": []
+          },
+          {
+            "Name": "rf",
+            "BlindExperience": true,
+            "Food": [
+              "SURPRISE-MEAL"
+            ],
+            "Allergies": [
+              "Soy",
+              "Fish",
+              "Peanuts",
+              "Shellfish",
+              "Eggs"
+            ]
+          }
+        ]
+      }
+    ],
+    "name": "ss",
+    "emailAddress": "2",
+    "phoneNumber": "s2222",
+    "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-12-06T16:00:00+01:00",
+        "Time": "16:00",
+        "EndTime": "18:00",
+        "PersonCount": "3",
+        "TableNumber": 10,
+        "People": [
+          {
+            "Name": "ak",
+            "BlindExperience": true,
+            "Food": [
+              "SURPRISE-MEAL"
+            ],
+            "Allergies": [
+              "Tree Nuts"
+            ]
+          },
+          {
+            "Name": "n",
+            "BlindExperience": false,
+            "Food": [],
+            "Allergies": []
+          },
+          {
+            "Name": "y",
+            "BlindExperience": true,
+            "Food": [
+              "SURPRISE-MEAL"
+            ],
+            "Allergies": []
+          }
+        ]
+      }
+    ],
+    "name": "ak",
+    "emailAddress": "1",
+    "phoneNumber": "1",
+    "preferences": []
   }
 ]
