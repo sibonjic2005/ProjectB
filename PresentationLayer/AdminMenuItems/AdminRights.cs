@@ -1,3 +1,4 @@
+using System.Net.Sockets;
 using Spectre.Console;
 class AdminRights
 {
@@ -37,11 +38,13 @@ class AdminRights
         if (confirmation)
         {
             accountsLogic.ChangeRights(account, newUserRights);
-            Console.WriteLine("User right changed successfully.");
+            AnsiConsole.MarkupLine("[green]User right changed successfully.[/]");
+            GoBack.GoBackAdminMenu();
         }
         else
         {
-            Console.WriteLine("Changing User rights cancelled.");
+            AnsiConsole.MarkupLine("[red]Changing User rights cancelled.[/]");
+            GoBack.GoBackAdminMenu();
         }
     }
 
@@ -59,5 +62,6 @@ class AdminRights
         );
 
         accountsLogic.AdminDeleteAccount(userMail);
+        GoBack.GoBackAdminMenu();
     }
 }

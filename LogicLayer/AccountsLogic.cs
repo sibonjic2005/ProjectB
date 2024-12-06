@@ -34,7 +34,7 @@ class AccountsLogic
         else if (user.IsEmployee)
             return "Employee";
 
-        return null;
+        return "None";
     }
 
     public void UpdateList(UserModel account)
@@ -403,25 +403,23 @@ class AccountsLogic
         var userToDelete = GetByEmail(email);
         if (userToDelete != null)
         {
-            Console.WriteLine($"Are you sure you want to delete the following account? (yes/no)");
             Console.WriteLine($"Name: {userToDelete.Name}");
             Console.WriteLine($"Email: {userToDelete.EmailAddress}");
-
-        var confirmation = Console.ReadLine()?.Trim().ToLower();
-        if (confirmation == "yes")
-        {
-            _accounts.Remove(userToDelete);
-            AccountsAccess.WriteAll(_accounts);
-            Console.WriteLine($"Account with email {email} has been successfully deleted.");
+    
+            if (AnsiConsole.Confirm($"Are you sure you want to delete this account?"))
+            {
+                _accounts.Remove(userToDelete);
+                AccountsAccess.WriteAll(_accounts);
+                AnsiConsole.MarkupLine($"Account with email {email} has been [green]successfully[/] deleted.");
+            }
+            else
+            {
+                AnsiConsole.MarkupLine("[red]Operation canceled.[/] No account was deleted.");
+            }
         }
-        else
-        {
-            Console.WriteLine("Operation canceled. No account was deleted.");
-        }
-    }
     else
     {
-        Console.WriteLine($"No account found with the email {email}.");
+        AnsiConsole.MarkupLine($"[red]No account found[/] with email {email}.");
     }
 }
 
