@@ -8,7 +8,7 @@ static class AdminReservation
         var name = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a Name: "));
 
-        var phonenumber = AnsiConsole.Prompt(
+        var phoneNumber = AnsiConsole.Prompt(
             new TextPrompt<string>("Enter a phone number: "));
 
         var email = AnsiConsole.Prompt(
@@ -52,7 +52,7 @@ static class AdminReservation
 
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(person));
 
-        if (!availableTables.Any())
+        if (availableTables.Count == 0)
         {
             Console.WriteLine("No tables available for the selected time.");
             return;
@@ -66,32 +66,54 @@ static class AdminReservation
                 .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
         );
 
-        Console.WriteLine($"You selected Table {tableSelection.TableNumber}.");
+        Console.WriteLine($"Selected Table: {tableSelection.TableNumber}.");
+
+        var choices = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Press <enter> to continue")
+                .PageSize(3)
+                .MoreChoicesText("[grey](Move up and down to reveal more choices)")
+                .AddChoices(new[] {
+                        "Continue"            
+                }));   
+                
+        if (choices == "Continue")
+        {
+            Console.Clear();
+        }
 
         var reservation = new Reservation(date, time, person, tableSelection.TableNumber);
 
-        accountsLogic.AddNewReservation(name, email, phonenumber, allergies, reservation);
+        accountsLogic.AddNewReservation(name, email, phoneNumber, allergies, reservation);
 
-        Console.WriteLine($"\nName: {name}, Phone Number {phonenumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {person}, End time: {reservation.EndTime}");
+        Console.WriteLine($"\nName: {name}\nPhone Number {phoneNumber}\nEmail: {email}\nDate: {date:dddd, MMMM dd, yyyy}\nTime: {time}\nAmount of persons: {person}\nEnd time: {reservation.EndTime}");
         Console.WriteLine($"\nReservation complete!");
-        // AdminMenu.AdminMenuStart();
+        
+        GoBack.GoBackReservationOption();
     }
 
     public static void CancelReservation()
     {
+        AccountsLogic accountsLogic = new AccountsLogic();
+
         ViewReservation();
 
-        Console.WriteLine("What is the email of the user to cancel the reservation?");
-        string email = Console.ReadLine();
-        
-        AccountsLogic accountsLogic = new AccountsLogic();
-        var user = accountsLogic.GetByEmail(email);
+        List<string> mailWithReservation = accountsLogic.GetMailsWithReservation();
 
-        if (user == null || user.Reservations.Count == 0)
+        if (mailWithReservation.Count < 1)
         {
-            Console.WriteLine("No reservations found for this email.");
-            return;
+            Console.WriteLine("How can you cancel a reservation without one?");
+            GoBack.GoBackReservationOption();
         }
+
+        var userMail = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Select the user's mail whose reservation should be cancelled:")
+                .PageSize(10)
+                .AddChoices(mailWithReservation)
+        );
+
+        var user = accountsLogic.GetByEmail(userMail);
 
         var reservationSelection = AnsiConsole.Prompt(
         new SelectionPrompt<Reservation>()
@@ -110,13 +132,35 @@ static class AdminReservation
                 
         if (confirmation)
         {
-            accountsLogic.RemoveSpecificReservation(email, reservationSelection);
+            accountsLogic.RemoveSpecificReservation(userMail, reservationSelection);
             Console.WriteLine("Reservation cancelled successfully.");
+            GoBack.GoBackReservationOption();
         }
         else
         {
             Console.WriteLine("Cancellation aborted.");
+            GoBack.GoBackReservationOption();
         }
+    }
+
+    public static void ViewReservations()
+    {
+        AccountsLogic accountsLogic = new AccountsLogic();
+        var allUsers = accountsLogic.LoadAllUsers();
+
+        Console.WriteLine($"Reservations: \n");
+        foreach (var user in allUsers)
+        {
+            if (user.Reservations.Count > 0)
+            {
+                Console.WriteLine($"Name: {user.Name}\nemail: {user.EmailAddress}:");
+                foreach (Reservation reservation in user.Reservations)
+                {
+                    Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Start Time: {reservation.Time}\n  - End time: {reservation.EndTime}\n  - People: {reservation.PersonCount}\n  - Table: {reservation.TableNumber}\n");
+                }
+            }
+        }
+        GoBack.GoBackReservationOption();
     }
 
     public static void ViewReservation()
@@ -136,22 +180,29 @@ static class AdminReservation
                 }
             }
         }
-        // AdminMenu.AdminMenuStart();
     }
 
     public static void ChangeReservation()
     {
-        Console.WriteLine("Enter the user's email to change their reservation:");
-        string getEmail = Console.ReadLine();
-
         AccountsLogic accountsLogic = new AccountsLogic();
-        var user = accountsLogic.GetByEmail(getEmail);
-    
-        if (user == null || user.Reservations.Count == 0)
+
+        ViewReservation();
+
+        List<string> mailWithReservation = accountsLogic.GetMailsWithReservation();
+
+        if (mailWithReservation.Count < 1)
         {
-            Console.WriteLine("No reservations found for this email.");
-            return;
+            Console.WriteLine("How can you change a reservation without one?");
+            GoBack.GoBackReservationOption();
         }
+
+        var userMail = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Select the user's mail whose reservation should be changed:")
+                .PageSize(10)
+                .AddChoices(mailWithReservation)
+        );
+        var user = accountsLogic.GetByEmail(userMail);
 
         var reservationSelection = AnsiConsole.Prompt(
             new SelectionPrompt<Reservation>()
@@ -182,10 +233,10 @@ static class AdminReservation
         TableLayout.SeatingPlan();
         List<Tables> availableTables = accountsLogic.GetAvailableTables(date, time, int.Parse(personCount));
 
-        if (!availableTables.Any())
+        if (availableTables.Count == 0)
         {
             Console.WriteLine("No tables available for the selected time.");
-            return;
+            GoBack.GoBackReservationOption();
         }
 
         var tableSelection = AnsiConsole.Prompt(
@@ -195,6 +246,22 @@ static class AdminReservation
                 .AddChoices(availableTables)
                 .UseConverter(table => $"Table {table.TableNumber} ({table.Capacity}-person)")
         );
+
+        Console.WriteLine($"Table Selected: {tableSelection.TableNumber}");
+
+        var choices = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Press <enter> to continue")
+                .PageSize(3)
+                .MoreChoicesText("[grey](Move up and down to reveal more choices)")
+                .AddChoices(new[] {
+                        "Continue"            
+                }));   
+                
+        if (choices == "Continue")
+        {
+            Console.Clear();
+        }
 
         reservationSelection.Date = date;
         reservationSelection.Time = time;
@@ -209,14 +276,17 @@ static class AdminReservation
                 
         if (confirmation)
         {
-            accountsLogic.UpdateReservation(getEmail, reservationSelection);
-            Console.WriteLine("Reservation changed successfully.\n");
+            accountsLogic.UpdateReservation(userMail, reservationSelection);
 
             Console.WriteLine($"Reservation updated:\nDate: {date:dddd, MMMM dd, yyyy}\nStart Time: {time}\nEnd Time: {reservationSelection.EndTime}\nPeople: {personCount}\nTable: {tableSelection.TableNumber}\n");
+            
+            GoBack.GoBackReservationOption();
         }
         else
         {
             Console.WriteLine("Changing Reservation aborted.");
+
+            GoBack.GoBackReservationOption();
         }
     }
 }

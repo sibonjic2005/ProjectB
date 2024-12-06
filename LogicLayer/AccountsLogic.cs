@@ -20,7 +20,7 @@ class AccountsLogic
     {
         List<string> accountMails = new List<string>();
 
-        foreach (UserModel user in _accounts)
+        foreach (var user in _accounts)
         {
             accountMails.Add(user.EmailAddress);
         }
@@ -55,6 +55,20 @@ class AccountsLogic
     public UserModel GetByEmail (string email)
     {
         return _accounts.Find(i => i.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
+    }
+
+    public List<string> GetMailsWithReservation()
+    {
+        List<string> mailsWithReservation = new List<string>();
+
+        foreach (var user in _accounts)
+        {
+            if (user.Reservations.Count > 0)
+            {
+                mailsWithReservation.Add(user.EmailAddress);
+            }
+        }
+        return mailsWithReservation;
     }
 
     public UserModel? CheckLogin(string email, string password)

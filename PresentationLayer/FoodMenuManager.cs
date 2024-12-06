@@ -18,7 +18,7 @@ public  class FoodMenuManager
             var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("[bold yellow]Select an option to manage the menu:[/]")
-                    .AddChoices("Add Item", "Delete Item", "Update Item", "Display Menu", "Exit"));
+                    .AddChoices("Add Item", "Delete Item", "Update Item", "Display Menu", "Go back"));
 
             switch (choice)
             {
@@ -37,10 +37,12 @@ public  class FoodMenuManager
                     if (isAdded)
                     {
                         AnsiConsole.MarkupLine("[green]Item added successfully![/]");
+                        GoBack.GoBackManageMenu();
                     }
                     else
                     {
                         AnsiConsole.MarkupLine("[red]No item has been added![/]");
+                        GoBack.GoBackManageMenu();
                     }
                     break;
 
@@ -69,14 +71,15 @@ public  class FoodMenuManager
                         .AddChoices(dishesInCategory)
                     );
 
-                    // Attempt to delete the item
                     if (foodMenu.DeleteItem(dishToDelete))
                     {
                         AnsiConsole.MarkupLine("[green]Item deleted successfully![/]");
+                        GoBack.GoBackManageMenu();
                     }
                     else
                     {
                         AnsiConsole.MarkupLine("[red]Item not found![/]");
+                        GoBack.GoBackManageMenu();
                     }
                     break;
 
@@ -131,18 +134,29 @@ public  class FoodMenuManager
                         if (isUpdated)
                         {
                             AnsiConsole.MarkupLine("[green]Item updated successfully![/]");
+
+                            GoBack.GoBackManageMenu();
+                        }
+                        else
+                        {
+                            AnsiConsole.MarkupLine("[red]Item not updated![/]");
+
+                            GoBack.GoBackManageMenu();
                         }
                     }
                     else
                     {
                         AnsiConsole.MarkupLine("[red]Dish not found![/]");
+                        
+                        GoBack.GoBackManageMenu();
                     }
                     break;
                 case "Display Menu":
                     foodMenu.DisplayFoodMenu();
+                    GoBack.GoBackManageMenu();
                     break;
 
-                case "Exit":
+                case "Go back":
                     // Exit the management loop
                     AnsiConsole.MarkupLine("[bold yellow]Exiting menu management.[/]");
                     return;

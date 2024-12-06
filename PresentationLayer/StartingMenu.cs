@@ -31,7 +31,7 @@ public static class StartingMenu
                     "Login", 
                     "Create an account", 
                     "Login as guest", 
-                    "View FoodMenu",
+                    "View Food Menu",
                     "View Restaurant Information",
                     "Exit"
                 }));
@@ -50,7 +50,7 @@ public static class StartingMenu
                 Console.Clear();
                 GuestLogin.LoginGuest();
                 break;
-            case "View FoodMenu":
+            case "View Food Menu":
                 Console.Clear();
                 var foodMenu = new FoodMenu();
                 foodMenu.DisplayFoodMenu();

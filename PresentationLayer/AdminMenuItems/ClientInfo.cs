@@ -13,13 +13,16 @@ class ClientInfo
                 .AddChoices(allUsersMail)
         );
 
-        UserModel account = accountsLogic.GetByEmail(userMail);
+        var account = accountsLogic.GetByEmail(userMail);
 
-        Console.WriteLine($"\nName: {account.Name}, \nBirthday: {account.DateOfBirth}, \nAddress: {account.Address} \nPhonenumber: {account.PhoneNumber}, \nEmail: {account.EmailAddress}");
+        Console.WriteLine($"\nName: {account.Name}\nBirthday: {account.DateOfBirth}\nAddress: {account.Address}\nPhone Number: {account.PhoneNumber}\nEmail: {account.EmailAddress}");
+
         foreach (string allergy in account.Preferences)
         {
             AnsiConsole.WriteLine($"Allergic to: {allergy}");
         }
+
+        GoBack.GoBackClientOption();
     }
 
     public static void ChangeClientInfo()
@@ -29,38 +32,31 @@ class ClientInfo
 
         var userMail = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Select a user you want to view:")
+                .Title("Select a user you want to change:")
                 .PageSize(10)
                 .AddChoices(allUsersMail)
         );
 
         var user = accountsLogic.GetByEmail(userMail);
-            if (user == null)
-            {
-                Console.WriteLine("No reservation found with the given email.");
-                // AdminMenu.AdminMenuStart();
-                return;
-            }
-
-        
+       
         var newName = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a Name: (press enter to keep old info) ").AllowEmpty());
+            new TextPrompt<string>($"Enter a Name: [grey](press enter to keep {user.Name})[/]").AllowEmpty());
 
-        var phonenumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a phone number: (press enter to keep old info)").AllowEmpty());
+        var phoneNumber = AnsiConsole.Prompt(
+            new TextPrompt<string>($"Enter a phone number: [grey](press enter to keep {user.PhoneNumber})[/]").AllowEmpty());
 
         var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an email: (press enter to keep old info)").AllowEmpty());
+            new TextPrompt<string>($"Enter an email: [grey](press enter to keep {user.EmailAddress})[/]").AllowEmpty());
             
         var dateOfBirth = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an date of birth: (press enter to keep old info)").AllowEmpty());
+            new TextPrompt<string>($"Enter an date of birth: [grey](press enter to keep {user.DateOfBirth})[/]").AllowEmpty());
         
         var address = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an address: (press enter to keep old info)").AllowEmpty());
+            new TextPrompt<string>($"Enter an address: [grey](press enter to keep {user.Address})[/]").AllowEmpty());
 
         var allergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
-                .Title("Do have any allergies?")
+                .Title("Does the client have any allergies?")
                 .NotRequired()
                 .PageSize(10)
                 .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
@@ -73,10 +69,10 @@ class ClientInfo
                     "Wheats", "Dairy"
         }));
 
+        accountsLogic.UpdateChangesClientInfo(userMail, newName, phoneNumber, email, dateOfBirth, address, allergies);
 
-        accountsLogic.UpdateChangesClientInfo(userMail, newName, phonenumber, email, dateOfBirth, address, allergies);
-        Console.WriteLine($"\nName: {newName}, Phone Number {phonenumber}");
-        Console.WriteLine($"\nReservation complete!");
+        Console.WriteLine($"\nChanges made!");
         
+        GoBack.GoBackClientOption();
     }
 }

@@ -47,18 +47,17 @@ class AdminRights
 
     public static void DeleteAccount()
     {
-        Console.WriteLine("Enter the email of the account you want to delete:");
-        string getEmail = Console.ReadLine();
-
         AccountsLogic accountsLogic = new AccountsLogic();
-        var user = accountsLogic.GetByEmail(getEmail);
-    
-        if (user == null)
-        {
-            Console.WriteLine("No user found");
-            return;
-        }
+        var allUsers = accountsLogic.LoadAllUsers();
+        List<string> allUsersMail = accountsLogic.LoadAllUsersMail();
 
-        accountsLogic.AdminDeleteAccount(getEmail);
+        var userMail = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Select the user you want to [red]delete[/]:")
+                .PageSize(10)
+                .AddChoices(allUsersMail)
+        );
+
+        accountsLogic.AdminDeleteAccount(userMail);
     }
 }

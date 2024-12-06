@@ -109,24 +109,24 @@ static class CreateAccount
         AccountsLogic accounts_logic = new AccountsLogic();
 
         var name = signUpChecker.ValidateName(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter a name: ")));
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter a Name: ")));
 
         var dateOfBirth = signUpChecker.ValidateDate(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter Date of Birth (DD-MM-YYYY): ")));
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter a Date of Birth (DD-MM-YYYY): ")));
         
         var address = signUpChecker.ValidateAddress(() =>
             AnsiConsole.Prompt(new TextPrompt<string>("Enter an Address: ")));
 
         var phoneNumber = signUpChecker.PhoneNumberRules(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your phonenumber: "))
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter a Phone Number: "))
         );
 
         var email = signUpChecker.ValidateEmail(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter an email address:"))
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter an Email Address:"))
         );
 
         var password = signUpChecker.PasswordRules(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter a password: ").Secret())
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter a Password: ").Secret())
         );
 
         var rights = AnsiConsole.Prompt(
@@ -155,5 +155,22 @@ static class CreateAccount
         }));
 
         accounts_logic.CreateUser(name, email, phoneNumber, rights, password, dateOfBirth, address, allergies);
+
+        Console.Clear();
+
+        AnsiConsole.MarkupLine($"[green]User ({name}) created successfully[/]");
+
+        var choices = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .PageSize(3)
+                .MoreChoicesText("[grey](Move up and down to reveal more choices)")
+                .AddChoices(new[] {
+                        "continue"            
+                }));   
+                
+        if (choices == "continue")
+        {
+            Console.Clear();
+        }
     }
 }
