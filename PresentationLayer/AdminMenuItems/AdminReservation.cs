@@ -3,6 +3,8 @@ static class AdminReservation
 {
     public static void MakeReservation()
     {
+        var foodMenu = new FoodMenu();
+
         AccountsLogic accountsLogic = new AccountsLogic();
 
         var name = AnsiConsole.Prompt(
@@ -62,7 +64,7 @@ static class AdminReservation
         Console.WriteLine($"\nThe first person is: {name}");
         var adminReservation = new PersonReservation(name);
 
-        HandleBlindExperience(adminReservation, name);
+        HandleBlindExperience(adminReservation, foodMenu, name);
         personReservations.Add(adminReservation);
 
         for (int i = 2; i <= personCount; i++)
@@ -73,7 +75,7 @@ static class AdminReservation
 
             var otherPersonReservation = new PersonReservation(otherPersonName);
 
-            HandleBlindExperience(otherPersonReservation, otherPersonName);
+            HandleBlindExperience(otherPersonReservation, foodMenu, otherPersonName);
             personReservations.Add(otherPersonReservation);
         }
 
@@ -85,10 +87,11 @@ static class AdminReservation
         accountsLogic.AddNewReservation(name, email, phoneNumber, new List<string>(), reservation);
 
         Console.WriteLine($"\nReservation complete!");
-        Console.WriteLine($"\nName: {name}, Phone Number: {phoneNumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {personCount}, End time: {reservation.EndTime}");
+        Console.WriteLine($"\nName: {name}, Phone Number: {phoneNumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {personCount}, End time: {reservation.EndTime}, Total Price: {reservation.TotalPrice}");
+        GoBack.GoBackReservationOption();
     }
 
-    private static void HandleBlindExperience(PersonReservation personReservation, string personName)
+    private static void HandleBlindExperience(PersonReservation personReservation, FoodMenu foodMenu, string personName)
     {
         Console.WriteLine($"\n{personName}, do you want a blind experience? (y/n)");
         string blindExperienceResponse = Console.ReadLine();
@@ -97,7 +100,19 @@ static class AdminReservation
         {
             personReservation.BlindExperience = true;
             Console.WriteLine($"{personName} has chosen a blind experience.");
-            personReservation.Food.Add("SURPRISE-MEAL");
+            
+            var surpriseDish = foodMenu._menuItems["Surprise Menu"].FirstOrDefault(d => d.Dish == "Surprise 3-Course Platter");
+            if (surpriseDish != null)
+            {
+                personReservation.Food.Add(surpriseDish.Dish);
+
+                string priceWithoutEuro = surpriseDish.Price.Replace("€", "").Replace(",", ".");
+                if (double.TryParse(priceWithoutEuro, out double surpriseDishPriceInCents))
+                {
+                    double surpriseDishPriceInEuros = surpriseDishPriceInCents / 100;
+                    personReservation.price += surpriseDishPriceInEuros;
+                }
+            }
 
             var allergies = AnsiConsole.Prompt(
                 new MultiSelectionPrompt<string>()

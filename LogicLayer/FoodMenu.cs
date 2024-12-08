@@ -6,6 +6,10 @@ public class FoodMenu
 {
     private static string menuFilePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"DataSources/foodmenu.json"));
     public Dictionary<string, List<MenuItem>> _menuItems = new Dictionary<string, List<MenuItem>>();
+    public string Category { get; set; }
+    public string Dish { get; set; }
+    public string Description { get; set; }
+    public string Price { get; set; }
 
     public FoodMenu()
     {
@@ -24,12 +28,12 @@ public class FoodMenu
             catch (Exception ex)
             {
                 Console.WriteLine($"Error loading menu: {ex.Message}");
-                _menuItems = new Dictionary<string, List<MenuItem>>(); // Initialize empty menu on error
+                _menuItems = new Dictionary<string, List<MenuItem>>();
             }
         }
         else
         {
-            _menuItems = new Dictionary<string, List<MenuItem>>(); // Initialize empty menu if file doesn't exist
+            _menuItems = new Dictionary<string, List<MenuItem>>();
         }
     }
 
@@ -202,79 +206,6 @@ public class FoodMenu
         AnsiConsole.Write(table);
     }
 
-
-    public List<string> GetAppetizersItems()
-    {
-        return new List<string>
-        {
-            "Bruschetta with Tomato and Basil",
-            "Stuffed Mushrooms",
-            "Arancini",
-            "Calamari Fritti",
-            "Spring Rolls",
-        };
-    }
-    public List<string> GetSoupsandSaladsItems()
-    {
-        return new List<string>
-        {
-            "Caesar Salad",
-            "Tomato Basil Soup",
-            "Greek Salad",
-            "Clam Chowder",
-            "Minestrone",
-            "Nicoise Salad"
-        };
-    }
-    public List<string> GetMainCourserItems()
-    {
-        return new List<string>
-        {
-            "Seared Wagyu Ribeye",
-            "Grilled Chicken",
-            "Spaghetti Carbonara",
-            "Beef Wellington",
-            "Vegetable Stir-Fry Tofu",
-            "Shrimp Scampi with Linguine",
-            "Grilled Salmon Teriyaki"
-        };
-    }
-    public List<string> GetSideDishesItems()
-    {
-        return new List<string>
-        {
-            "Roasted Brussels Sprouts with Balsamic Glaze",
-            "Sweet Potato Fries",
-            "Creamed Spinach"
-        };
-    }
-    public List<string> GetDessertsItems()
-    {
-        return new List<string>
-        {
-            "New York Cheesecake",
-            "Tiramisu",
-            "Chocolate Fondant",
-            "Fruit Salad",
-            "Crème Brûlée",
-            "Grand Dessert Platter"
-        };
-    }
-    public List<string> GetDrinksItems()
-    {
-        return new List<string>
-        {
-            "Fresh Orange Juice",
-            "Cappuccino",
-            "Espresso",
-            "Latte",
-            "House Red Wine",
-            "Coca-Cola",
-            "Tonic Water",
-            "Classic Mojito"
-        };
-    }
-
     public static List<string> GetAllergyOptions()
     {
         return new List<string> {
@@ -316,4 +247,13 @@ public class FoodMenu
     //     AnsiConsole.Clear();
     //     AnsiConsole.Render(table);
     // }
+}
+public static class FoodMenuLoader
+{
+    public static Dictionary<string, List<FoodMenu>> LoadMenuFromJson(string filePath)
+    {
+        string jsonString = File.ReadAllText(filePath);
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        return JsonSerializer.Deserialize<Dictionary<string, List<FoodMenu>>>(jsonString, options);
+    }
 }

@@ -1,6 +1,7 @@
 using Spectre.Console;
 static class UserReservation
 {
+    private static string menuFilePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"DataSources/foodmenu.json"));
     public static void MakeReservation()
     {
         AccountsLogic accountsLogic = new AccountsLogic();
@@ -144,8 +145,21 @@ static class UserReservation
             reservation.People.Add(otherPersonReservation);
         }
 
-        var payment = new Payment();
-        payment.StartPayment();
+        Console.WriteLine($"Your total price to pay is €{reservation.TotalPrice}.");
+        Console.WriteLine("Do you want to pay now? (y/n)");
+        string pay = Console.ReadLine();
+
+        if (pay == "y" || pay == "Y")
+        {
+            reservation.isPaid = true;
+            var payment = new Payment();
+            payment.StartPayment();
+        }
+        else if (pay == "n" || pay == "N")
+        {
+            reservation.isPaid = false;
+            Console.WriteLine($"You will have to pay a total of €{reservation.TotalPrice} at the restaurant.");
+        }
 
         Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}\nStart Time: {time}\nEnd Time: {reservation.EndTime}\nAmount of persons: {personCount}\n");
 
@@ -153,11 +167,6 @@ static class UserReservation
 
         Console.WriteLine($"\nReservation complete!");
         UserMenu.UserMenuStart();
-    }
-
-    private static void HandleFoodSelectionAdmin(PersonReservation personReservation)
-    {
-        return;
     }
 
     private static void HandleFoodSelection(PersonReservation personReservation, FoodMenu foodMenu, string personName)
@@ -168,7 +177,19 @@ static class UserReservation
         {
             personReservation.BlindExperience = true;
             Console.WriteLine($"{personName} has chosen a blind experience.");
-            personReservation.Food.Add("SURPRISE-MEAL");
+            
+            var surpriseDish = foodMenu._menuItems["Surprise Menu"].FirstOrDefault(d => d.Dish == "Surprise 3-Course Platter");
+            if (surpriseDish != null)
+            {
+                personReservation.Food.Add(surpriseDish.Dish);
+
+                string priceWithoutEuro = surpriseDish.Price.Replace("€", "").Replace(",", ".");
+                if (double.TryParse(priceWithoutEuro, out double surpriseDishPriceInCents))
+                {
+                    double surpriseDishPriceInEuros = surpriseDishPriceInCents / 100;
+                    personReservation.price += surpriseDishPriceInEuros;
+                }
+            }
         }
         else
         {
@@ -177,73 +198,43 @@ static class UserReservation
             if (chooseFood == "y" || chooseFood == "Y")
             {
                 foodMenu.DisplayFoodMenu();
+                var foodData = FoodMenuLoader.LoadMenuFromJson(menuFilePath);
 
-                var selectedAppetizers = AnsiConsole.Prompt(
-                    new MultiSelectionPrompt<string>()
-                        .Title($"{personName}, select your Appetizer(s) (Press <enter> to skip):")
-                        .PageSize(10)
-                        .InstructionsText(
-                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                        .AddChoices(foodMenu.GetAppetizersItems())
-                        .Required(false)
-                );
+                int index = 0;
+                foreach (var category in foodData.Keys)
+                {
+                    if (index == 0)
+                    {
+                        index++;
+                        continue;
+                    }
 
-                var selectedSoupsAndSalads = AnsiConsole.Prompt(
-                    new MultiSelectionPrompt<string>()
-                        .Title($"{personName}, select your Soups and Salads (Press <enter> to skip):")
-                        .PageSize(10)
-                        .InstructionsText(
-                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                        .AddChoices(foodMenu.GetSoupsandSaladsItems())
-                        .Required(false)
-                );
+                    var dishesInCategory = foodData[category];
 
-                var selectedMainCourses = AnsiConsole.Prompt(
-                    new MultiSelectionPrompt<string>()
-                        .Title($"{personName}, select your Main course(s) (Press <enter> to skip):")
-                        .PageSize(10)
-                        .InstructionsText(
-                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                        .AddChoices(foodMenu.GetMainCourserItems())
-                        .Required(false)
-                );
+                    var selectedDishes = AnsiConsole.Prompt(
+                        new MultiSelectionPrompt<string>()
+                            .Title($"{personName}, select your {category} (Press <enter> to skip):")
+                            .PageSize(10)
+                            .InstructionsText("[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                            .AddChoices(dishesInCategory.Select(d => $"{d.Dish}").ToList())
+                            .Required(false)
+                    );
 
-                var selectedSideDishes = AnsiConsole.Prompt(
-                    new MultiSelectionPrompt<string>()
-                        .Title($"{personName}, select your Side dishe(s) (Press <enter> to skip):")
-                        .PageSize(10)
-                        .InstructionsText(
-                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                        .AddChoices(foodMenu.GetSideDishesItems())
-                        .Required(false)
-                );
+                    foreach (var dishName in selectedDishes)
+                    {
+                        var selectedDish = dishesInCategory.First(d => d.Dish == dishName);
+                        personReservation.Food.Add(selectedDish.Dish);
 
-                var selectedDesserts = AnsiConsole.Prompt(
-                    new MultiSelectionPrompt<string>()
-                        .Title($"{personName}, select your Dessert(s) (Press <enter> to skip):")
-                        .PageSize(10)
-                        .InstructionsText(
-                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                        .AddChoices(foodMenu.GetDessertsItems())
-                        .Required(false)
-                );
+                        string priceWithoutEuro = selectedDish.Price.Replace("€", "").Replace(",", ".");
+                        if (double.TryParse(priceWithoutEuro, out double dishPriceInCents))
+                        {
+                            double dishPriceInEuros = dishPriceInCents / 100;
+                            personReservation.price += dishPriceInEuros;
+                        }
+                    }
+                    index++;
+                }
 
-                var selectedDrinks = AnsiConsole.Prompt(
-                    new MultiSelectionPrompt<string>()
-                        .Title($"{personName}, select your Drink(s) (Press <enter> to skip):")
-                        .PageSize(10)
-                        .InstructionsText(
-                            "[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                        .AddChoices(foodMenu.GetDrinksItems())
-                        .Required(false)
-                );
-
-                personReservation.Food.AddRange(selectedAppetizers);
-                personReservation.Food.AddRange(selectedSoupsAndSalads);
-                personReservation.Food.AddRange(selectedMainCourses);
-                personReservation.Food.AddRange(selectedSideDishes);
-                personReservation.Food.AddRange(selectedDesserts);
-                personReservation.Food.AddRange(selectedDrinks);
             }
             else
             {
@@ -252,8 +243,6 @@ static class UserReservation
             }
         }
     }
-
-
 
     public static void CancelReservation()
     {

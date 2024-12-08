@@ -8,31 +8,25 @@
     "isEmployee": false,
     "reservations": [
       {
-        "Date": "2024-12-05T17:00:00+01:00",
-        "Time": "17:00",
-        "EndTime": "19:00",
-        "PersonCount": "2",
-        "TableNumber": 1,
+        "Date": "2024-12-09T10:00:00+01:00",
+        "Time": "10:00",
+        "EndTime": "12:00",
+        "PersonCount": "1",
+        "TableNumber": 20,
+        "TotalPrice": 55,
+        "isPaid": false,
         "People": [
           {
             "Name": "John Doe",
             "BlindExperience": true,
             "Food": [
-              "SURPRISE-MEAL"
-            ],
-            "Allergies": []
-          },
-          {
-            "Name": "v",
-            "BlindExperience": true,
-            "Food": [
-              "SURPRISE-MEAL"
+              "Surprise 3-Course Platter"
             ],
             "Allergies": [
-              "Fish",
-              "Peanuts",
-              "Eggs"
-            ]
+              "Tree Nuts",
+              "Soy"
+            ],
+            "price": 55
           }
         ]
       }
@@ -40,7 +34,10 @@
     "name": "John Doe",
     "emailAddress": "john@example.com",
     "phoneNumber": "1234567890",
-    "preferences": []
+    "preferences": [
+      "Tree Nuts",
+      "Soy"
+    ]
   },
   {
     "password": "adminpass",
@@ -121,6 +118,8 @@
         "EndTime": "18:00",
         "PersonCount": "2",
         "TableNumber": 1,
+        "TotalPrice": 0,
+        "isPaid": false,
         "People": []
       }
     ],
@@ -158,6 +157,8 @@
         "EndTime": "18:00",
         "PersonCount": "3",
         "TableNumber": 9,
+        "TotalPrice": 0,
+        "isPaid": false,
         "People": [
           {
             "Name": "ss",
@@ -167,13 +168,15 @@
             ],
             "Allergies": [
               "Tree Nuts"
-            ]
+            ],
+            "price": 0
           },
           {
             "Name": "trv",
             "BlindExperience": false,
             "Food": [],
-            "Allergies": []
+            "Allergies": [],
+            "price": 0
           },
           {
             "Name": "rf",
@@ -187,7 +190,28 @@
               "Peanuts",
               "Shellfish",
               "Eggs"
-            ]
+            ],
+            "price": 0
+          }
+        ]
+      },
+      {
+        "Date": "2024-12-09T10:00:00+01:00",
+        "Time": "10:00",
+        "EndTime": "12:00",
+        "PersonCount": "1",
+        "TableNumber": 18,
+        "TotalPrice": 55,
+        "isPaid": false,
+        "People": [
+          {
+            "Name": "2",
+            "BlindExperience": true,
+            "Food": [
+              "Surprise 3-Course Platter"
+            ],
+            "Allergies": [],
+            "price": 55
           }
         ]
       }
@@ -211,6 +235,8 @@
         "EndTime": "18:00",
         "PersonCount": "3",
         "TableNumber": 10,
+        "TotalPrice": 0,
+        "isPaid": false,
         "People": [
           {
             "Name": "ak",
@@ -220,13 +246,15 @@
             ],
             "Allergies": [
               "Tree Nuts"
-            ]
+            ],
+            "price": 0
           },
           {
             "Name": "n",
             "BlindExperience": false,
             "Food": [],
-            "Allergies": []
+            "Allergies": [],
+            "price": 0
           },
           {
             "Name": "y",
@@ -234,7 +262,30 @@
             "Food": [
               "SURPRISE-MEAL"
             ],
-            "Allergies": []
+            "Allergies": [],
+            "price": 0
+          }
+        ]
+      },
+      {
+        "Date": "2024-12-09T10:00:00+01:00",
+        "Time": "10:00",
+        "EndTime": "12:00",
+        "PersonCount": "1",
+        "TableNumber": 19,
+        "TotalPrice": 55,
+        "isPaid": false,
+        "People": [
+          {
+            "Name": "1",
+            "BlindExperience": true,
+            "Food": [
+              "Surprise 3-Course Platter"
+            ],
+            "Allergies": [
+              "Tree Nuts"
+            ],
+            "price": 55
           }
         ]
       }
@@ -258,6 +309,8 @@
         "EndTime": "18:00",
         "PersonCount": "3",
         "TableNumber": 11,
+        "TotalPrice": 0,
+        "isPaid": false,
         "People": [
           {
             "Name": "Aaaaa",
@@ -269,13 +322,15 @@
               "Tree Nuts",
               "Soy",
               "Fish"
-            ]
+            ],
+            "price": 0
           },
           {
             "Name": "e",
             "BlindExperience": false,
             "Food": [],
-            "Allergies": []
+            "Allergies": [],
+            "price": 0
           },
           {
             "Name": "t",
@@ -283,7 +338,8 @@
             "Food": [
               "SURPRISE-MEAL"
             ],
-            "Allergies": []
+            "Allergies": [],
+            "price": 0
           }
         ]
       }
@@ -291,6 +347,152 @@
     "name": "Aaaaa",
     "emailAddress": "aa",
     "phoneNumber": "aaa",
+    "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-12-07T19:00:00+01:00",
+        "Time": "19:00",
+        "EndTime": "21:00",
+        "PersonCount": "2",
+        "TableNumber": 1,
+        "TotalPrice": 0,
+        "isPaid": false,
+        "People": [
+          {
+            "Name": "e",
+            "BlindExperience": false,
+            "Food": [],
+            "Allergies": [],
+            "price": 0
+          },
+          {
+            "Name": "g",
+            "BlindExperience": true,
+            "Food": [
+              "SURPRISE-MEAL"
+            ],
+            "Allergies": [
+              "Tree Nuts",
+              "Soy",
+              "Fish"
+            ],
+            "price": 0
+          }
+        ]
+      }
+    ],
+    "name": "e",
+    "emailAddress": "e",
+    "phoneNumber": "e",
+    "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-12-09T10:00:00+01:00",
+        "Time": "10:00",
+        "EndTime": "12:00",
+        "PersonCount": "2",
+        "TableNumber": 1,
+        "TotalPrice": 55,
+        "isPaid": false,
+        "People": [
+          {
+            "Name": "a",
+            "BlindExperience": true,
+            "Food": [
+              "Surprise 3-Course Platter"
+            ],
+            "Allergies": [
+              "Tree Nuts"
+            ],
+            "price": 55
+          },
+          {
+            "Name": "h",
+            "BlindExperience": false,
+            "Food": [],
+            "Allergies": [],
+            "price": 0
+          }
+        ]
+      },
+      {
+        "Date": "2024-12-09T10:00:00+01:00",
+        "Time": "10:00",
+        "EndTime": "12:00",
+        "PersonCount": "1",
+        "TableNumber": 17,
+        "TotalPrice": 55,
+        "isPaid": false,
+        "People": [
+          {
+            "Name": "a",
+            "BlindExperience": true,
+            "Food": [
+              "Surprise 3-Course Platter"
+            ],
+            "Allergies": [
+              "Tree Nuts"
+            ],
+            "price": 55
+          }
+        ]
+      }
+    ],
+    "name": "a",
+    "emailAddress": "a",
+    "phoneNumber": "a",
+    "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [
+      {
+        "Date": "2024-12-09T10:00:00+01:00",
+        "Time": "10:00",
+        "EndTime": "12:00",
+        "PersonCount": "1",
+        "TableNumber": 16,
+        "TotalPrice": 55,
+        "isPaid": false,
+        "People": [
+          {
+            "Name": "r",
+            "BlindExperience": true,
+            "Food": [
+              "Surprise 3-Course Platter"
+            ],
+            "Allergies": [
+              "Tree Nuts"
+            ],
+            "price": 55
+          }
+        ]
+      }
+    ],
+    "name": "r",
+    "emailAddress": "y",
+    "phoneNumber": "t",
     "preferences": []
   }
 ]
