@@ -124,49 +124,63 @@ static class UserReservation
 
             var otherPersonReservation = new PersonReservation(personName);
 
-            Console.WriteLine($"\n{personName}, do you have any allergies? (y/n)");
-            string hasOtherAllergies = Console.ReadLine();
-            if (hasOtherAllergies == "y" || hasOtherAllergies == "Y")
+            while (true)
             {
-                var allergies = AnsiConsole.Prompt(
-                    new MultiSelectionPrompt<string>()
-                        .Title($"{personName}, select your allergies (Press <enter> to skip):")
-                        .PageSize(10)
-                        .InstructionsText("[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                        .AddChoices(FoodMenu.GetAllergyOptions())
-                        .Required(false)
-                );
+                Console.WriteLine($"\n{personName}, do you have any allergies? (y/n)");
+                string hasOtherAllergies = Console.ReadLine();
+                if (hasOtherAllergies == "y" || hasOtherAllergies == "Y")
+                {
+                    var allergies = AnsiConsole.Prompt(
+                        new MultiSelectionPrompt<string>()
+                            .Title($"{personName}, select your allergies (Press <enter> to skip):")
+                            .PageSize(10)
+                            .InstructionsText("[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                            .AddChoices(FoodMenu.GetAllergyOptions())
+                            .Required(false)
+                    );
 
-                otherPersonReservation.Allergies.AddRange(allergies);
+                    otherPersonReservation.Allergies.AddRange(allergies);
+                    break;
+                }
+                else if (hasOtherAllergies == "n" || hasOtherAllergies == "N")
+                {
+                    Console.WriteLine($"{personName} has no allergies.");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                }
             }
-            else
-            {
-                Console.WriteLine($"{personName} has no allergies.");
-            }
-
-            HandleFoodSelection(otherPersonReservation, foodMenu, personName);
-            reservation.People.Add(otherPersonReservation);
+                HandleFoodSelection(otherPersonReservation, foodMenu, personName);
+                reservation.People.Add(otherPersonReservation);
         }
 
         
         if (reservation.TotalPrice > 0)
         {
-            Console.WriteLine($"Your total price to pay is €{reservation.TotalPrice}.");
-            double roundedprice = Math.Round(reservation.TotalPrice, 2);
-            string formattedPrice = string.Format(CultureInfo.InvariantCulture, "€{0:F2}", roundedprice);
-            Console.WriteLine("Do you want to pay now? (y/n)");
-            string pay = Console.ReadLine();
-
-            if (pay == "y" || pay == "Y")
-            {
-                reservation.isPaid = true;
-                var payment = new Payment();
-                payment.StartPayment();
-            }
-            else if (pay == "n" || pay == "N")
-            {
-                reservation.isPaid = false;
-                Console.WriteLine($"You will have to pay a total of €{reservation.TotalPrice} at the restaurant.");
+            while (true) {
+                double totalprice = reservation.TotalPrice;
+                string realPrice = FoodMenu.HandleDecimals(totalprice);
+                Console.WriteLine($"Your total price to pay is €{realPrice}.");
+                Console.WriteLine("Do you want to pay now? (y/n)");
+                string pay = Console.ReadLine();
+                if (pay == "y" || pay == "Y")
+                {
+                    reservation.isPaid = true;
+                    var payment = new Payment();
+                    payment.StartPayment();
+                    break;
+                }
+                else if (pay == "n" || pay == "N")
+                {
+                    reservation.isPaid = false;
+                    Console.WriteLine($"You will have to pay a total of €{realPrice} at the restaurant.");
+                    break;
+                } else
+                {
+                    Console.WriteLine("Invalid input");
+                }
             }
         }
 
@@ -180,82 +194,107 @@ static class UserReservation
 
     private static void HandleFoodSelection(PersonReservation personReservation, FoodMenu foodMenu, string personName)
     {
-        Console.WriteLine($"\n{personName}, do you want a blind experience? (y/n)");
-        string chooseBlindExperience = Console.ReadLine();
-        if (chooseBlindExperience == "y" || chooseBlindExperience == "Y")
+        bool isFinished = false;
+        while (!isFinished)
         {
-            personReservation.BlindExperience = true;
-            Console.WriteLine($"{personName} has chosen a blind experience.");
-            
-            var surpriseDish = foodMenu._menuItems["Surprise Menu"].FirstOrDefault(d => d.Category == "Surprise Menu");
-            if (surpriseDish != null)
+            Console.WriteLine($"\n{personName}, do you want a blind experience? (y/n)");
+            string chooseBlindExperience = Console.ReadLine();
+            if (chooseBlindExperience == "y" || chooseBlindExperience == "Y")
             {
-                personReservation.Food.Add(surpriseDish.Dish);
-
-                string priceWithoutEuro = surpriseDish.Price.Replace("€", "");
-                double price = Convert.ToDouble(priceWithoutEuro);
+                personReservation.BlindExperience = true;
+                Console.WriteLine($"{personName} has chosen a blind experience.");
                 
-
-                if (double.TryParse(priceWithoutEuro, out double surpriseDishPriceInCents))
+                var surpriseDish = foodMenu._menuItems["Surprise Menu"].FirstOrDefault(d => d.Category == "Surprise Menu");
+                if (surpriseDish != null)
                 {
-                    double surpriseDishPriceInEuros = surpriseDishPriceInCents / 100;
-                    string realPrice = FoodMenu.HandleDecimals(surpriseDishPriceInEuros);
-                    Console.WriteLine($"{realPrice}");
-                    personReservation.price += surpriseDishPriceInEuros;
+                    personReservation.Food.Add(surpriseDish.Dish);
+
+                    string priceWithoutEuro = surpriseDish.Price.Replace("€", "");
+                    double price = Convert.ToDouble(priceWithoutEuro);
+                    
+
+                    if (double.TryParse(priceWithoutEuro, out double surpriseDishPriceInCents))
+                    {
+                        double surpriseDishPriceInEuros = surpriseDishPriceInCents / 100;
+                        string realPrice = FoodMenu.HandleDecimals(surpriseDishPriceInEuros);
+
+                        personReservation.price += surpriseDishPriceInEuros;
+                    }
                 }
+                isFinished = true;
             }
-        }
-        else
-        {
-            Console.WriteLine($"\n{personName}: Do you want to select your food? (y/n)");
-            string chooseFood = Console.ReadLine();
-            if (chooseFood == "y" || chooseFood == "Y")
+            else if (chooseBlindExperience == "n" || chooseBlindExperience == "N")
             {
-                foodMenu.DisplayFoodMenu();
-                var foodData = FoodMenuLoader.LoadMenuFromJson(menuFilePath);
-
-                int index = 0;
-                foreach (var category in foodData.Keys)
+                while (true)
                 {
-                    if (index == 0)
+                Console.WriteLine($"\n{personName}: Do you want to select your food? (y/n)");
+                string chooseFood = Console.ReadLine();
+                if (chooseFood == "y" || chooseFood == "Y")
+                {
+                    foodMenu.DisplayFoodMenu();
+                    var foodData = FoodMenuLoader.LoadMenuFromJson(menuFilePath);
+
+                    int index = 0;
+                    foreach (var category in foodData.Keys)
                     {
-                        index++;
-                        continue;
-                    }
-
-                    var dishesInCategory = foodData[category];
-
-                    var selectedDishes = AnsiConsole.Prompt(
-                        new MultiSelectionPrompt<string>()
-                            .Title($"{personName}, select your {category} (Press <enter> to skip):")
-                            .PageSize(10)
-                            .InstructionsText("[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
-                            .AddChoices(dishesInCategory.Select(d => $"{d.Dish}").ToList())
-                            .Required(false)
-                    );
-
-                    foreach (var dishName in selectedDishes)
-                    {
-                        var selectedDish = dishesInCategory.First(d => d.Dish == dishName);
-                        personReservation.Food.Add(selectedDish.Dish);
-
-                        string priceWithoutEuro = selectedDish.Price.Replace("€", "").Replace(",", ".");
-                        if (double.TryParse(priceWithoutEuro, out double dishPriceInCents))
+                        if (index == 0)
                         {
-                            double dishPriceInEuros = dishPriceInCents / 100;
-                            personReservation.price += dishPriceInEuros;
+                            index++;
+                            continue;
                         }
-                    }
-                    index++;
-                }
 
+                        var dishesInCategory = foodData[category];
+
+                        var selectedDishes = AnsiConsole.Prompt(
+                            new MultiSelectionPrompt<string>()
+                                .Title($"{personName}, select your {category} (Press <enter> to skip):")
+                                .PageSize(10)
+                                .InstructionsText("[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
+                                .AddChoices(dishesInCategory.Select(d => $"{d.Dish}").ToList())
+                                .Required(false)
+                        );
+
+                        foreach (var dishName in selectedDishes)
+                        {
+                            var selectedDish = dishesInCategory.First(d => d.Dish == dishName);
+                            personReservation.Food.Add(selectedDish.Dish);
+
+                            string priceWithoutEuro = selectedDish.Price.Replace("€", "");
+                            double price = Convert.ToDouble(priceWithoutEuro);
+
+                            if (double.TryParse(priceWithoutEuro, out double dishPriceInCents))
+                            {
+                                double dishPriceInEuros = dishPriceInCents / 100;
+                                string realPrice = FoodMenu.HandleDecimals(dishPriceInEuros);
+                                Console.WriteLine($"{realPrice}");
+                                personReservation.price += dishPriceInEuros;
+                            }
+                        }
+                        index++;
+                    }
+                    isFinished = true;
+                    break;
+
+                }
+                else if (chooseFood == "n" || chooseFood == "N")
+                {
+                    Console.WriteLine($"{personName} chose not to select any food.");
+                    personReservation.Food.Add("Will choose in the restaurant");
+                    isFinished = true;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                }
+                }
             }
             else
             {
-                Console.WriteLine($"{personName} chose not to select any food.");
-                personReservation.Food.Add("Will choose in the restaurant");
+                Console.WriteLine("Invalid input");
             }
         }
+        
     }
 
     public static void CancelReservation()

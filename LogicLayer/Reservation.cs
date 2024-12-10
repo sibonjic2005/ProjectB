@@ -38,7 +38,6 @@ public class PersonReservation
     public bool BlindExperience { get; set; }
     public List<string> Food { get; set; }
     public List<string> Allergies { get; set; }
-
     public double price { get; set; }
 
     public PersonReservation(string name)
