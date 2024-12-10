@@ -15,7 +15,7 @@ static class UserLogin
         if (user != null)
         {
             Console.Clear();
-            Console.WriteLine($"Welcome back, {user.Name}!");
+            AnsiConsole.MarkupLine($"Welcome back, [green3_1]{user.Name}[/]!");
             AccountsLogic.CurrentAccount = user;
 
             if (user.IsAdmin)
@@ -46,7 +46,7 @@ static class UserLogin
 
         if (user != null)
         {
-            Console.WriteLine($"Welcome {user.Name}!");
+            AnsiConsole.MarkupLine($"Welcome [green3_1]{user.Name}[/]!");
             AccountsLogic.CurrentAccount = user;
             UserMenu.UserMenuStart();
         }
