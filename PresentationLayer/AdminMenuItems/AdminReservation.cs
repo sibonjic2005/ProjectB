@@ -87,7 +87,7 @@ static class AdminReservation
         accountsLogic.AddNewReservation(name, email, phoneNumber, new List<string>(), reservation);
 
         Console.WriteLine($"\nReservation complete!");
-        Console.WriteLine($"\nName: {name}, Phone Number: {phoneNumber}, Email: {email}, Date: {date:dddd, MMMM dd, yyyy}, Time: {time}, Amount of persons: {personCount}, End time: {reservation.EndTime}, Total Price: {reservation.TotalPrice}");
+        Console.WriteLine($"\nName: {name}\nPhone Number: {phoneNumber}\nEmail: {email}\nDate: {date:dddd, MMMM dd, yyyy}\nTime: {time}\nAmount of persons: {personCount}\nEnd time: {reservation.EndTime}\nTotal Price: €{reservation.TotalPrice}");
         GoBack.GoBackReservationOption();
     }
 

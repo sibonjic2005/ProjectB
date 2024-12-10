@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Security.Cryptography;
 using Spectre.Console;
 static class UserReservation
 {
@@ -146,20 +148,26 @@ static class UserReservation
             reservation.People.Add(otherPersonReservation);
         }
 
-        Console.WriteLine($"Your total price to pay is €{reservation.TotalPrice}.");
-        Console.WriteLine("Do you want to pay now? (y/n)");
-        string pay = Console.ReadLine();
+        
+        if (reservation.TotalPrice > 0)
+        {
+            Console.WriteLine($"Your total price to pay is €{reservation.TotalPrice}.");
+            double roundedprice = Math.Round(reservation.TotalPrice, 2);
+            string formattedPrice = string.Format(CultureInfo.InvariantCulture, "€{0:F2}", roundedprice);
+            Console.WriteLine("Do you want to pay now? (y/n)");
+            string pay = Console.ReadLine();
 
-        if (pay == "y" || pay == "Y")
-        {
-            reservation.isPaid = true;
-            var payment = new Payment();
-            payment.StartPayment();
-        }
-        else if (pay == "n" || pay == "N")
-        {
-            reservation.isPaid = false;
-            Console.WriteLine($"You will have to pay a total of €{reservation.TotalPrice} at the restaurant.");
+            if (pay == "y" || pay == "Y")
+            {
+                reservation.isPaid = true;
+                var payment = new Payment();
+                payment.StartPayment();
+            }
+            else if (pay == "n" || pay == "N")
+            {
+                reservation.isPaid = false;
+                Console.WriteLine($"You will have to pay a total of €{reservation.TotalPrice} at the restaurant.");
+            }
         }
 
         Console.WriteLine($"\nDate: {formattedDate:dddd, MMMM dd, yyyy, hh:mm tt}\nStart Time: {time}\nEnd Time: {reservation.EndTime}\nAmount of persons: {personCount}\n");
@@ -184,10 +192,15 @@ static class UserReservation
             {
                 personReservation.Food.Add(surpriseDish.Dish);
 
-                string priceWithoutEuro = surpriseDish.Price.Replace("€", "").Replace(",", ".");
+                string priceWithoutEuro = surpriseDish.Price.Replace("€", "");
+                double price = Convert.ToDouble(priceWithoutEuro);
+                
+
                 if (double.TryParse(priceWithoutEuro, out double surpriseDishPriceInCents))
                 {
                     double surpriseDishPriceInEuros = surpriseDishPriceInCents / 100;
+                    string realPrice = FoodMenu.HandleDecimals(surpriseDishPriceInEuros);
+                    Console.WriteLine($"{realPrice}");
                     personReservation.price += surpriseDishPriceInEuros;
                 }
             }
