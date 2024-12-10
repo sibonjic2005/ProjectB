@@ -27,6 +27,11 @@ class AccountsLogic
         return accountMails;
     }
 
+    public bool EmailExists(string email)
+    {
+        return _accounts.Any(user => user.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
+    }
+
     public string CheckUserRights(UserModel user)
     {
         if (user.IsAdmin)
@@ -88,6 +93,10 @@ class AccountsLogic
 
     public void CreateUser(string name, string email, string phone, string rights, string password = "", string dateOfBirth = "", string address = "", List<string> preferences = null)
     {
+        if (EmailExists(email))
+        {
+            
+        }
         if (rights == "Employee rights")
         {
             CreateEmployee(name, email, phone, password, dateOfBirth, address, preferences);

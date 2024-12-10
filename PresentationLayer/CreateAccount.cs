@@ -19,10 +19,19 @@ static class CreateAccount
         var phoneNumber = signUpChecker.PhoneNumberRules(() =>
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your Phone Number: "))
         );
+        string email;
 
-        var email = signUpChecker.ValidateEmail(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Email Address:"))
-        );
+        while (true)
+        {
+            email = signUpChecker.ValidateEmail(() => 
+                AnsiConsole.Prompt(new TextPrompt<string>("Enter your Email Address:"))
+            );
+            if (!accounts_logic.EmailExists(email))
+            {
+                break;
+            }
+                EmailInUse();
+        }
 
         var password = signUpChecker.PasswordRules(() => 
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your Password: (Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.)").Secret())
@@ -73,9 +82,19 @@ static class CreateAccount
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your Phone Number: "))
         );
 
-        var email = signUpChecker.ValidateEmail(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Email Address:"))
-        );
+        string email;
+
+        while (true)
+        {
+            email = signUpChecker.ValidateEmail(() => 
+                AnsiConsole.Prompt(new TextPrompt<string>("Enter your Email Address:"))
+            );
+            if (!accountsLogic.EmailExists(email))
+            {
+                break;
+            }
+                EmailInUse();
+        }
 
         var allergies = AnsiConsole.Prompt(
             new MultiSelectionPrompt<string>()
@@ -122,9 +141,19 @@ static class CreateAccount
             AnsiConsole.Prompt(new TextPrompt<string>("Enter a Phone Number: "))
         );
 
-        var email = signUpChecker.ValidateEmail(() => 
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter an Email Address:"))
-        );
+        string email;
+
+        while (true)
+        {
+            email = signUpChecker.ValidateEmail(() => 
+                AnsiConsole.Prompt(new TextPrompt<string>("Enter your Email Address:"))
+            );
+            if (!accounts_logic.EmailExists(email))
+            {
+                break;
+            }
+                EmailInUse();
+        }
 
         var password = signUpChecker.PasswordRules(() => 
             AnsiConsole.Prompt(new TextPrompt<string>("Enter a Password: ").Secret())
@@ -173,5 +202,10 @@ static class CreateAccount
         {
             Console.Clear();
         }
+    }
+
+    public static void EmailInUse()
+    {
+        Console.WriteLine("An account with this email already exists.");
     }
 }
