@@ -7,6 +7,7 @@ static class UserReservation
     public static void MakeReservation()
     {
         AccountsLogic accountsLogic = new AccountsLogic();
+        SignUpChecker signUpChecker= new SignUpChecker();
         string email = AccountsLogic.CurrentAccount?.EmailAddress;
         string accountName = AccountsLogic.CurrentAccount?.Name;
         var user = accountsLogic.GetByEmail(email);
@@ -119,8 +120,8 @@ static class UserReservation
 
         for (int i = 1; i < personCount; i++)
         {
-            Console.Write($"Enter the name for person {i + 1}: ");
-            string personName = Console.ReadLine();
+            var personName = signUpChecker.ValidateName(() =>
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Name: ")));
 
             var otherPersonReservation = new PersonReservation(personName);
 
