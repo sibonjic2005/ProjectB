@@ -132,6 +132,7 @@ static class UserReservation
                         .PageSize(10)
                         .InstructionsText("[grey](Use <space> to toggle an item, <enter> to confirm your selections)[/]")
                         .AddChoices(FoodMenu.GetAllergyOptions())
+                        .Required(false)
                 );
 
                 otherPersonReservation.Allergies.AddRange(allergies);
@@ -178,7 +179,7 @@ static class UserReservation
             personReservation.BlindExperience = true;
             Console.WriteLine($"{personName} has chosen a blind experience.");
             
-            var surpriseDish = foodMenu._menuItems["Surprise Menu"].FirstOrDefault(d => d.Dish == "Surprise 3-Course Platter");
+            var surpriseDish = foodMenu._menuItems["Surprise Menu"].FirstOrDefault(d => d.Category == "Surprise Menu");
             if (surpriseDish != null)
             {
                 personReservation.Food.Add(surpriseDish.Dish);

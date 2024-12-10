@@ -8,13 +8,13 @@
     "isEmployee": false,
     "reservations": [
       {
-        "Date": "2024-12-09T10:00:00+01:00",
+        "Date": "2024-12-10T10:00:00+01:00",
         "Time": "10:00",
         "EndTime": "12:00",
         "PersonCount": "1",
-        "TableNumber": 20,
+        "TableNumber": 16,
         "TotalPrice": 55,
-        "isPaid": false,
+        "isPaid": true,
         "People": [
           {
             "Name": "John Doe",
@@ -23,7 +23,6 @@
               "Surprise 3-Course Platter"
             ],
             "Allergies": [
-              "Tree Nuts",
               "Soy"
             ],
             "price": 55
@@ -35,7 +34,6 @@
     "emailAddress": "john@example.com",
     "phoneNumber": "1234567890",
     "preferences": [
-      "Tree Nuts",
       "Soy"
     ]
   },

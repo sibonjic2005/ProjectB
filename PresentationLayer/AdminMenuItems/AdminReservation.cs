@@ -123,6 +123,7 @@ static class AdminReservation
                     .InstructionsText(
                         "[grey](Press [blue]<space>[/] to choose an allergy, [green]<enter>[/] to accept)[/]")
                     .AddChoices(FoodMenu.GetAllergyOptions())
+                    .Required(false)
             );
 
             personReservation.Allergies.AddRange(allergies);
