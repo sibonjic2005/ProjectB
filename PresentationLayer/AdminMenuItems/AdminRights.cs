@@ -53,6 +53,7 @@ class AdminRights
         AccountsLogic accountsLogic = new AccountsLogic();
         var allUsers = accountsLogic.LoadAllUsers();
         List<string> allUsersMail = accountsLogic.LoadAllUsersMail();
+        allUsersMail.Add("Go back");
 
         var userMail = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -60,6 +61,11 @@ class AdminRights
                 .PageSize(10)
                 .AddChoices(allUsersMail)
         );
+
+        if (userMail == "Go back")
+        {
+            AdminMenu.AdminMenuStart();
+        }
 
         accountsLogic.AdminDeleteAccount(userMail);
         GoBack.GoBackAdminMenu();
