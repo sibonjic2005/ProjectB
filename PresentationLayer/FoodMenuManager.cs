@@ -12,6 +12,8 @@ public  class FoodMenuManager
 
     public void ManageMenu()
     {
+        List<string> options = foodMenu._menuItems.Keys.ToList();
+        options.Add("Go back to Admin Menu");
         while (true)
         {
             // Display options to the user
@@ -26,7 +28,12 @@ public  class FoodMenuManager
                     var category = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                             .Title("Select a [green]category[/]:")
-                            .AddChoices(foodMenu._menuItems.Keys.ToArray()));
+                            .AddChoices(options));
+                    
+                    if (category == "Go back to Admin Menu")
+                    {
+                        AdminMenu.AdminMenuStart();
+                    }
 
                     var dish = AnsiConsole.Ask<string>("Enter the [green]dish name[/]:");
                     var description = AnsiConsole.Ask<string>("Enter the [green]description[/]:");
@@ -46,12 +53,18 @@ public  class FoodMenuManager
                     }
                     break;
 
-                case "Delete Item":
+                case "Delete Item":      
                     var category1 = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                         .Title("Select the [red]category[/] of the dish you'd like to delete:")
-                        .AddChoices(foodMenu._menuItems.Keys.ToArray())
+                        .AddChoices(options)
                     );
+
+                    if (category1 == "Go back to Admin Menu")
+                    {
+                        AdminMenu.AdminMenuStart();
+                    }
+
                     List<string> dishesInCategory = new List<string>();
 
                     foreach (var itemList in foodMenu._menuItems.Values)
@@ -87,7 +100,7 @@ public  class FoodMenuManager
                     var category2 = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                         .Title("Select the [green]category[/] of the dish you'd like to update:")
-                        .AddChoices(foodMenu._menuItems.Keys.ToArray())
+                        .AddChoices(options)
                     );
                     List<string> dishesInCategory1 = new List<string>();
 

@@ -65,5 +65,31 @@
     "emailAddress": "eric@gmail.com",
     "phoneNumber": "0623456987",
     "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [],
+    "name": "fe",
+    "emailAddress": "fjenfejw@gmail.com",
+    "phoneNumber": "3242432432432",
+    "preferences": []
+  },
+  {
+    "password": "User rights",
+    "dateOfBirth": "",
+    "address": "",
+    "isAdmin": false,
+    "isGuest": false,
+    "isEmployee": false,
+    "reservations": [],
+    "name": "yo",
+    "emailAddress": "kanus@gmail.com",
+    "phoneNumber": "24345325435",
+    "preferences": []
   }
 ]
