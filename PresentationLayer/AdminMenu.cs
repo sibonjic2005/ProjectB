@@ -86,7 +86,7 @@ using Spectre.Console;
                 break;
             case "View Reservations":
                 Console.Clear();
-                AdminReservation.ViewReservation();
+                AdminReservation.ViewReservations();
                 break;
             case "Go back":
                 Console.Clear();
