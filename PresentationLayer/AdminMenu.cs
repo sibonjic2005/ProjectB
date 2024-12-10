@@ -48,7 +48,7 @@ using Spectre.Console;
                 break;
             case "Delete User":
                 AdminRights.DeleteAccount();
-                AdminMenuStart();
+                GoBack.GoBackAdminMenu();
                 break;
             case "Log out":
                 Console.WriteLine("You successfully logged out.");

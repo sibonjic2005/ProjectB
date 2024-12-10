@@ -114,7 +114,8 @@ static class CreateAccount
         var dateOfBirth = signUpChecker.ValidateDate(() =>
             AnsiConsole.Prompt(new TextPrompt<string>("Enter a Date of Birth (DD-MM-YYYY): ")));
         
-        var address = signUpChecker.ValidateAddress(() =>
+        var address = signUpChecker.ValidateAddress
+        (() =>
             AnsiConsole.Prompt(new TextPrompt<string>("Enter an Address: ")));
 
 

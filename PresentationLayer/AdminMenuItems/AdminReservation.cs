@@ -6,15 +6,18 @@ static class AdminReservation
         var foodMenu = new FoodMenu();
 
         AccountsLogic accountsLogic = new AccountsLogic();
+        SignUpChecker signUpChecker = new SignUpChecker();
 
-        var name = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a Name: "));
+        var name = signUpChecker.ValidateName(() =>
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter a Name: ")));
 
-        var phoneNumber = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter a phone number: "));
+        var phoneNumber = signUpChecker.PhoneNumberRules(() =>
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter a Phone Number: "))
+        );
 
-        var email = AnsiConsole.Prompt(
-            new TextPrompt<string>("Enter an email: "));
+        var email = signUpChecker.ValidateEmail(() => 
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter an Email Address:"))
+        );
 
         DateTime date = Calendar.CalendarDate();
         List<string> timeOptions = Calendar.GetTimeOptions(date);
