@@ -110,6 +110,11 @@ public class SignUpChecker
         {
             date = getDate();
 
+            if (date == string.Empty)
+            {
+                return date;
+            }
+
             if (!Regex.IsMatch(date, datePattern))
             {
                 Console.WriteLine("Date is invalid. Please enter a valid date in the format DD-MM-YYYY.");
@@ -158,6 +163,10 @@ public class SignUpChecker
         while (true)
         {
             address = getAddress();
+
+            if (address == string.Empty) {
+                return address;
+            }
 
             if (!Regex.IsMatch(address, addressPattern))
             {

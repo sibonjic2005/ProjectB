@@ -11,10 +11,10 @@ static class CreateAccount
 
 
         var dateOfBirth = signUpChecker.ValidateDate(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter Date of Birth (DD-MM-YYYY): ")));
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter Date of Birth (DD-MM-YYYY): ").AllowEmpty()));
         
         var address = signUpChecker.ValidateAddress(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Address: ")));
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Address: ").AllowEmpty()));
 
         var phoneNumber = signUpChecker.PhoneNumberRules(() =>
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your Phone Number: "))
@@ -64,10 +64,10 @@ static class CreateAccount
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your Name: ")));
 
         var dateOfBirth = signUpChecker.ValidateDate(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter Date of Birth (DD-MM-YYYY): ")));
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter Date of Birth (DD-MM-YYYY): ").AllowEmpty()));
         
         var address = signUpChecker.ValidateAddress(() =>
-            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Address: ")));
+            AnsiConsole.Prompt(new TextPrompt<string>("Enter your Address: ").AllowEmpty()));
 
         var phoneNumber = signUpChecker.PhoneNumberRules(() =>
             AnsiConsole.Prompt(new TextPrompt<string>("Enter your Phone Number: "))
@@ -116,6 +116,7 @@ static class CreateAccount
         
         var address = signUpChecker.ValidateAddress(() =>
             AnsiConsole.Prompt(new TextPrompt<string>("Enter an Address: ")));
+
 
         var phoneNumber = signUpChecker.PhoneNumberRules(() =>
             AnsiConsole.Prompt(new TextPrompt<string>("Enter a Phone Number: "))

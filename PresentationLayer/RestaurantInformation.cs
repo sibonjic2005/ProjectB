@@ -20,6 +20,56 @@ public static class RestaurantInformation
         LoadRestaurantInformation();
     }
 
+    // public static void PrintRestaurantInformationAdmin()
+    // {
+    //     AnsiConsole.MarkupLine($"[maroon]Restaurant Name:[/] {restaurantName}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Address:[/] {address}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Phone Number:[/] {phoneNumber}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Cuisine Type:[/] {cuisineType}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Cancellation Policy:[/] {cancellationPolicy}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Payment:[/] {paymentMethods}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine("[maroon]House Rules:[/]");
+
+    //     for (int i = 0; i < houseRules.Count; i++)
+    //     {
+    //         AnsiConsole.MarkupLine($"[blue3]House Rule {i + 1}:[/] {houseRules[i]}");
+    //     }
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Opening time Mon-Sun:[/] {openingHours}");
+
+    //     GoBack.GoBackRestaurantInfo();
+    // }
+    // public static void PrintRestaurantInformationGuest()
+    // {
+    //     AnsiConsole.MarkupLine($"[maroon]Restaurant Name:[/] {restaurantName}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Address:[/] {address}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Phone Number:[/] {phoneNumber}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Cuisine Type:[/] {cuisineType}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Cancellation Policy:[/] {cancellationPolicy}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Payment:[/] {paymentMethods}");
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine("[maroon]House Rules:[/]");
+
+    //     for (int i = 0; i < houseRules.Count; i++)
+    //     {
+    //         AnsiConsole.MarkupLine($"[blue3]House Rule {i + 1}:[/] {houseRules[i]}");
+    //     }
+    //     AnsiConsole.WriteLine("");
+    //     AnsiConsole.MarkupLine($"[maroon]Opening time Mon-Sun:[/] {openingHours}");
+
+    //     GoBack.GoBackStartingMenu();
+    // }
     public static void PrintRestaurantInformation()
     {
         AnsiConsole.MarkupLine($"[maroon]Restaurant Name:[/] {restaurantName}");
@@ -43,7 +93,7 @@ public static class RestaurantInformation
         AnsiConsole.WriteLine("");
         AnsiConsole.MarkupLine($"[maroon]Opening time Mon-Sun:[/] {openingHours}");
 
-        GoBack.GoBackRestaurantInfo();
+        // GoBack.GoBackUserMenu();
     }
 
     public static void EditRestaurantInformation()
