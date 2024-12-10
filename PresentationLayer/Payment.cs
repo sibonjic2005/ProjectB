@@ -86,7 +86,7 @@ public class Payment
     private void OpenTikkiePaymentLink()
     {
         // Hardcoded Tikkie URL (replace this with your actual link)
-        string tikkieUrl = "https://tikkie.me/pay/dmav96p5qufc77icpg7g"; // Replace with your actual Tikkie link
+        string tikkieUrl = "https://tikkie.me/pay/7ngjcjbmtbq07fpiskce"; // Replace with your actual Tikkie link
 
         Console.WriteLine("Redirecting to Tikkie payment...");
         System.Threading.Thread.Sleep(1000); // Simulate loading time
