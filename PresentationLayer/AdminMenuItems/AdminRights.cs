@@ -53,7 +53,7 @@ class AdminRights
         AccountsLogic accountsLogic = new AccountsLogic();
         var allUsers = accountsLogic.LoadAllUsers();
         List<string> allUsersMail = accountsLogic.LoadAllUsersMail();
-        allUsersMail.Add("Go back");
+        allUsersMail.Add("[yellow]Go back[/]");
 
         var userMail = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -62,7 +62,7 @@ class AdminRights
                 .AddChoices(allUsersMail)
         );
 
-        if (userMail == "Go back")
+        if (userMail == "[yellow]Go back[/]")
         {
             AdminMenu.AdminMenuStart();
         }

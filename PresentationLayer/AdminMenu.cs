@@ -15,7 +15,7 @@ using Spectre.Console;
                 .AddChoices(new[] {
                         "Reservations", "Clients", 
                         "Food Menu", "Restaurant Information",
-                        "Create User", "Promote/Demote Accounts","Delete User", "Log out"        
+                        "Create User", "Promote/Demote Accounts","Delete User", "[red]Log out[/]"        
                 }));
 
         switch (choices)
@@ -50,7 +50,7 @@ using Spectre.Console;
                 AdminRights.DeleteAccount();
                 GoBack.GoBackAdminMenu();
                 break;
-            case "Log out":
+            case "[red]Log out[/]":
                 Console.WriteLine("You successfully logged out.");
                 StartingMenu.Menu();
                 break;
@@ -67,7 +67,7 @@ using Spectre.Console;
                 .PageSize(15)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)[/]")
                 .AddChoices(new[] {
-                        "Make a Reservation", "Change a Reservation","Cancel Reservation", "View Reservations", "Go back"       
+                        "Make a Reservation", "Change a Reservation","Cancel Reservation", "View Reservations", "[yellow]Go back[/]"       
                 }));
         
         switch (choice)
@@ -88,7 +88,7 @@ using Spectre.Console;
                 Console.Clear();
                 AdminReservation.ViewReservations();
                 break;
-            case "Go back":
+            case "[yellow]Go back[/]":
                 Console.Clear();
                 AdminMenuStart();
                 break;
@@ -105,7 +105,7 @@ using Spectre.Console;
                 .PageSize(15)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)[/]")
                 .AddChoices(new[] {
-                        "View Client Info", "Change Client Info", "Go back"       
+                        "View Client Info", "Change Client Info", "[yellow]Go back[/]"       
                 }));
         
         switch (choice)
@@ -118,7 +118,7 @@ using Spectre.Console;
                 Console.Clear();
                 ClientInfo.ChangeClientInfo();
                 break;
-            case "Go back":
+            case "[yellow]Go back[/]":
                 Console.Clear();
                 AdminMenuStart();
                 break;
@@ -135,7 +135,7 @@ using Spectre.Console;
                 .PageSize(15)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)[/]")
                 .AddChoices(new[] {
-                        "View Restaurant Info", "Change Restaurant Info", "Go back"       
+                        "View Restaurant Info", "Change Restaurant Info", "[yellow]Go back[/]"       
                 }));
 
         switch (choice)
@@ -149,7 +149,7 @@ using Spectre.Console;
                 Console.Clear();
                 RestaurantInformation.EditRestaurantInformation();
                 break;
-            case "Go back":
+            case "[yellow]Go back[/]":
                 Console.Clear();
                 AdminMenuStart();
                 break;

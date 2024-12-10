@@ -5,7 +5,7 @@ class ClientInfo
     {
         AccountsLogic accountsLogic = new AccountsLogic();
         List<string> allUsersMail = accountsLogic.LoadAllUsersMail();
-        allUsersMail.Add("Go back to Admin Menu");
+        allUsersMail.Add("[yellow]Go back to Admin Menu[/]");
 
         var userMail = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -14,7 +14,7 @@ class ClientInfo
                 .AddChoices(allUsersMail)
         );
 
-        if (userMail == "Go back to Admin Menu")
+        if (userMail == "[yellow]Go back to Admin Menu[/]")
         {
             AdminMenu.AdminMenuStart();
         }
@@ -35,7 +35,7 @@ class ClientInfo
     {
         AccountsLogic accountsLogic = new AccountsLogic();
         List<string> allUsersMail = accountsLogic.LoadAllUsersMail();
-        allUsersMail.Add("Go back to Admin Menu");
+        allUsersMail.Add("[yellow]Go back to Admin Menu[/]");
 
         var userMail = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -44,7 +44,7 @@ class ClientInfo
                 .AddChoices(allUsersMail)
         );
 
-        if (userMail == "Go back to Admin Menu")
+        if (userMail == "[yellow]Go back to Admin Menu[/]")
         {
             AdminMenu.AdminMenuStart();
         }

@@ -1,8 +1,9 @@
 using Spectre.Console;
+using System;
 
 static class GoBack
 {
-    public static string Enter = "Press Enter to go back";
+    public static string Enter = "[yellow]Press Enter to go back[/]";
     public static void GoBackUserMenu()
     {
         var choices = AnsiConsole.Prompt(
@@ -11,7 +12,7 @@ static class GoBack
                 .PageSize(3)
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
-                        Enter            
+                        Enter           
                 }));   
                 
         if (choices == Enter)

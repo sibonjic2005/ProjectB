@@ -12,7 +12,7 @@ using Spectre.Console;
                 .MoreChoicesText("[grey](Move up and down to reveal more choices)")
                 .AddChoices(new[] {
                         "Make a Reservation", "Cancel a Reservation", "View your Reservation",
-                        "View Food Menu", "View Restaurant Information", "Profile", "Log out"           
+                        "View Food Menu", "View Restaurant Information", "Profile", "[red]Log out[/]"           
                 }));
 
         switch (choices)
@@ -52,7 +52,7 @@ using Spectre.Console;
                 var profileChoice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("What would you like to do?")
-                        .AddChoices("View Profile", "Edit Profile", "Delete Account", "Go Back to User Menu"));
+                        .AddChoices("View Profile", "Edit Profile", "Delete Account", "[yellow]Go Back to User Menu[/]"));
 
                 Console.Clear();
 
@@ -71,7 +71,7 @@ using Spectre.Console;
                         // if user deletes their account it should go back to main menu
                         GoBack.GoBackProfileMenu();
                         break;
-                    case "Go Back to User Menu":
+                    case "[yellow]Go Back to User Menu[/]":
                         inProfile = false;
                         UserMenuStart();
                         break;
@@ -80,7 +80,7 @@ using Spectre.Console;
                 }
                 }
                 break;
-            case "Log out":
+            case "[red]Log out[/]":
                 Console.Clear();
                 Console.WriteLine("You sucessfully logged out.");
                 StartingMenu.Menu();

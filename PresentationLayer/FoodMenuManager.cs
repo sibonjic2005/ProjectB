@@ -13,14 +13,14 @@ public  class FoodMenuManager
     public void ManageMenu()
     {
         List<string> options = foodMenu._menuItems.Keys.ToList();
-        options.Add("Go back to Admin Menu");
+        options.Add("[yellow]Go back to Admin Menu[/]");
         while (true)
         {
             // Display options to the user
             var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("[bold yellow]Select an option to manage the menu:[/]")
-                    .AddChoices("Add Item", "Delete Item", "Update Item", "Display Menu", "Go back"));
+                    .AddChoices("Add Item", "Delete Item", "Update Item", "Display Menu", "[yellow]Go back[/]"));
 
             switch (choice)
             {
@@ -30,7 +30,7 @@ public  class FoodMenuManager
                             .Title("Select a [green]category[/]:")
                             .AddChoices(options));
                     
-                    if (category == "Go back to Admin Menu")
+                    if (category == "[yellow]Go back to Admin Menu[/]")
                     {
                         AdminMenu.AdminMenuStart();
                     }
@@ -60,7 +60,7 @@ public  class FoodMenuManager
                         .AddChoices(options)
                     );
 
-                    if (category1 == "Go back to Admin Menu")
+                    if (category1 == "[yellow]Go back to Admin Menu[/]")
                     {
                         AdminMenu.AdminMenuStart();
                     }
@@ -102,6 +102,10 @@ public  class FoodMenuManager
                         .Title("Select the [green]category[/] of the dish you'd like to update:")
                         .AddChoices(options)
                     );
+                    if (category2 == "[yellow]Go back to Admin Menu[/]")
+                    {
+                        AdminMenu.AdminMenuStart();
+                    }
                     List<string> dishesInCategory1 = new List<string>();
 
                     foreach (var itemList in foodMenu._menuItems.Values)
@@ -169,7 +173,7 @@ public  class FoodMenuManager
                     GoBack.GoBackManageMenu();
                     break;
 
-                case "Go back":
+                case "[yellow]Go back[/]":
                     // Exit the management loop
                     AnsiConsole.MarkupLine("[bold yellow]Exiting menu management.[/]");
                     return;

@@ -33,7 +33,7 @@ public static class StartingMenu
                     "Login as guest", 
                     "View Food Menu",
                     "View Restaurant Information",
-                    "Exit"
+                    "[red]Exit[/]"
                 }));
 
         switch (choices)
@@ -61,7 +61,7 @@ public static class StartingMenu
                 RestaurantInformation.PrintRestaurantInformation();
                 GoBack.GoBackStartingMenu();
                 break;
-            case "Exit":
+            case "[red]Exit[/]":
                 Console.Clear();
                 Console.WriteLine("Thank you for visiting our website!");
                 break;

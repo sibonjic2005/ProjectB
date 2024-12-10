@@ -163,7 +163,7 @@ static class UserReservation
             while (true) {
                 double totalprice = reservation.TotalPrice;
                 string realPrice = FoodMenu.HandleDecimals(totalprice);
-                Console.WriteLine($"Your total price to pay is €{realPrice}.");
+                Console.WriteLine($"Your total price to pay is {realPrice}");
                 Console.WriteLine("Do you want to pay now? (y/n)");
                 string pay = Console.ReadLine();
                 if (pay == "y" || pay == "Y")
@@ -176,7 +176,7 @@ static class UserReservation
                 else if (pay == "n" || pay == "N")
                 {
                     reservation.isPaid = false;
-                    Console.WriteLine($"You will have to pay a total of €{realPrice} at the restaurant.");
+                    Console.WriteLine($"You will have to pay a total of {realPrice} at the restaurant.");
                     break;
                 } else
                 {
@@ -217,7 +217,6 @@ static class UserReservation
                     if (double.TryParse(priceWithoutEuro, out double surpriseDishPriceInCents))
                     {
                         double surpriseDishPriceInEuros = surpriseDishPriceInCents / 100;
-                        string realPrice = FoodMenu.HandleDecimals(surpriseDishPriceInEuros);
 
                         personReservation.price += surpriseDishPriceInEuros;
                     }
@@ -266,8 +265,6 @@ static class UserReservation
                             if (double.TryParse(priceWithoutEuro, out double dishPriceInCents))
                             {
                                 double dishPriceInEuros = dishPriceInCents / 100;
-                                string realPrice = FoodMenu.HandleDecimals(dishPriceInEuros);
-                                Console.WriteLine($"{realPrice}");
                                 personReservation.price += dishPriceInEuros;
                             }
                         }
