@@ -4,12 +4,11 @@ public static class TableLayout
     {
         string[] divider = new string[] { "+", "-", "+", "-" }; // To create borders
 
-        // Print top border
+        
         Console.WriteLine($"{divider[0]}-----------------------------------------------------------------{divider[2]}");
         Console.WriteLine("|                      Restaurant Seating Plan                    |");
         Console.WriteLine($"{divider[0]}-----------------------------------------------------------------{divider[2]}");
 
-        // Print the layout rows
         Console.WriteLine("|   ┌────┐   ┌────┐       ┌────┐   ┌────┐       ┌────┐   ┌────┐   |");
         Console.WriteLine("|   │ T1 │   │ T2 │       │ T3 │   │ T4 │       │ T5 │   │ T6 │   |");
         Console.WriteLine("|   └────┘   └────┘       └────┘   └────┘       └────┘   └────┘   |");
@@ -24,9 +23,12 @@ public static class TableLayout
         Console.WriteLine("|        │ T13│        │ T14│      │ T15│        │ T16│           |");
         Console.WriteLine("|        └────┘        └────┘      └────┘        └────┘           |");
         Console.WriteLine("|         (6P)          (6P)        (6P)          (6P)            |");
-        
+        Console.WriteLine("|                                                                 |");
+        Console.WriteLine("|   ┌────┐   ┌────┐   ┌────┐   ┌────┐   ┌────┐   ┌────┐   ┌────┐  |");
+        Console.WriteLine("|   │ T17│   │ T18│   │ T19│   │ T20│   │ T21│   │ T22│   │ T23│  |");
+        Console.WriteLine("|   └────┘   └────┘   └────┘   └────┘   └────┘   └────┘   └────┘  |");
+        Console.WriteLine("|    (1P)     (1P)     (1P)     (1P)     (1P)     (1P)     (1P)   |");
 
-        // Print bottom border
         Console.WriteLine($"{divider[0]}-----------------------------------------------------------------{divider[2]}");
     }
 }
