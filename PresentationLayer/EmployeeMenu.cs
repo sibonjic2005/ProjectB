@@ -20,16 +20,13 @@ using Spectre.Console;
         switch (choices)
         {
             case "Make a reservation":
-                AdminReservation.MakeReservation();
-                EmployeeMenuStart();
+                AdminReservation.MakeReservation("employee");
                 break;
             case "Change a reservation":
-                AdminReservation.ChangeReservation();
-                EmployeeMenuStart();
+                AdminReservation.ChangeReservation("employee");
                 break;
             case "Cancel reservation":
-                AdminReservation.CancelReservation();
-                EmployeeMenuStart();
+                AdminReservation.CancelReservation("employee");
                 break;
             case "View reservations":
                 AdminReservation.ViewReservation();

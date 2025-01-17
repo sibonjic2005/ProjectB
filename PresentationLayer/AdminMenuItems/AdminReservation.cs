@@ -1,7 +1,7 @@
 using Spectre.Console;
 static class AdminReservation
 {
-    public static void MakeReservation()
+    public static void MakeReservation(string rights = "admin")
     {
         var foodMenu = new FoodMenu();
 
@@ -91,6 +91,11 @@ static class AdminReservation
 
         Console.WriteLine($"\nReservation complete!");
         Console.WriteLine($"\nName: {name}\nPhone Number: {phoneNumber}\nEmail: {email}\nDate: {date:dddd, MMMM dd, yyyy}\nTime: {time}\nAmount of persons: {personCount}\nEnd time: {reservation.EndTime}\nTotal Price: €{reservation.TotalPrice}");
+        if (rights != "admin")
+        {
+            GoBack.GoBackEmployeeMenu();
+            return;
+        }
         GoBack.GoBackReservationOption();
     }
 
@@ -138,7 +143,7 @@ static class AdminReservation
     }
 
 
-    public static void CancelReservation()
+    public static void CancelReservation(string rights = "admin")
     {
         AccountsLogic accountsLogic = new AccountsLogic();
 
@@ -148,7 +153,12 @@ static class AdminReservation
 
         if (mailWithReservation.Count < 1)
         {
-            Console.WriteLine("How can you cancel a reservation without one?");
+            Console.WriteLine("There's no reservation to be modified?");
+            if (rights != "admin")
+            {
+                GoBack.GoBackEmployeeMenu();
+                return;
+            }
             GoBack.GoBackReservationOption();
         }
 
@@ -180,11 +190,21 @@ static class AdminReservation
         {
             accountsLogic.RemoveSpecificReservation(userMail, reservationSelection);
             Console.WriteLine("Reservation cancelled successfully.");
+            if (rights != "admin")
+            {
+                GoBack.GoBackEmployeeMenu();
+                return;
+            }
             GoBack.GoBackReservationOption();
         }
         else
         {
             Console.WriteLine("Cancellation aborted.");
+            if (rights != "admin")
+            {
+                GoBack.GoBackEmployeeMenu();
+                return;
+            }
             GoBack.GoBackReservationOption();
         }
     }
@@ -205,6 +225,10 @@ static class AdminReservation
                     Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Start Time: {reservation.Time}\n  - End time: {reservation.EndTime}\n  - People: {reservation.PersonCount}\n  - Table: {reservation.TableNumber}\n");
                 }
             }
+            else
+            {
+                Console.WriteLine("None");
+            }
         }
         GoBack.GoBackReservationOption();
     }
@@ -215,6 +239,7 @@ static class AdminReservation
         var allUsers = accountsLogic.LoadAllUsers();
 
         Console.WriteLine($"Reservations: \n");
+
         foreach (var user in allUsers)
         {
             if (user.Reservations.Count > 0)
@@ -225,10 +250,14 @@ static class AdminReservation
                     Console.WriteLine($"  - Date: {reservation.Date.ToString("dd-MM-yyyy")}\n  - Start Time: {reservation.Time}\n  - End time: {reservation.EndTime}\n  - People: {reservation.PersonCount}\n  - Table: {reservation.TableNumber}\n");
                 }
             }
+            else
+            {
+                Console.WriteLine("None");
+            }
         }
     }
 
-    public static void ChangeReservation()
+    public static void ChangeReservation(string rights = "admin")
     {
         AccountsLogic accountsLogic = new AccountsLogic();
 
@@ -238,7 +267,7 @@ static class AdminReservation
 
         if (mailWithReservation.Count < 1)
         {
-            Console.WriteLine("How can you change a reservation without one?");
+            Console.WriteLine("There's no reservation to be modified?");
             GoBack.GoBackReservationOption();
         }
 

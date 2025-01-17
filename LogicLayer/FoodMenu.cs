@@ -214,39 +214,6 @@ public class FoodMenu
                     "Wheats", "Dairy"
         };
     }
-
-        // Method to display the food menu using Spectre.Console table
-    // public void DisplayFoodMenu()
-    // {
-    //     LoadMenu();
-    //     // Create a new table with headers
-    //     var table = new Table();
-    //     table.AddColumn("Category");
-    //     table.AddColumn("Dish");
-    //     table.AddColumn("Description");
-    //     table.AddColumn("Price");
-
-    //     // Loop through each category and add the menu items to the table
-    //     foreach (var category in _menuItems)
-    //     {
-    //         // Add the category name as the first row
-    //         table.AddRow(category.Key, "", "", "");
-    //         table.AddRow("[grey]────────────────────────────────────────────[/]", "", "", "");
-
-    //         // Add the menu items for this category
-    //         foreach (var item in category.Value)
-    //         {
-    //             table.AddRow("", item.Dish, item.Description, item.Price);
-    //         }
-
-    //         // Add a line between sections
-    //         table.AddRow("[grey]────────────────────────────────────────────[/]", "", "", "");
-    //     }
-
-    //     // Render the table in the console
-    //     AnsiConsole.Clear();
-    //     AnsiConsole.Render(table);
-    // }
 }
 public static class FoodMenuLoader
 {
